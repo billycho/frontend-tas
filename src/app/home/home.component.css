@@ -1,0 +1,37 @@
+/* Dashboard CSS */
+md-sidenav {
+  width: 200px;
+  text-align: center;
+}
+md-sidenav button, a {
+  height: 45px;
+  width: 200px;
+}
+button.menu{
+  min-width: 0;
+  padding: 0 8px;
+}
+a.title{
+  padding-left: 8px;
+  color: #ffffff;
+  text-decoration: none;
+}
+.app-content {
+  width: 90%;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  padding-left: 5%;
+  padding-right: 5%;
+}
+md-sidenav-container {
+  position: fixed;
+  height: 100%;
+  min-height: 90%;
+  width: 100%;
+  min-width: 100%;
+}
+.mat-elevation-z4{
+  position: relative;
+  z-index: 2;
+}

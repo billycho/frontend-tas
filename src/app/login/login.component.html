@@ -1,0 +1,29 @@
+<!-- Login UI -->
+<div class='login'>
+  <md-card>
+    <md-card-title>Training Admin System</md-card-title>
+    <md-card-subtitle>Login</md-card-subtitle>
+    <form name = "form" (ngSubmit)="f.form.valid && login()" #f = "ngForm"  >
+      <md-card-content>
+        <md-input-container color="accent"  >
+            <span mdPrefix>mitrais\</span>
+            <input mdInput placeholder="Username" name ="username" [(ngModel)]="model.username" required [disabled]="loading">
+        </md-input-container>  
+       </md-card-content>
+      <md-card-content>
+        <md-input-container color="accent" >
+          <input mdInput type="password" placeholder="Password" name = "password" [(ngModel)] = "model.password" required [disabled]="loading">
+        </md-input-container>
+      </md-card-content>
+      <md-card-content>
+        <md-checkbox name="remember_me" [disabled]="loading">Remember Me</md-checkbox>
+      </md-card-content>
+      <md-card-actions>
+        <button md-raised-button color="accent" type = submit  [disabled]="loading">Login</button>
+      </md-card-actions>
+      <md-card-content>
+          <alert></alert>
+      </md-card-content>
+    </form> 
+  </md-card>
+</div>

@@ -1,0 +1,87 @@
+<div class="content">
+    <md-card>
+        <md-card-title>Active Training</md-card-title>
+        <md-card-content>
+            <md-table [dataSource]="activeTrainingDataSource">
+
+                <ng-container mdColumnDef="courseName">
+                    <md-header-cell *mdHeaderCellDef> Course Name </md-header-cell>
+                    <md-cell *mdCellDef="let activeTraining"> {{activeTraining.courseName}} </md-cell>
+                </ng-container>
+            
+                <ng-container mdColumnDef="mainTrainer">
+                    <md-header-cell *mdHeaderCellDef> Main Trainer </md-header-cell>
+                    <md-cell *mdCellDef="let activeTraining"> {{activeTraining.mainTrainer}} </md-cell>
+                </ng-container>
+
+                <ng-container mdColumnDef="backupTrainer">
+                    <md-header-cell *mdHeaderCellDef> Back Up Trainer </md-header-cell>
+                    <md-cell *mdCellDef="let activeTraining"> {{activeTraining.backupTrainer}} </md-cell>
+                </ng-container>
+
+                <ng-container mdColumnDef="startDate">
+                    <md-header-cell *mdHeaderCellDef> Start Date </md-header-cell>
+                    <md-cell *mdCellDef="let activeTraining"> {{activeTraining.startDate}} </md-cell>
+                </ng-container>
+
+                <ng-container mdColumnDef="endDate">
+                    <md-header-cell *mdHeaderCellDef> End Date </md-header-cell>
+                    <md-cell *mdCellDef="let activeTraining"> {{activeTraining.endDate}} </md-cell>
+                </ng-container>
+
+                <ng-container mdColumnDef="trainingLocation">
+                    <md-header-cell *mdHeaderCellDef> Training Location </md-header-cell>
+                    <md-cell *mdCellDef="let activeTraining"> {{activeTraining.trainingLocation}} </md-cell>
+                </ng-container>
+            
+                <md-header-row *mdHeaderRowDef="activeTrainingColumns"></md-header-row>
+                <md-row *mdRowDef="let row; columns: activeTrainingColumns;"></md-row>
+              
+            </md-table>
+              
+        </md-card-content>
+    </md-card>
+</div>
+<div>
+    <md-card>
+        <md-card-title>BCC Schedule</md-card-title>
+        <md-card-content>
+            <md-table [dataSource]="BCCDataSource">
+                
+                <ng-container mdColumnDef="trainerName">
+                    <md-header-cell *mdHeaderCellDef> Trainer Name </md-header-cell>
+                    <md-cell *mdCellDef="let bcc"> {{bcc.trainerName}} </md-cell>
+                </ng-container>
+
+                <ng-container mdColumnDef="monday">
+                    <md-header-cell *mdHeaderCellDef> Monday </md-header-cell>
+                    <md-cell *mdCellDef="let bcc"> {{bcc.monday}} </md-cell>
+                </ng-container>
+                
+                <ng-container mdColumnDef="tuesday">
+                    <md-header-cell *mdHeaderCellDef> Tuesday </md-header-cell>
+                    <md-cell *mdCellDef="let bcc"> {{bcc.tuesday}} </md-cell>
+                </ng-container>
+
+                <ng-container mdColumnDef="wednesday">
+                    <md-header-cell *mdHeaderCellDef> Wednesday </md-header-cell>
+                    <md-cell *mdCellDef="let bcc"> {{bcc.wednesday}} </md-cell>
+                </ng-container>
+
+                <ng-container mdColumnDef="thursday">
+                    <md-header-cell *mdHeaderCellDef> Thursday </md-header-cell>
+                    <md-cell *mdCellDef="let bcc"> {{bcc.thursday}} </md-cell>
+                </ng-container>
+
+                <ng-container mdColumnDef="friday">
+                    <md-header-cell *mdHeaderCellDef> Friday </md-header-cell>
+                    <md-cell *mdCellDef="let bcc"> {{bcc.friday}} </md-cell>
+                </ng-container>
+            
+                <md-header-row *mdHeaderRowDef="BCCColumns"></md-header-row>
+                <md-row *mdRowDef="let row; columns: BCCColumns;"></md-row>
+                
+            </md-table>
+        </md-card-content>
+    </md-card>
+</div>

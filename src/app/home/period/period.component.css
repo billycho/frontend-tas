@@ -1,0 +1,14 @@
+.add-period{
+    text-align: right;
+    padding-left: 38.6%;
+}
+
+md-form-field{
+    width: 100%;
+}
+.filter{
+    width: 50%;
+}
+.inline {
+    display: inline-block;
+}
