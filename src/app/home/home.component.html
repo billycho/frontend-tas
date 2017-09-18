@@ -11,11 +11,11 @@
 </md-toolbar>
 <md-sidenav #sidenav>
 <span><br>
-    <div style='color:#FFFFFF;font-size: 18px;font-family:Roboto;'>{{currentUser.name}}</div>
-    <div style='color:#FFFFFF;font-size: 13px;font-family:Roboto;' *ngIf="currentUser.role==1">Administrator</div>
-    <div style='color:#FFFFFF;font-size: 13px;font-family:Roboto;' *ngIf="currentUser.role==2">Trainer</div>
-    <div style='color:#FFFFFF;font-size: 13px;font-family:Roboto;' *ngIf="currentUser.role==3">Manager</div>
-    <div style='color:#FFFFFF;font-size: 13px;font-family:Roboto;' *ngIf="currentUser.role==4">Participant</div>
+    <div style='font-size: 18px;font-family:Roboto;'>{{currentUser.name}}</div>
+    <div style='font-size: 13px;font-family:Roboto;' *ngIf="currentUser.role==1">Administrator</div>
+    <div style='font-size: 13px;font-family:Roboto;' *ngIf="currentUser.role==2">Trainer</div>
+    <div style='font-size: 13px;font-family:Roboto;' *ngIf="currentUser.role==3">Manager</div>
+    <div style='font-size: 13px;font-family:Roboto;' *ngIf="currentUser.role==4">Participant</div>
 </span>
 <button md-button (click)=sidenav.close() routerLink="/home/period" color="white" >Period</button>
 <button md-button (click)=sidenav.close() routerLink="/home/user" color="white" *ngIf="currentUser.role==1">User</button>

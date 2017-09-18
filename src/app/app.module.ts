@@ -27,9 +27,9 @@ import { AlertService } from './alert.service';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 // used to create fake backend
-import { fakeBackendProvider } from './fakebackend';
-import { MockBackend, MockConnection } from '@angular/http/testing';
-import { BaseRequestOptions } from '@angular/http';
+
+
+import { HttpClientModule } from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -53,7 +53,8 @@ import { BaseRequestOptions } from '@angular/http';
     HttpModule,
     MdDatepickerModule,
     MdNativeDateModule,
-    routing
+    routing,
+    HttpClientModule
   ],
   providers: [AuthGuard,
     AuthenticationService,
@@ -61,9 +62,7 @@ import { BaseRequestOptions } from '@angular/http';
     AlertService,
     CookieService,
     // providers used to create fake backend
-    fakeBackendProvider,
-    MockBackend,
-    BaseRequestOptions
+   
   ],
   bootstrap: [AppComponent],
   entryComponents: [

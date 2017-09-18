@@ -1,8 +1,3 @@
-.add-period{
-    text-align: right;
-    padding-left: 38.6%;
-}
-
 md-form-field{
     width: 100%;
 }
@@ -11,4 +6,13 @@ md-form-field{
 }
 .inline {
     display: inline-block;
+}
+
+.parent {
+  position: relative;
+}
+.right {
+    position: absolute;
+    right: 0;
+    margin-right: 10px;
 }

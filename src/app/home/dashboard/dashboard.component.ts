@@ -1,13 +1,16 @@
-import {Component} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {DataSource} from '@angular/cdk/collections';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
+import { Location } from '../../location';
+import { LocationService } from '../../location.service';
 
 @Component({
   templateUrl: './dashboard.component.html',
-  styleUrls: ['./dashboard.component.css']
+  styleUrls: ['./dashboard.component.css'],
+  providers: [LocationService]
 })
-export class DashboardComponent {
+export class DashboardComponent  {
   // Active Training DataStream
   activeTrainingColumns = ['courseName', 'mainTrainer', 'backupTrainer', 'startDate', 'endDate', 'trainingLocation'];
   activeTrainingDataSource = new ActiveTrainingDataSource();
@@ -15,6 +18,15 @@ export class DashboardComponent {
   //BCC Schedule DataStream
   BCCColumns = ['trainerName', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday'];
   BCCDataSource = new BCCDataSource();
+
+  //location
+  locations;
+  constructor(private locationService: LocationService) {
+    console.log("asda");
+    this.locations = locationService.getLocations();
+    
+  }
+
 
 }
 

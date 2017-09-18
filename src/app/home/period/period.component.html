@@ -7,7 +7,7 @@
           <input mdInput #filter placeholder="Search">
         </md-form-field>
       </div>
-      <div class="add-period inline"><button md-raised-button style='background-color:#673AB7'  (click)="openDialog('Create')"><md-icon>add</md-icon> Add Period</button></div>
+      <div class="add-period inline right"><button md-raised-button color="accent"  (click)="openDialog('Create')"><md-icon>add</md-icon> Add Period</button></div>
       
       <md-table #table [dataSource]="dataSource" mdSort>
         
