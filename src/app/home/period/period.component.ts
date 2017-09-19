@@ -47,7 +47,7 @@ export class PeriodComponent {
   {
     let dialogRef = this.addPeriod.open(AddPeriodDialog, {
       width: '40%',
-      data: { trainingName: period.trainingName, startDate: new Date(period.startDate), endDate:new Date(period.endDate) ,operation: operation }
+      data: { trainingName: period.locationId }
     });
 
     dialogRef.afterClosed().subscribe(result => {
@@ -94,14 +94,8 @@ export class AddPeriodDialog {
 
 //table
 export interface Period {
-  id:number;
-  trainingName: string;
-  activeStatus: boolean;
-  coursesCount: number;
-  startDate: string;
-  endDate: string;
-  createdBy: string;
-  editedBy: string;
+  locationId:number;
+  locationName: string;
 }
 
 export class PeriodDatabase {
@@ -110,19 +104,8 @@ export class PeriodDatabase {
 
   constructor() {
     this.dataChange.next([
-      {id: 1,trainingName: 'Training #1', activeStatus: true , coursesCount: 3 , startDate:'1-11-2017', endDate:'3-12-2017', createdBy:"Trainer #1", editedBy: "Trainer #12"},
-      {id: 2,trainingName: 'Training #2', activeStatus: false , coursesCount: 3 , startDate:'2-11-2017', endDate:'4-12-2017', createdBy:"Trainer #2", editedBy: "Trainer #11"},
-      {id: 3,trainingName: 'Training #3', activeStatus: true , coursesCount: 3 , startDate:'3-11-2017', endDate:'5-12-2017', createdBy:"Trainer #3", editedBy: "Trainer #10"},
-      {id: 4,trainingName: 'Training #4', activeStatus: false , coursesCount: 8 , startDate:'4-11-2016', endDate:'6-12-2016', createdBy:"Trainer #4", editedBy: "Trainer #9"},
-         {id: 5,trainingName: 'Training #5', activeStatus: true , coursesCount: 3 , startDate:'5-11-2017', endDate:'7-12-2017', createdBy:"Trainer #5", editedBy: "Trainer #8"},
-      {id: 6,trainingName: 'Training #6', activeStatus: false , coursesCount: 3 , startDate:'6-11-2017', endDate:'8-12-2017', createdBy:"Trainer #6", editedBy: "Trainer #7"},
-      {id: 7,trainingName: 'Training #7', activeStatus: true , coursesCount: 3 , startDate:'7-11-2017', endDate:'9-12-2017', createdBy:"Trainer #7", editedBy: "Trainer #6"},
-      {id: 8,trainingName: 'Training #8', activeStatus: false , coursesCount: 8 , startDate:'8-11-2016', endDate:'10-12-2016', createdBy:"Trainer #8", editedBy: "Trainer #5"},
-      {id: 9,trainingName: 'Training #9', activeStatus: true , coursesCount: 3 , startDate:'9-11-2017', endDate:'11-12-2017', createdBy:"Trainer #9", editedBy: "Trainer #4"},
-      {id: 10,trainingName: 'Training #10', activeStatus: false , coursesCount: 3 , startDate:'10-11-2017', endDate:'12-12-2017', createdBy:"Trainer #10", editedBy: "Trainer #3"},
-      {id: 11,trainingName: 'Training #11', activeStatus: true , coursesCount: 3 , startDate:'11-11-2017', endDate:'13-12-2017', createdBy:"Trainer #11", editedBy: "Trainer #2"},
-      {id: 12,trainingName: 'Training #12', activeStatus: false , coursesCount: 8 , startDate:'12-11-2016', endDate:'14-12-2016', createdBy:"Trainer #12", editedBy: "Trainer #1"}
-      
+      {locationId: 1, locationName: '1'},
+      {locationId: 2, locationName: "123"}
     ]);
   }
 }
@@ -150,7 +133,7 @@ export class PeriodDataSource extends DataSource<any> {
 
     return Observable.merge(...displayDataChanges).map(() => {
       this.filteredData = this._periodDatabase.data.slice().filter((item: Period) => {
-        let searchStr = (item.trainingName + item.startDate + item.endDate + item.createdBy + item.editedBy).toLowerCase();
+        let searchStr = (item.locationId + item.locationName).toLowerCase();
         return searchStr.indexOf(this.filter.toLowerCase()) != -1;
       });
 
@@ -179,7 +162,7 @@ export class PeriodDataSource extends DataSource<any> {
       let propertyB: number|string = '';
 
       switch (this._sort.active) {
-        case 'id': [propertyA, propertyB] = [a.id, b.id]; break;
+        case 'id': [propertyA, propertyB] = [a.locationId, b.locationId]; break;
       }
 
       let valueA = isNaN(+propertyA) ? propertyA : +propertyA;

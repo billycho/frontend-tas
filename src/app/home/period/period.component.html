@@ -1,6 +1,6 @@
 <div>
   <md-card>
-    <md-card-title>Training Period</md-card-title>
+    <md-card-title>Training Period1</md-card-title>
     <md-card-content>
       <div class="filter inline">
         <md-form-field>
@@ -11,64 +11,18 @@
       
       <md-table #table [dataSource]="dataSource" mdSort>
         
-        <ng-container mdColumnDef="id">
+        <ng-container mdColumnDef="Id">
           <md-header-cell *mdHeaderCellDef md-sort-header> ID </md-header-cell>
-          <md-cell *mdCellDef="let period"> {{period.id}} </md-cell>
+          <md-cell *mdCellDef="let period"> {{period.locationId}} </md-cell>
         </ng-container>
 
-        <ng-container mdColumnDef="trainingName">
-          <md-header-cell *mdHeaderCellDef md-sort-header> Training Name </md-header-cell>
-          <md-cell *mdCellDef="let period"> {{period.trainingName}} </md-cell>
+        <ng-container mdColumnDef="Name">
+          <md-header-cell *mdHeaderCellDef md-sort-header> Location Name </md-header-cell>
+          <md-cell *mdCellDef="let period"> {{period.locationName}} </md-cell>
         </ng-container>
 
-        <ng-container mdColumnDef="activeStatus">
-          <md-header-cell *mdHeaderCellDef md-sort-header> Active </md-header-cell>
-          <md-cell *mdCellDef="let period"> 
-            <div *ngIf=period.activeStatus; else elseBlock>Active</div>
-            <ng-template #elseBlock>Not Active</ng-template>
-          </md-cell>
-        </ng-container>
 
-        <ng-container mdColumnDef="coursesCount">
-          <md-header-cell *mdHeaderCellDef md-sort-header> # of Courses </md-header-cell>
-          <md-cell *mdCellDef="let period"> {{period.coursesCount}} </md-cell>
-        </ng-container>
-        
-        <ng-container mdColumnDef="startDate">
-          <md-header-cell *mdHeaderCellDef md-sort-header> Start Date </md-header-cell>
-          <md-cell *mdCellDef="let period"> {{period.startDate}} </md-cell>
-        </ng-container>
-
-        <ng-container mdColumnDef="endDate">
-          <md-header-cell *mdHeaderCellDef md-sort-header> End Date </md-header-cell>
-          <md-cell *mdCellDef="let period"> {{period.endDate}} </md-cell>
-        </ng-container>
-
-        <ng-container mdColumnDef="createdBy">
-          <md-header-cell *mdHeaderCellDef md-sort-header> Created By </md-header-cell>
-          <md-cell *mdCellDef="let period"> {{period.createdBy}} </md-cell>
-        </ng-container>
-
-        <ng-container mdColumnDef="editedBy">
-          <md-header-cell *mdHeaderCellDef md-sort-header> Edited By </md-header-cell>
-          <md-cell *mdCellDef="let period"> {{period.editedBy}} </md-cell>
-        </ng-container>
-
-        <ng-container mdColumnDef="action">
-            <md-header-cell *mdHeaderCellDef md-sort-header> Action </md-header-cell>
-            <md-cell *mdCellDef="let period">
-              
-
-              <button md-icon-button [mdMenuTriggerFor]="menu"><md-icon>more_horiz</md-icon></button>
-              <md-menu #menu="mdMenu">
-                  <button md-icon-button class="md-small" color="accent" mdTooltip="Eligible Participant List"><md-icon>supervisor_account</md-icon></button>
-                  <button md-icon-button class="md-small" color="accent" mdTooltip="Schedule List"><md-icon>date_range</md-icon></button>
-                  <button md-icon-button class="md-small" color="accent" mdTooltip="Edit"  (click)="editDialog('Update',period)"><md-icon>border_color</md-icon></button>
-                  <button md-icon-button class="md-small" color="warn" mdTooltip="Delete"><md-icon>delete</md-icon></button>
-              </md-menu>
-
-            </md-cell>
-          </ng-container>
+    
     
         <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
         <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>

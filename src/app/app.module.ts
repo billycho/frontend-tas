@@ -24,12 +24,14 @@ import { AuthGuard } from './authguard.service';
 import { AuthenticationService } from './authentication.service';
 import { UserService } from './user.service';
 import { AlertService } from './alert.service';
+import { LoginService } from './login.service';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 // used to create fake backend
 
 
 import { HttpClientModule } from "@angular/common/http";
+import { HelloComponent } from './hello/hello.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,8 @@ import { HttpClientModule } from "@angular/common/http";
     EnrollmentComponent,
     AchievementComponent,
     MaintenanceComponent,
-    AlertComponent
+    AlertComponent,
+    HelloComponent
   ],
   imports: [
     BrowserModule,
@@ -61,6 +64,7 @@ import { HttpClientModule } from "@angular/common/http";
     UserService,
     AlertService,
     CookieService,
+    LoginService
     // providers used to create fake backend
    
   ],

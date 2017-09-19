@@ -7,10 +7,12 @@ import { UserComponent } from './home/user/user.component'
 import { EnrollmentComponent } from './home/enrollment/enrollment.component'
 import { AchievementComponent } from './home/achievement/achievement.component'
 import { MaintenanceComponent } from "./home/maintenance/maintenance.component";
+import { HelloComponent } from './hello/hello.component';
 
 import { AuthGuard } from './authguard.service';
 
 const routes: Routes = [
+    {path: 'hello',   component: HelloComponent},
     { path: 'login',            component: LoginComponent },
     { path: 'home',        component: HomeComponent, 
         canActivate: [AuthGuard],children: [
@@ -19,7 +21,7 @@ const routes: Routes = [
             {path: 'user',          component: UserComponent},
             {path: 'enrollment',    component: EnrollmentComponent},
             {path: 'achievement',   component: AchievementComponent},
-            {path: 'maintenance',   component: MaintenanceComponent}
+            {path: 'maintenance',   component: MaintenanceComponent},
     ]},
 
     //if any path then redirect to home

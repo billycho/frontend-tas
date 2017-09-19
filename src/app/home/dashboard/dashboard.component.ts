@@ -21,9 +21,14 @@ export class DashboardComponent  {
 
   //location
   locations;
+  loginResponse;
   constructor(private locationService: LocationService) {
     console.log("asda");
     this.locations = locationService.getLocations();
+    
+   // locationService.addComment();
+
+    //locationService.addComment().subscribe((loginResponse) => {this.loginResponse = loginResponse;alert(loginResponse.status)});
     
   }
 

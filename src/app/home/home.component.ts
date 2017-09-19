@@ -5,6 +5,7 @@ import {CookieService } from 'angular2-cookie/services/cookies.service';
 
 import { User } from '../user';
 
+import { LoginRequest } from '../loginrequest';
 import { UserService } from '../user.service';
 
 @Component({
@@ -14,7 +15,7 @@ import { UserService } from '../user.service';
 export class HomeComponent{
   
   private router: Router;
-  private currentUser: User;
+  private currentUser: LoginRequest;
   private user: User;
   private users: User[];
   
@@ -23,10 +24,11 @@ export class HomeComponent{
     private cookieService:CookieService
   ){
     //Using local storage:
-    // this.currentUser= JSON.parse(localStorage.getItem('currentUser'));
+    this.currentUser= JSON.parse(localStorage.getItem('currentUser'));
 
     //using cookie
     this.currentUser=JSON.parse(this.cookieService.get('currentUserLocalHost'));
+   
   }
   logout(){
     this.authenticationService.logout();
