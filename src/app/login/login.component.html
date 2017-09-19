@@ -6,7 +6,6 @@
     <form name = "form" (ngSubmit)="f.form.valid && login()" #f = "ngForm"  >
       <md-card-content>
         <md-input-container color="accent"  >
-            <span mdPrefix>mitrais\</span>
             <input mdInput placeholder="Username" name ="username" [(ngModel)]="username" required [disabled]="loading">
         </md-input-container>  
        </md-card-content>

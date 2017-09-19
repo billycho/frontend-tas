@@ -22,7 +22,7 @@ import { AlertComponent } from './alert.component';
 
 import { AuthGuard } from './authguard.service';
 import { AuthenticationService } from './authentication.service';
-import { UserService } from './user.service';
+import { UserService } from './home/user/user.service';
 import { AlertService } from './alert.service';
 import { LoginService } from './login.service';
 import { CookieService } from 'angular2-cookie/services/cookies.service';

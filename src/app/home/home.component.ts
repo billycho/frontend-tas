@@ -3,10 +3,10 @@ import { AuthenticationService } from '../authentication.service';
 import { Router } from '@angular/router';
 import {CookieService } from 'angular2-cookie/services/cookies.service';
 
-import { User } from '../user';
+import { User } from './user/user';
 
 import { LoginRequest } from '../loginrequest';
-import { UserService } from '../user.service';
+import { UserService } from './user/user.service';
 
 @Component({
   templateUrl: './home.component.html',
