@@ -25,6 +25,7 @@ import { AuthenticationService } from './authentication.service';
 import { UserService } from './user.service';
 import { AlertService } from './alert.service';
 import { LoginService } from './login.service';
+import { LocationService } from './location.service';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 // used to create fake backend
@@ -64,7 +65,8 @@ import { HelloComponent } from './hello/hello.component';
     UserService,
     AlertService,
     CookieService,
-    LoginService
+    LoginService,
+    LocationService
     // providers used to create fake backend
    
   ],

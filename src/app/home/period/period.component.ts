@@ -10,7 +10,8 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/observable/fromEvent';
-
+import { Location } from '../../location';
+import { LocationService } from '../../location.service';
 
 //Structure
 @Component({
@@ -18,22 +19,12 @@ import 'rxjs/add/observable/fromEvent';
   styleUrls: ['./period.component.css']
 })
 export class PeriodComponent {
-  displayedColumns = ['id','trainingName', 'activeStatus', 'coursesCount', 'startDate', 'endDate', 'createdBy', 'editedBy', 'action'];
-  periodDatabase = new PeriodDatabase();
-  dataSource: PeriodDataSource | null;
-
-  @ViewChild(MdPaginator) paginator: MdPaginator;
+ 
   @ViewChild('filter') filter: ElementRef;
   @ViewChild(MdSort) sort: MdSort;
   ngOnInit() {
-    this.dataSource = new PeriodDataSource(this.periodDatabase, this.paginator, this.sort);
-    Observable.fromEvent(this.filter.nativeElement, 'keyup')
-        .debounceTime(150)
-        .distinctUntilChanged()
-        .subscribe(() => {
-          if (!this.dataSource) { return; }
-          this.dataSource.filter = this.filter.nativeElement.value;
-        });
+    //this.dataSource = new PeriodDataSource(this.periodDatabase, this.paginator, this.sort);
+
   }
   
   trainingName: string;
@@ -41,34 +32,49 @@ export class PeriodComponent {
   endDate: string;
   
 
-  constructor(public addPeriod: MdDialog) {}
+  dashboardAT: Location[];
 
-  editDialog(operation:string, period:Period)
-  {
-    let dialogRef = this.addPeriod.open(AddPeriodDialog, {
-      width: '40%',
-      data: { trainingName: period.locationId }
-    });
+  displayedColumns = ['locationId','locationName'];
+  periodDatabase;
+  dataSource: PeriodDataSource | null;
 
-    dialogRef.afterClosed().subscribe(result => {
-      this.trainingName = result.trainingName;
-      this.startDate = result.startDate;
-      this.endDate = result.endDate;
-    });
+  constructor(public addPeriod: MdDialog,private locationService:LocationService) {
+   // this.periodDatabase = new PeriodDatabase();
+    this.locationService.getLocations().subscribe(((dashboardAT) => {
+      this.dashboardAT = dashboardAT;
+      
+      //this.dataSource = new PeriodDataSource(this.periodDatabase, this.paginator, this.sort);
+      this.periodDatabase = new PeriodDatabase(this.dashboardAT); 
+      this.dataSource = new PeriodDataSource(this.periodDatabase, this.sort);
+    }));
   }
-  openDialog(operation:string): void {
+
+  // editDialog(operation:string, period:Period)
+  // {
+  //   let dialogRef = this.addPeriod.open(AddPeriodDialog, {
+  //     width: '40%',
+  //     data: { trainingName: period.locationId }
+  //   });
+
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     this.trainingName = result.trainingName;
+  //     this.startDate = result.startDate;
+  //     this.endDate = result.endDate;
+  //   });
+  // }
+  // openDialog(operation:string): void {
   
-    let dialogRef = this.addPeriod.open(AddPeriodDialog, {
-      width: '40%',
-      data: { trainingName: "",operation: operation }
-    });
+  //   let dialogRef = this.addPeriod.open(AddPeriodDialog, {
+  //     width: '40%',
+  //     data: { trainingName: "",operation: operation }
+  //   });
 
-    dialogRef.afterClosed().subscribe(result => {
-      this.trainingName = result.trainingName;
-      this.startDate = result.startDate;
-      this.endDate = result.endDate;
-    });
-  }
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     this.trainingName = result.trainingName;
+  //     this.startDate = result.startDate;
+  //     this.endDate = result.endDate;
+  //   });
+  // }
 
 }
 
@@ -93,20 +99,30 @@ export class AddPeriodDialog {
 }
 
 //table
-export interface Period {
-  locationId:number;
-  locationName: string;
-}
 
 export class PeriodDatabase {
-  dataChange: BehaviorSubject<Period[]> = new BehaviorSubject<Period[]>([]);
-  get data(): Period[] { return this.dataChange.value; }
+  dataChange: BehaviorSubject<Location[]> = new BehaviorSubject<Location[]>([]);
+  get data(): Location[] { return this.dataChange.value; }
 
-  constructor() {
-    this.dataChange.next([
-      {locationId: 1, locationName: '1'},
-      {locationId: 2, locationName: "123"}
-    ]);
+  // constructor() {
+  //   this.dataChange.next([
+  //     {locationId: 1, locationName: '1'},
+  //     {locationId: 2, locationName: "123"}
+  //   ]);
+  // }
+
+    constructor(private dataAT: Location[]) {
+    // ]);
+    for (let i = 0; i < dataAT.length; i++) { 
+  
+      alert( this.dataAT[i].locationName);
+      const copiedData = this.data.slice();
+      copiedData.push({
+        locationId: this.dataAT[i].locationId,
+        locationName: this.dataAT[i].locationName
+      });
+      this.dataChange.next(copiedData);
+   }
   }
 }
 
@@ -116,35 +132,22 @@ export class PeriodDataSource extends DataSource<any> {
   set filter(filter: string) {
     this._filterChange.next(filter);
   }
-  filteredData: Period[] = [];
-  renderedData: Period[] = [];
+  filteredData: Location[] = [];
+  renderedData: Location[] = [];
   //sortedData: Period[] = [];
-  constructor(private _periodDatabase: PeriodDatabase, private _paginator: MdPaginator, private _sort: MdSort) {
+  constructor(private _periodDatabase: PeriodDatabase,  private _sort: MdSort) {
     super();
   }
-  connect(): Observable<Period[]> {
+  connect(): Observable<Location[]> {
     const displayDataChanges = [
       this._periodDatabase.dataChange,
       this._filterChange,
-      this._paginator.page,
       this._sort.mdSortChange,
     ];
 
 
     return Observable.merge(...displayDataChanges).map(() => {
-      this.filteredData = this._periodDatabase.data.slice().filter((item: Period) => {
-        let searchStr = (item.locationId + item.locationName).toLowerCase();
-        return searchStr.indexOf(this.filter.toLowerCase()) != -1;
-      });
-
-     const sortedData = this.getSortedData(this.filteredData.slice());
-
-      // Grab the page's slice of data.
-      const startIndex = this._paginator.pageIndex * this._paginator.pageSize;
-      this.renderedData = sortedData.splice(startIndex, this._paginator.pageSize);
-
-      
-      return this.renderedData;
+      return this.getSortedData();
 
       
 
@@ -153,7 +156,8 @@ export class PeriodDataSource extends DataSource<any> {
 
   disconnect() {}
 
-  getSortedData(data: Period[]): Period[] {
+  getSortedData(): Location[] {
+    const data = this._periodDatabase.data.slice();
     //const data = this._periodDatabase.data.slice();
     if (!this._sort.active || this._sort.direction == '') { return data; }
 
@@ -162,7 +166,7 @@ export class PeriodDataSource extends DataSource<any> {
       let propertyB: number|string = '';
 
       switch (this._sort.active) {
-        case 'id': [propertyA, propertyB] = [a.locationId, b.locationId]; break;
+        case 'locationId': [propertyA, propertyB] = [a.locationId, b.locationId]; break;
       }
 
       let valueA = isNaN(+propertyA) ? propertyA : +propertyA;
