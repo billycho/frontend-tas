@@ -26,7 +26,7 @@ import { UserService } from './home/user/user.service';
 import { AlertService } from './alert.service';
 import { LoginService } from './login.service';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
-
+import { GradeService } from './home/user/grade.service';
 // used to create fake backend
 
 
@@ -64,8 +64,10 @@ import { HelloComponent } from './hello/hello.component';
     UserService,
     AlertService,
     CookieService,
-    LoginService
+    LoginService,
     // providers used to create fake backend
+
+    GradeService
    
   ],
   bootstrap: [AppComponent],

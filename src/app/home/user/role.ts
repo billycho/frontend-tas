@@ -1,7 +1,4 @@
-export class Role{
-    constructor (
-        public roleId:number,
-        public roleName: string
-    ){    
-    }
+export interface Role{
+        roleId:number;
+        roleName: string;
 }

@@ -4,17 +4,15 @@ import { Observable } from 'rxjs/Rx';
 import { LoginRequest } from '../../loginrequest';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 
-import { User } from './user';
-import { Role } from './role';
-
+import { Grade } from './grade';
 @Injectable()
-export class UserService {
+export class GradeService {
    constructor(private http: Http) {
    }
  
-   getUsers(): Observable<User[]> {
+   getUsers(): Observable<Grade[]> {
       
-      return this.http.get("http://localhost:8080/employees/all")
+      return this.http.get("http://localhost:8080/grades")
          .map((res: Response) => res.json())
          .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
    }

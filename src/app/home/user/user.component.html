@@ -8,16 +8,13 @@
         </md-form-field>
       </div> -->
       <!-- <div class="add-period inline right"><button md-raised-button color="accent"  (click)="openDialog('Create')"><md-icon>add</md-icon> Add Period</button></div> -->
-      <!-- <div *ngFor = "let e of users.employee"> -->
-          <!-- <div *ngFor = "let e of user.employee"> -->
-            <!-- {{e.employeeId}} -->
-          <!-- </div> -->
-      <!-- </div> -->
+      
+   
       <md-table #table [dataSource]="dataSource" mdSort>
         
         <ng-container mdColumnDef="employeeid">
           <md-header-cell *mdHeaderCellDef md-sort-header> Employee ID </md-header-cell>
-          <!-- <md-cell *ngFor="let user"> {{employee.employeeId}} </md-cell> -->
+          <md-cell *mdCellDef="let user"> {{user.employeeId}} </md-cell>
         </ng-container>
 
         <ng-container mdColumnDef="fullname">
@@ -70,7 +67,9 @@
             [pageSize]="10"
             [pageSizeOptions]="[10, 25, 50, 100]">
       </md-paginator> -->
- 
+      <div *ngFor = "let user of users">
+            {{user.roles[0]?.roleName}}
+      </div>
     </md-card-content>
   </md-card>
 </div>

@@ -1,8 +1,5 @@
-export class Grade{
-    constructor (
-        public gradeId:number,
-        public jobFamily:string,
-        public grade:string
-    ){    
-    }
+export interface Grade{
+        gradeid:number;
+        jobfamily:string;
+        grade:string;
 }
