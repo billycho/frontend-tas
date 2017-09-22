@@ -4,6 +4,7 @@ import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import { Location } from '../../location';
 import { LocationService } from '../../location.service';
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @Component({
   templateUrl: './dashboard.component.html',
@@ -22,9 +23,12 @@ export class DashboardComponent  {
   //location
   locations;
   loginResponse;
+
+  dummy:string;
   constructor(private locationService: LocationService) {
     console.log("asda");
     this.locations = locationService.getLocations();
+    this.dummy = "gkfk";
     
    // locationService.addComment();
 

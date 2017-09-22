@@ -1,0 +1,74 @@
+<h2 md-dialog-title>Add employee</h2>
+<md-dialog-content>
+    <md-table #table [dataSource]="dataSource" mdSort>
+                        
+        <ng-container mdColumnDef="isUser">
+                <md-header-cell *mdHeaderCellDef ></md-header-cell>
+                <md-cell *mdCellDef="let addEmployee">
+                    <!-- <form>
+                    <input type="checkbox"  
+                        [(NgModel)] = "addEmployee.isUser"
+                        [disabled]="addEmployee.beenUser|| !addEmployee.employee.active"
+                        >
+                    </form> -->
+                    {{addEmployee.isUser}}
+                </md-cell>
+            </ng-container>
+        
+
+        <ng-container mdColumnDef="employeeId">
+            <md-header-cell *mdHeaderCellDef md-sort-header> ID </md-header-cell>
+            <md-cell *mdCellDef="let addEmployee"> {{addEmployee.employee.employeeId}} </md-cell>
+        </ng-container>
+
+        <ng-container mdColumnDef="fullname">
+            <md-header-cell *mdHeaderCellDef md-sort-header> Fullname </md-header-cell>
+            <md-cell *mdCellDef="let addEmployee"> {{addEmployee.employee.fullname}} </md-cell>
+            </ng-container>
+    
+        <ng-container mdColumnDef="email">
+            <md-header-cell *mdHeaderCellDef md-sort-header> Email </md-header-cell>
+            <md-cell *mdCellDef="let addEmployee"> {{addEmployee.employee.email}} </md-cell>
+        </ng-container>
+    
+        <ng-container mdColumnDef="jobfamily">
+            <md-header-cell *mdHeaderCellDef md-sort-header> Job Family </md-header-cell>
+            <md-cell *mdCellDef="let addEmployee"> {{addEmployee.employee.grade.jobfamily}} </md-cell>
+        </ng-container>
+    
+        <ng-container mdColumnDef="stream">
+            <md-header-cell *mdHeaderCellDef md-sort-header> Stream </md-header-cell>
+            <md-cell *mdCellDef="let addEmployee"> {{addEmployee.employee.stream}} </md-cell>
+        </ng-container>
+    
+        <ng-container mdColumnDef="grade">
+            <md-header-cell *mdHeaderCellDef md-sort-header> Grade </md-header-cell>
+            <md-cell *mdCellDef="let addEmployee"> {{addEmployee.employee.grade.grade}} </md-cell>
+        </ng-container>
+    
+        <ng-container mdColumnDef="accountName">
+            <md-header-cell *mdHeaderCellDef md-sort-header> Account Name </md-header-cell>
+            <md-cell *mdCellDef="let addEmployee"> {{addEmployee.employee.accountName}} </md-cell>
+        </ng-container>
+    
+        <ng-container mdColumnDef="active">
+            <md-header-cell *mdHeaderCellDef md-sort-header> Active </md-header-cell>
+            <md-cell *mdCellDef="let addEmployee">
+                <div *ngIf="addEmployee.employee.active then thenBlock else elseBlock"></div>
+                <ng-template #thenBlock>Yes</ng-template>
+                <ng-template #elseBlock>No</ng-template>
+            </md-cell>
+        </ng-container>
+
+        <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
+        <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
+    </md-table>
+    <!-- <input type="text"
+        [(ngModel)]= "dummy"
+        >
+    <p>{{dummy}}</p> -->
+</md-dialog-content>
+<md-dialog-actions style="float: right;">
+    <button type="submit" md-button color="accent"  (click)="addUser()">Add User</button>
+    <button md-button color="indigo"  (click)="closeDialog()">Cancel</button>
+</md-dialog-actions>

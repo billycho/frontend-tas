@@ -1,54 +1,55 @@
-import { Component, OnInit } from '@angular/core';
-import {DataSource} from '@angular/cdk/collections';
-import {Observable} from 'rxjs/Observable';
+import { Component, OnInit, Inject} from '@angular/core';
+import  {DataSource} from '@angular/cdk/collections';
+import { Observable } from 'rxjs/Observable';
+import { MdDialog } from '@angular/material';
+
 import 'rxjs/add/observable/of';
 
-import { User } from './user';
-// import {Grade} from './grade';
+import { AddUserDialog } from './adduserdialog.component'
+import { Employee } from './employee';
 
-import { UserService } from './user.service';
-// import { GradeService } from './grade.service';
+import { EmployeeService } from './employee.service';
 
 @Component({
   templateUrl: './user.component.html',
   styleUrls: ['./user.component.css']
 })
 export class UserComponent implements OnInit {
-  private users:User[];
+  private users:Employee[];
   dataSource:UserDataSource;
-  // grades: Grade[];
 
   constructor(
-    private userService: UserService
-    // private gradeService:GradeService
+    private employeeService: EmployeeService,
+    public addUserDialog: MdDialog
   ) {
-    this.userService.getUsers()
+    this.employeeService.getUsers()
       .subscribe(
         (users)=>{this.users = users; 
-        console.log(users[0].employeeId);
         this.dataSource = new UserDataSource( this.users);
         }
       );
-      
-    // this.dataSource = new UserDataSource( this.users);
-    // this.gradeService.getUsers().subscribe((grades)=>{this.grades = grades; console.log(grades[0]);});
   }
   
-  displayedColumns = ['employeeid', 'fullname', 'email', 'jobfam-stream', 'grade', 'accname', 'active', 'roles'];
-  // dataSource = this.users;
+  displayedColumns = ['employeeId', 'fullname', 'email', 'jobfamily','stream', 'grade', 'accountName', 'active', 'roles', 'act'];
   
   ngOnInit() {
     
+  }
+
+  openDialog(): void {
+    let dialogRef = this.addUserDialog.open(AddUserDialog, {
+      height: '600px',
+      width: '800px'
+    });
   }
 }
 
 export class UserDataSource extends DataSource<any> {
   
-  constructor(private users: User[]){
+  constructor(private users: Employee[]){
     super();
   }
-  connect(): Observable<User[]> {
-    console.log(this.users);
+  connect(): Observable<Employee[]> {
     return Observable.of(this.users);
   }
 
