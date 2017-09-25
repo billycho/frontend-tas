@@ -32,7 +32,6 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 
 import { HttpClientModule } from "@angular/common/http";
-import { HelloComponent } from './hello/hello.component';
 
 @NgModule({
   declarations: [
@@ -46,8 +45,7 @@ import { HelloComponent } from './hello/hello.component';
     EnrollmentComponent,
     AchievementComponent,
     MaintenanceComponent,
-    AlertComponent,
-    HelloComponent
+    AlertComponent
   ],
   imports: [
     BrowserModule,
