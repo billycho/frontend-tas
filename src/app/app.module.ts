@@ -14,20 +14,23 @@ import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './home/dashboard/dashboard.component';
 import { PeriodComponent, AddPeriodDialog } from './home/period/period.component';
-import { UserComponent } from './home/user/user.component';
+import { UserComponent} from './home/user/user.component';
 import { EnrollmentComponent } from './home/enrollment/enrollment.component';
 import { AchievementComponent } from './home/achievement/achievement.component';
 import { MaintenanceComponent } from './home/maintenance/maintenance.component';
 import { AlertComponent } from './alert.component';
 
+import { AddUserDialog } from './home/user/adduserdialog.component';
+
 import { AuthGuard } from './authguard.service';
 import { AuthenticationService } from './authentication.service';
-import { UserService } from './user.service';
 import { AlertService } from './alert.service';
 import { LoginService } from './login.service';
 import { LocationService } from './location.service';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
-
+import { GradeService } from './home/user/grade.service';
+import { EmployeeService } from './home/user/employee.service';
+import { RoleService } from './home/user/role.service';
 // used to create fake backend
 
 
@@ -45,7 +48,8 @@ import { HttpClientModule } from "@angular/common/http";
     EnrollmentComponent,
     AchievementComponent,
     MaintenanceComponent,
-    AlertComponent
+    AlertComponent,
+    AddUserDialog
   ],
   imports: [
     BrowserModule,
@@ -60,17 +64,21 @@ import { HttpClientModule } from "@angular/common/http";
   ],
   providers: [AuthGuard,
     AuthenticationService,
-    UserService,
     AlertService,
     CookieService,
     LoginService,
-    LocationService
+    LocationService,
+    EmployeeService,
+    RoleService,
     // providers used to create fake backend
+
+    GradeService
    
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    AddPeriodDialog
+    AddPeriodDialog,
+    AddUserDialog
   ]
 })
 export class AppModule { }

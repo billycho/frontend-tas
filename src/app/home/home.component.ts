@@ -3,10 +3,10 @@ import { AuthenticationService } from '../authentication.service';
 import { Router } from '@angular/router';
 import {CookieService } from 'angular2-cookie/services/cookies.service';
 
-import { User } from '../user';
+import { Employee } from './user/employee';
 
 import { LoginRequest } from '../loginrequest';
-import { UserService } from '../user.service';
+import { EmployeeService } from './user/employee.service';
 
 @Component({
   templateUrl: './home.component.html',
@@ -16,10 +16,10 @@ export class HomeComponent{
   
   private router: Router;
   private currentUser: LoginRequest;
-  private user: User;
-  private users: User[];
+  private user: Employee;
+  private users: Employee[];
   
-  constructor( private userService: UserService,
+  constructor( private employeeService: EmployeeService,
     private authenticationService: AuthenticationService,
     private cookieService:CookieService
   ){

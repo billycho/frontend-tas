@@ -1,7 +1,4 @@
-export class Location{
-    constructor (
-        public locationId: number,
-        public locationName:string
-    ){    
-    }
+export interface Location{
+        locationId: number;
+        locationName:string;
 }
