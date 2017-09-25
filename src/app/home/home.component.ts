@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
-import { AuthenticationService } from '../authentication.service';
 import { Router } from '@angular/router';
+
+import { AuthenticationService } from '../service/authentication.service';
 import {CookieService } from 'angular2-cookie/services/cookies.service';
+import { EmployeeService } from '../service/employee.service';
 
-import { Employee } from './user/employee';
+import { Employee } from '../model/employee';
+import { LoginRequest } from '../model/loginrequest';
 
-import { LoginRequest } from '../loginrequest';
-import { EmployeeService } from './user/employee.service';
 
 @Component({
   templateUrl: './home.component.html',

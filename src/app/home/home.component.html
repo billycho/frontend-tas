@@ -1,4 +1,3 @@
-
 <md-sidenav-container>
 <md-toolbar color="primary" >
 <span>
@@ -15,16 +14,15 @@
     <div style='font-size: 13px;font-family:Roboto;' *ngIf="currentUser.role==2">Trainer</div>
     <div style='font-size: 13px;font-family:Roboto;' *ngIf="currentUser.role==3">Manager</div>
     <div style='font-size: 13px;font-family:Roboto;' *ngIf="currentUser.role==4">Participant</div>
+    <br>
 </span>
+<button md-button (click)=sidenav.close() routerLink="/home/dashboard" color="white" >Dashboard</button>
 <button md-button (click)=sidenav.close() routerLink="/home/period" color="white" >Period</button>
 <button md-button (click)=sidenav.close() routerLink="/home/user" color="white" *ngIf="currentUser.role==1">User</button>
 <button md-button (click)=sidenav.close() routerLink="/home/enrollment" color="white">Enrollment</button>
 <button md-button (click)=sidenav.close() routerLink="/home/achievement" color="white" *ngIf= "currentUser.role==1 || currentUser.role==2">Achievement</button>
 <button md-button (click)=sidenav.close() routerLink="/home/maintenance" color="white">Training Maintenance</button>
-
-<div style='background-color:#B71C1C'>
 <button md-button color="white" (click)=logout() routerLink="/login">Logout</button>
-</div>
 </md-sidenav>
 
 <div class="app-content mat-typography">

@@ -18,19 +18,21 @@ import { UserComponent} from './home/user/user.component';
 import { EnrollmentComponent } from './home/enrollment/enrollment.component';
 import { AchievementComponent } from './home/achievement/achievement.component';
 import { MaintenanceComponent } from './home/maintenance/maintenance.component';
-import { AlertComponent } from './alert.component';
+import { AlertComponent } from './alert/alert.component';
 
 import { AddUserDialog } from './home/user/adduserdialog.component';
 
-import { AuthGuard } from './authguard.service';
-import { AuthenticationService } from './authentication.service';
-import { AlertService } from './alert.service';
-import { LoginService } from './login.service';
-import { LocationService } from './location.service';
+import { AuthGuard } from './service/authguard.service';
+import { AuthenticationService } from './service/authentication.service';
+import { AlertService } from './service/alert.service';
+import { LoginService } from './service/login.service';
+import { LocationService } from './service/location.service';
+import { GradeService } from './service/grade.service';
+import { EmployeeService } from './service/employee.service';
+import { RoleService } from './service/role.service';
+
+
 import { CookieService } from 'angular2-cookie/services/cookies.service';
-import { GradeService } from './home/user/grade.service';
-import { EmployeeService } from './home/user/employee.service';
-import { RoleService } from './home/user/role.service';
 // used to create fake backend
 
 

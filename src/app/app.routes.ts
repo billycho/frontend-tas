@@ -8,7 +8,7 @@ import { EnrollmentComponent } from './home/enrollment/enrollment.component'
 import { AchievementComponent } from './home/achievement/achievement.component'
 import { MaintenanceComponent } from "./home/maintenance/maintenance.component";
 
-import { AuthGuard } from './authguard.service';
+import { AuthGuard } from './service/authguard.service';
 
 const routes: Routes = [
     { path: 'login',            component: LoginComponent },

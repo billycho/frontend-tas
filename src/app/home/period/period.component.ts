@@ -10,8 +10,8 @@ import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/debounceTime';
 import 'rxjs/add/operator/distinctUntilChanged';
 import 'rxjs/add/observable/fromEvent';
-import { Location } from '../../location';
-import { LocationService } from '../../location.service';
+import { Location } from '../../model/location';
+import { LocationService } from '../../service/location.service';
 
 //Structure
 @Component({

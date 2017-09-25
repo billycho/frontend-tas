@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, RequestOptions ,Headers } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { Location } from "./location";
-import { LoginRequest } from './loginrequest';
+import { Location } from "../model/location";
+import { LoginRequest } from '../model/loginrequest';
 @Injectable()
 export class LocationService {
    constructor(private http: Http) {

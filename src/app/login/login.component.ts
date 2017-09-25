@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 
-import { AlertService} from '../alert.service';
-import { AuthenticationService } from '../authentication.service';
-import { LoginService } from '../login.service';
+import { AlertService} from '../service/alert.service';
+import { AuthenticationService } from '../service/authentication.service';
+import { LoginService } from '../service/login.service';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 @Component({

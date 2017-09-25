@@ -2,14 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {DataSource} from '@angular/cdk/collections';
 import {Observable} from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
-import { Location } from '../../location';
-import { LocationService } from '../../location.service';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 @Component({
   templateUrl: './dashboard.component.html',
   styleUrls: ['./dashboard.component.css'],
-  providers: [LocationService]
 })
 export class DashboardComponent  {
   // Active Training DataStream
@@ -25,11 +22,8 @@ export class DashboardComponent  {
   loginResponse;
 
   dummy:string;
-  constructor(private locationService: LocationService) {
-    console.log("asda");
-    this.locations = locationService.getLocations();
-    this.dummy = "gkfk";
-    
+  constructor() {
+   
    // locationService.addComment();
 
     //locationService.addComment().subscribe((loginResponse) => {this.loginResponse = loginResponse;alert(loginResponse.status)});

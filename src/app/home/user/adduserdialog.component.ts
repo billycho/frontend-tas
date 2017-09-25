@@ -6,12 +6,12 @@ import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MdSnackBar} from '@angular/material';
 import 'rxjs/add/observable/of';
 
-import { Employee } from './employee';
-import { Role } from './role';
+import { Employee } from '../../model/employee';
+import { Role } from '../../model/role';
 
-import { EmployeeService } from './employee.service';
-import { RoleService } from './role.service';
-import { AlertService } from '../../alert.service';
+import { EmployeeService } from '../../service/employee.service';
+import { RoleService } from '../../service/role.service';
+import { AlertService } from '../../service/alert.service';
 
 @Component({
     templateUrl: 'adduserdialog.component.html'

@@ -6,9 +6,9 @@ import { MdDialog } from '@angular/material';
 import 'rxjs/add/observable/of';
 
 import { AddUserDialog } from './adduserdialog.component'
-import { Employee } from './employee';
+import { Employee } from '../../model/employee';
 
-import { EmployeeService } from './employee.service';
+import { EmployeeService } from '../../service/employee.service';
 
 @Component({
   templateUrl: './user.component.html',

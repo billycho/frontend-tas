@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Http, Response, RequestOptions ,Headers } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
-import { LoginRequest } from '../../loginrequest';
+import { LoginRequest } from '../model/loginrequest';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 
-import { Employee } from './employee';
-import { Role } from './role';
+import { Employee } from '../model/employee';
+import { Role } from '../model/role';
 
 @Injectable()
 export class EmployeeService {
