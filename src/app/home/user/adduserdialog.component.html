@@ -7,7 +7,7 @@
                 <md-cell *mdCellDef="let addEmployee">
                     <input type="checkbox"  
                         [checked] = "addEmployee.isUser"
-                        [disabled]="addEmployee.beenUser|| !addEmployee.employee.active"
+                        [disabled]="addEmployee.beenUser|| !addEmployee.employee.active || loading"
                         (change)="addEmployee.isUser =!addEmployee.isUse"
                         >
                 </md-cell>
@@ -64,6 +64,6 @@
 
 </md-dialog-content>
 <md-dialog-actions style="float: right;">
-    <button type="submit" md-button color="accent"  (click)="addUser()">Add User</button>
-    <button md-button color="indigo"  (click)="closeDialog()">Cancel</button>
+    <button type="submit" md-button color="accent"  (click)="addUser()"[disabled]=loading>Add User</button>
+    <button md-button color="indigo"  (click)="closeDialog()"[disabled]=loading>Cancel</button>
 </md-dialog-actions>

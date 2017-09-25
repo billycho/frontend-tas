@@ -63,7 +63,7 @@ import { AlertService } from '../../alert.service';
         
             while(index <this.addEmployees.length ) {
                 if(!this.addEmployees[index].beenUser && this.addEmployees[index].isUser){
-                    // this.loading = true;
+                    this.loading = true;
                     var resultEmployee: Employee;                    
 
                     this.employeeService.addUser(this.addEmployees[index].employee, role )
@@ -71,25 +71,11 @@ import { AlertService } from '../../alert.service';
                         employee => {
                             resultEmployee = employee;
                             this.alertService.success("Employee "+resultEmployee.fullname+" succesfully added.");
-                            // this.alertService.getMessage().subscribe(
-                            //     message=>{
-                            //         this.alertSnackBar.open(message,'', {
-                            //             duration:2000
-                            //         })
-                            //     }
-                            // )
                             employeesAdded++;
                             this.closeDialog();
                         },
                         error => {
                             this.alertService.error(error);
-                            // this.alertService.getMessage().subscribe(
-                            //     message=>{
-                            //         this.alertSnackBar.open(message,'', {
-                            //             duration:2000
-                            //         })
-                            //     }
-                            // )
                         });
                     }
                 index++;
@@ -104,10 +90,9 @@ import { AlertService } from '../../alert.service';
                 this.alertSnackBar.open(message.text,'', {
                     duration:3000
                 });
-                console.log(message);
             }
         )
-        // this.loading = false;
+        this.loading = false;
     }
   }
   

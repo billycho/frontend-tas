@@ -22,12 +22,7 @@ export class UserComponent implements OnInit {
     private employeeService: EmployeeService,
     public addUserDialog: MdDialog
   ) {
-    this.employeeService.getUsers()
-      .subscribe(
-        (users)=>{this.users = users; 
-        this.dataSource = new UserDataSource( this.users);
-        }
-      );
+    this.updateUser();
   }
   
   displayedColumns = ['employeeId', 'fullname', 'email', 'jobfamily','stream', 'grade', 'accountName', 'active', 'roles', 'act'];
@@ -35,11 +30,22 @@ export class UserComponent implements OnInit {
   ngOnInit() {
     
   }
-
+  updateUser(){
+    this.employeeService.getUsers()
+    .subscribe(
+      (users)=>{this.users = users; 
+      this.dataSource = new UserDataSource( this.users);
+      }
+    );
+  }
   openDialog(): void {
     let dialogRef = this.addUserDialog.open(AddUserDialog, {
       height: '600px',
       width: '800px'
+    });
+
+    dialogRef.afterClosed().subscribe(result=>{
+      this.updateUser();
     });
   }
 }
