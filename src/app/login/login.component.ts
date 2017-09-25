@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
         var obj = { "username":this.username, "password":this.password};
 
         this.loginService.authenticate(obj).subscribe((loginResponse) => {this.loginResponse = loginResponse;
-            alert(loginResponse.status);
+            //alert(loginResponse.status);
             if(loginResponse.status == 1)
             {
                
