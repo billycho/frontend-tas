@@ -14,14 +14,14 @@ export class EmployeeService {
    
    getEmployees(): Observable<Employee []> {
       
-      return this.http.get("http://localhost:8080/employees/all")
+      return this.http.get("http://localhost:8080/employees")
          .map((res: Response) => res.json())
          .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
    }
 
    getUsers(): Observable<Employee []> {
       
-      return this.http.get("http://localhost:8080/employees/users/all")
+      return this.http.get("http://localhost:8080/employees/users")
          .map((res: Response) => res.json())
          .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
    }
