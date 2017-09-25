@@ -5,13 +5,11 @@
         <ng-container mdColumnDef="isUser">
                 <md-header-cell *mdHeaderCellDef ></md-header-cell>
                 <md-cell *mdCellDef="let addEmployee">
-                    <!-- <form>
                     <input type="checkbox"  
-                        [(NgModel)] = "addEmployee.isUser"
+                        [checked] = "addEmployee.isUser"
                         [disabled]="addEmployee.beenUser|| !addEmployee.employee.active"
+                        (change)="addEmployee.isUser =!addEmployee.isUse"
                         >
-                    </form> -->
-                    {{addEmployee.isUser}}
                 </md-cell>
             </ng-container>
         
@@ -63,10 +61,7 @@
         <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
         <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
     </md-table>
-    <!-- <input type="text"
-        [(ngModel)]= "dummy"
-        >
-    <p>{{dummy}}</p> -->
+
 </md-dialog-content>
 <md-dialog-actions style="float: right;">
     <button type="submit" md-button color="accent"  (click)="addUser()">Add User</button>

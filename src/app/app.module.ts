@@ -29,6 +29,7 @@ import { LoginService } from './login.service';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { GradeService } from './home/user/grade.service';
 import { EmployeeService } from './home/user/employee.service';
+import { RoleService } from './home/user/role.service';
 // used to create fake backend
 
 
@@ -68,6 +69,7 @@ import { HelloComponent } from './hello/hello.component';
     CookieService,
     LoginService,
     EmployeeService,
+    RoleService,
     // providers used to create fake backend
 
     GradeService

@@ -5,6 +5,7 @@ import { LoginRequest } from '../../loginrequest';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 import { Employee } from './employee';
+import { Role } from './role';
 
 @Injectable()
 export class EmployeeService {
@@ -25,9 +26,18 @@ export class EmployeeService {
          .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
    }
 
-   addUser(body: any): Observable<Employee>{
-         return this.http.post("http://localhost:8080/employees/addrole", body)
+   addUser(employee: Employee, role: Role): Observable<Employee>{
+         var obj = {"employeeId":employee.employeeId, "roleId":role.roleId};
+         console.log(JSON.stringify({employeeId:employee.employeeId, roleId:role.roleId}));
+         return this.http.post("http://localhost:8080/employees/addrole",obj)
          .map((res: Response) => res.json())
          .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
    }
+}
+
+class EmployeeRole{
+      constructor(
+            employeeId:number,
+            roleId:number
+      ){ }
 }

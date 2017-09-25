@@ -1,13 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { DataSource } from '@angular/cdk/collections';
 import { Observable } from 'rxjs/Observable';
 import { MdDialogRef } from '@angular/material';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+import {MdSnackBar} from '@angular/material';
 import 'rxjs/add/observable/of';
 
 import { Employee } from './employee';
+import { Role } from './role';
 
 import { EmployeeService } from './employee.service';
+import { RoleService } from './role.service';
 import { AlertService } from '../../alert.service';
 
 @Component({
@@ -23,8 +26,10 @@ import { AlertService } from '../../alert.service';
 
     constructor(
       private employeeService: EmployeeService,
-      public dialogRef: MdDialogRef<AddUserDialog>,
-      private alertService : AlertService      
+      private roleService:RoleService,
+      public dialogAddUser: MdDialogRef<AddUserDialog>,
+      private alertService : AlertService,
+      private alertSnackBar:MdSnackBar     
       ) {
         this.dummy ="true";
         this.employeeService.getEmployees()
@@ -36,23 +41,6 @@ import { AlertService } from '../../alert.service';
                         this.employees[i]
                     );
                 }
-                console.log(this.addEmployees);
-                // var i:number;
-                // for(i = 0; i <employees.length; i++){
-                    // this.addEmployee[i]= new AddEmployee(
-                        // this.employees[i].employeeId,
-                        // this.employees[i].fullname,
-                        // this.employees[i].grade,
-                        // this.employees[i].stream,
-                        // this.employees[i].active, 
-                        // this.employees[i].location,
-                        // this.employees[i].accountName, 
-                        // this.employees[i].email, 
-                        // this.employees[i].accountPassword, 
-                        // this.employees[i].salt, 
-                        // this.employees[i].roles
-                    // );
-                // }
                 this.dataSource = new EmployeeDataSource( this.addEmployees);
             })
         
@@ -64,27 +52,63 @@ import { AlertService } from '../../alert.service';
     }
 
     closeDialog(){
-        this.dialogRef.close();
+        this.dialogAddUser.close();
     }
+    addUser(){
+        var employeesAdded:number =0;
+        var index:number=0;
+        
+        this.roleService.getRoleById(4).subscribe((fetchedRole) =>{
+            let role = fetchedRole;
+        
+            while(index <this.addEmployees.length ) {
+                if(!this.addEmployees[index].beenUser && this.addEmployees[index].isUser){
+                    // this.loading = true;
+                    var resultEmployee: Employee;                    
 
-    
-    // addUser(){
-    //     if(this.addEmployees.length > 0){
-    //         this.loading = true;
-    //         this.employeeService.addUser(this.model)
-    //             .subscribe(
-    //                 data => {
-    //                     this.alertService.success('Registration successful', true);
-    //                     this.closeDialog();
-    //                 },
-    //                 error => {
-    //                     this.alertService.error(error);
-    //                     this.loading = false;
-    //                 });
-    //         } else{
-    //             this.alertService.error('No employee added');
-    //         }
-    // }
+                    this.employeeService.addUser(this.addEmployees[index].employee, role )
+                    .subscribe(
+                        employee => {
+                            resultEmployee = employee;
+                            this.alertService.success("Employee "+resultEmployee.fullname+" succesfully added.");
+                            // this.alertService.getMessage().subscribe(
+                            //     message=>{
+                            //         this.alertSnackBar.open(message,'', {
+                            //             duration:2000
+                            //         })
+                            //     }
+                            // )
+                            employeesAdded++;
+                            this.closeDialog();
+                        },
+                        error => {
+                            this.alertService.error(error);
+                            // this.alertService.getMessage().subscribe(
+                            //     message=>{
+                            //         this.alertSnackBar.open(message,'', {
+                            //             duration:2000
+                            //         })
+                            //     }
+                            // )
+                        });
+                    }
+                index++;
+                } 
+        });
+        if (employeesAdded == 0){
+            this.alertService.error("No employee to be added");            
+        }
+
+        this.alertService.getMessage().subscribe(
+            message=>{
+                this.alertSnackBar.open(message.text,'', {
+                    duration:3000
+                });
+                console.log(message);
+            }
+        )
+        // this.loading = false;
+    }
   }
   
 export class EmployeeDataSource extends DataSource<any> {
@@ -99,22 +123,11 @@ export class EmployeeDataSource extends DataSource<any> {
     }
 
 class AddEmployee{
-    //public isUser:boolean;
+
     public beenUser:boolean;
-    public isUser:boolean;
+    isUser:boolean;
     constructor(
         public employee:Employee
-        // employeeId, 
-        // fullname,
-        // grade, 
-        // stream, 
-        // active, 
-        // location, 
-        // accountName, 
-        // email, 
-        // accountPassword, 
-        // salt, 
-        // roles
     ){
         this.beenUser=this.hadBeenUser();
         this.isUser = this.beenUser;
