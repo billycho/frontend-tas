@@ -19,6 +19,7 @@ import { EnrollmentComponent } from './home/enrollment/enrollment.component';
 import { AchievementComponent } from './home/achievement/achievement.component';
 import { MaintenanceComponent } from './home/maintenance/maintenance.component';
 import { AlertComponent } from './alert/alert.component';
+import { UserDetailComponent } from './home/user/detail/userdetail.component'
 
 import { AddUserDialog } from './home/user/adduserdialog.component';
 
@@ -29,6 +30,7 @@ import { LoginService } from './service/login.service';
 import { LocationService } from './service/location.service';
 import { GradeService } from './service/grade.service';
 import { EmployeeService } from './service/employee.service';
+import { EmployeeMethod } from './service/employee.method';
 import { RoleService } from './service/role.service';
 
 
@@ -51,7 +53,8 @@ import { HttpClientModule } from "@angular/common/http";
     AchievementComponent,
     MaintenanceComponent,
     AlertComponent,
-    AddUserDialog
+    UserDetailComponent,
+    AddUserDialog,
   ],
   imports: [
     BrowserModule,
@@ -72,6 +75,7 @@ import { HttpClientModule } from "@angular/common/http";
     LocationService,
     EmployeeService,
     RoleService,
+    EmployeeMethod,
     // providers used to create fake backend
 
     GradeService

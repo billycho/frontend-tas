@@ -70,7 +70,7 @@
 
       <ng-container mdColumnDef="act">
         <md-header-cell *mdHeaderCellDef md-sort-header> Action </md-header-cell>
-        <md-cell *mdCellDef="let user" onmouseover="" style="cursor: pointer"><md-icon>modeedit</md-icon></md-cell>
+        <md-cell *mdCellDef="let user" onmouseover="" style="cursor: pointer" routerLink="/home/user/{{user.employeeId}}"><md-icon>modeedit</md-icon></md-cell>
       </ng-container>
     
         <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>

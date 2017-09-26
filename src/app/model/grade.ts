@@ -1,4 +1,4 @@
-export interface Grade{
+export class Grade{
         gradeid:number;
         jobfamily:string;
         grade:string;
