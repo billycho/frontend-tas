@@ -7,6 +7,7 @@ import { UserComponent } from './home/user/user.component'
 import { EnrollmentComponent } from './home/enrollment/enrollment.component'
 import { AchievementComponent } from './home/achievement/achievement.component'
 import { MaintenanceComponent } from "./home/maintenance/maintenance.component";
+import { UserDetailComponent } from './home/user/detail/userdetail.component'
 
 import { AuthGuard } from './service/authguard.service';
 
@@ -17,6 +18,7 @@ const routes: Routes = [
             {path: '',              component: DashboardComponent},
             {path: 'period',        component: PeriodComponent},
             {path: 'user',          component: UserComponent},
+            {path: 'user/:id',          component: UserDetailComponent},
             {path: 'enrollment',    component: EnrollmentComponent},
             {path: 'achievement',   component: AchievementComponent},
             {path: 'maintenance',   component: MaintenanceComponent},

@@ -6,7 +6,7 @@ export class Employee{
         constructor(
         public employeeId:number,
         public fullname:string,
-        public  grade: Grade,
+        public grade: Grade,
         public stream: String,
         public active: boolean,
         public location: Location,
@@ -14,6 +14,9 @@ export class Employee{
         public email: String,
         public accountPassword: String,
         public salt: String,
-        public roles:Array<Role>,
-        ){}
+        public roles:Array<Role>
+        ){
+
+        }
+        
 }

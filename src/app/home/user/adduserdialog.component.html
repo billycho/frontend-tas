@@ -7,8 +7,8 @@
                 <md-cell *mdCellDef="let addEmployee">
                     <input type="checkbox"  
                         [checked] = "addEmployee.isUser"
-                        [disabled]="addEmployee.beenUser|| !addEmployee.employee.active || loading"
-                        (change)="addEmployee.isUser =!addEmployee.isUse"
+                        [disabled]="addEmployee.beenUser || loading"
+                        (change)="addEmployee.isUser =!addEmployee.isUser"
                         >
                 </md-cell>
             </ng-container>

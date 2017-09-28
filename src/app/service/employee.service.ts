@@ -33,11 +33,19 @@ export class EmployeeService {
          .map((res: Response) => res.json())
          .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
    }
-}
 
-class EmployeeRole{
-      constructor(
-            employeeId:number,
-            roleId:number
-      ){ }
+   getById(id:number):Observable<Employee>{
+         return this.http.get("http://localhost:8080/employees/"+id)
+            .map((res:Response)=>res.json())
+            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+   }
+   
+   //RESTRICTED TO ONLY UPDATE ROLE AND ACTIVE
+   update(employee: Employee):Observable<Employee>{
+      var obj = {"employeeId":employee.employeeId, "active":employee.active, "roles":employee.roles};
+      console.log(obj);
+      return this.http.post("http://localhost:8080/employees/update",obj)
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+   }
 }
