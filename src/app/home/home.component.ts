@@ -25,13 +25,19 @@ export class HomeComponent{
     private cookieService:CookieService
   ){
     //Using local storage:
-    this.currentUser= JSON.parse(localStorage.getItem('currentUser'));
-
-    //using cookie
-    this.currentUser=JSON.parse(this.cookieService.get('currentUserLocalHost'));
-   
+       
+    if (this.cookieService.get('currentUserLocalHost') == null) {
+      this.router.navigate(['/login']);
+    
+    }
+    else
+    {
+       this.currentUser=JSON.parse(this.cookieService.get('currentUserLocalHost'));  
+  
+    }
   }
   logout(){
-    this.authenticationService.logout();
+    this.cookieService.remove('currentUserLocalHost');
+    this.router.navigate(['/login']);
   }
 }

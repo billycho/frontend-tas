@@ -17,8 +17,9 @@ export class LoginComponent implements OnInit {
     returnUrl: string;
     loginResponse;
 
-    username: String;
+    username: string;
     password: string;
+    remember: boolean;
     
     constructor(
         private route: ActivatedRoute,
@@ -29,11 +30,39 @@ export class LoginComponent implements OnInit {
       ) { }
 
     ngOnInit() {
+        this.remember = false;
+        
+        if(this.cookieService.get('rememberMe') == null)
+        {
+           
+        }
+        else
+        {
+            if(this.cookieService.get('rememberMe') == "true")
+            {
+                this.password = this.cookieService.get('password');
+                this.username = this.cookieService.get('username'); 
+            };
+        }
+
         // reset login status
         //this.authenticationService.logout();
 
         // get return url from route parameters or default to '/'
         //this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/home';
+    }
+
+    changeRemember()
+    {
+        if(this.remember == false)
+        {
+            this.remember = true;
+        }
+        else
+        {
+            this.remember = false;
+        }
+        
     }
 
     login() {
@@ -45,7 +74,20 @@ export class LoginComponent implements OnInit {
             //alert(loginResponse.status);
             if(loginResponse.status == 1)
             {
-               
+                if(this.remember == true)
+                {
+                    this.cookieService.put('rememberMe',"true");
+                    this.cookieService.put('password', this.password);
+                    this.cookieService.put('username', this.username);
+                    //alert(this.cookieService.get('rememberMe'));
+                }
+                else
+                {
+                    this.cookieService.put('rememberMe',"false");
+                    this.cookieService.put('password', "");
+                    this.cookieService.put('username', "");
+                }
+
                 localStorage.setItem('currentUser', JSON.stringify(loginResponse));
                 this.cookieService.put('currentUserLocalHost',JSON.stringify(loginResponse));
                 this.router.navigate(['/home']);

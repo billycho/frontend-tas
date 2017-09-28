@@ -156,6 +156,7 @@ export class UserDataSource extends DataSource<any> {
 
       switch (this._sort.active) {
         case 'employeeId': [propertyA, propertyB] = [a.employeeId, b.employeeId]; break;
+        case 'fullname' : [propertyA, propertyB] = [a.fullname, b.fullname]; break;
       }
 
       let valueA = isNaN(+propertyA) ? propertyA : +propertyA;

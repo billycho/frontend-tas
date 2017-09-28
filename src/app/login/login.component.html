@@ -15,7 +15,9 @@
         </md-input-container>
       </md-card-content>
       <md-card-content>
-        <md-checkbox name="remember_me" [disabled]="loading">Remember Me</md-checkbox>
+        <md-checkbox 
+        (change) = "changeRemember()"
+        name="remember_me" [disabled]="loading">Remember Me</md-checkbox>
       </md-card-content>
       <md-card-actions>
         <button md-raised-button color="accent" type = submit  [disabled]="loading">Login</button>
@@ -23,6 +25,13 @@
       <md-card-content>
           <alert></alert>
       </md-card-content>
+
+      <!-- <input type="checkbox"  
+      [checked] = "addEmployee.isUser"
+      [disabled]="addEmployee.beenUser|| !addEmployee.employee.active || loading"
+      (change)="addEmployee.isUser =!addEmployee.isUse"
+      >
+       -->
     </form> 
   </md-card>
 </div>

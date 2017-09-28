@@ -13,7 +13,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { HomeComponent } from './home/home.component';
 import { DashboardComponent } from './home/dashboard/dashboard.component';
-import { PeriodComponent, AddPeriodDialog } from './home/period/period.component';
+import { PeriodComponent } from './home/period/period.component';
 import { UserComponent} from './home/user/user.component';
 import { EnrollmentComponent } from './home/enrollment/enrollment.component';
 import { AchievementComponent } from './home/achievement/achievement.component';
@@ -21,6 +21,7 @@ import { MaintenanceComponent } from './home/maintenance/maintenance.component';
 import { AlertComponent } from './alert/alert.component';
 
 import { AddUserDialog } from './home/user/adduserdialog.component';
+import { AddPeriodDialog } from './home/period/addperioddialog.component';
 
 import { AuthGuard } from './service/authguard.service';
 import { AuthenticationService } from './service/authentication.service';
@@ -30,6 +31,7 @@ import { LocationService } from './service/location.service';
 import { GradeService } from './service/grade.service';
 import { EmployeeService } from './service/employee.service';
 import { RoleService } from './service/role.service';
+import { PeriodService } from './service/period.service';
 
 
 import { CookieService } from 'angular2-cookie/services/cookies.service';
@@ -51,7 +53,8 @@ import { HttpClientModule } from "@angular/common/http";
     AchievementComponent,
     MaintenanceComponent,
     AlertComponent,
-    AddUserDialog
+    AddUserDialog,
+    AddPeriodDialog
   ],
   imports: [
     BrowserModule,
@@ -74,7 +77,8 @@ import { HttpClientModule } from "@angular/common/http";
     RoleService,
     // providers used to create fake backend
 
-    GradeService
+    GradeService,
+    PeriodService
    
   ],
   bootstrap: [AppComponent],

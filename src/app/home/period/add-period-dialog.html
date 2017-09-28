@@ -1,14 +1,17 @@
-<h1 md-dialog-title>{{data.operation}} Period</h1>
+<h1 md-dialog-title>Add Period</h1>
 
-<form>
+<form #periodForm="ngForm">
     <div md-dialog-content>
         <md-form-field color="accent">
-            <input mdInput placeholder="Training Name" [(ngModel)]='data.trainingName' name="trainingName">
+            <input (change) = "asda()"  required mdInput placeholder="Training Name" [(ngModel)]='data.periodName' name="trainingName">
+            <md-error *ngIf="addPeriodFormControl.hasError('required')">
+              Training Name is <strong>required</strong>
+        </md-error>
         </md-form-field>
     </div>
     <div md-dialog-content>
         <md-form-field color="accent">
-            <input mdInput placeholder="Start Date" [(ngModel)]='data.startDate' name="startDate" [mdDatepicker]="startDate" [max]=data.endDate>
+            <input mdInput required placeholder="Start Date" [(ngModel)]='data.startDate' name="startDate" [mdDatepicker]="startDate">
             <md-datepicker-toggle mdSuffix [for]="startDate"></md-datepicker-toggle>
             <md-datepicker #startDate></md-datepicker>
             <md-error *ngIf="addPeriodFormControl.hasError('required')">
@@ -18,7 +21,7 @@
     </div>
     <div md-dialog-content>
         <md-form-field color="accent">
-            <input mdInput placeholder="End Date" [(ngModel)]='data.endDate' name="endDate" [mdDatepicker]="endDate" [min]='data.startDate'>
+            <input mdInput (change) = "asda()" required placeholder="End Date" [(ngModel)]='data.endDate' name="endDate" [mdDatepicker]="endDate" [min]='startDate1'>
             <md-datepicker-toggle mdSuffix [for]="endDate"></md-datepicker-toggle>
             <md-datepicker #endDate></md-datepicker>
             <md-error *ngIf="addPeriodFormControl.hasError('required')">
@@ -26,6 +29,32 @@
             </md-error>
         </md-form-field>
     </div>
-    <button md-raised-button style='background-color:#673AB7' [md-dialog-close]="data">Add Period</button>
+    <md-card-content>
+    <md-checkbox 
+    [(ngModel)]= 'data.openenrollment' 
+  
+    name="open" [disabled]="loading">Is this enrollment open?</md-checkbox>
+
+    <md-select required name='stateperiod' mdInput  (change) = "changeOpen()" [(ngModel)]= 'data.periodical' placeholder="State">
+        <md-option *ngFor="let statePeriod of statePeriods" [value]="statePeriod.value">
+            {{ statePeriod.viewValue }}
+          </md-option>
+     </md-select>
+
+     <!-- <md-select placeholder="Favorite food">
+        <md-option *ngFor="let food of foods" [value]="food.value">
+            {{ food.viewValue }}
+          </md-option>
+      </md-select> -->
+
+    </md-card-content>
+    <button [disabled]="!periodForm.form.valid" md-raised-button type='submit' color="accent"(click)="submit()">
+        <div *ngIf="operation == 'edit'">
+            Edit Period
+        </div>
+        <div *ngIf="operation == 'create'">
+            Add Period
+        </div>
+    </button>
     <button md-raised-button color="warn" (click)="onNoClick()">Cancel</button>
 </form>
