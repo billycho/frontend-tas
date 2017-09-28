@@ -2,10 +2,11 @@ md-form-field{
     width: 100%;
 }
 .filter{
-    width: 50%;
+    width: 30%;
+  
 }
 .inline {
-    display: inline-block;
+    /* display: inline-block; */
 }
 
 .parent {
@@ -15,4 +16,11 @@ md-form-field{
     position: absolute;
     right: 0;
     margin-right: 10px;
+}
+
+.inputsearch 
+{
+    float: left;
+    margin-left: 10px;
+    width: 150px;
 }

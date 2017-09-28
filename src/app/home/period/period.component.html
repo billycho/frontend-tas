@@ -2,46 +2,53 @@
   <md-card>
     <md-card-title>Training Period</md-card-title>
     <md-card-content>
-      <div class="filter inline">
-        <md-form-field>
+      <div class="inline">
+        <md-form-field class="inputsearch">
           <input mdInput #filter placeholder="Name">
         </md-form-field>
-        <md-form-field>
+        <md-form-field class="inputsearch">
           <input mdInput #filterCreatedBy placeholder="Created By">
         </md-form-field>
+        <md-form-field class="inputsearch">
+          <input mdInput #filterUpdatedBy placeholder="Updated By">
+        </md-form-field>
+
+        <br>
+
         <!-- (ngModelChange)="qwer()"  -->
-        <md-form-field>
+        <md-form-field class="inputsearch" style="clear:both">
             <input [(ngModel)]='createdDate' name="createDate1" (ngModelChange)="checkDate('created')"  mdInput #filter1 placeholder="Created Date" [mdDatepicker]="createDate1">            
             <md-datepicker-toggle mdSuffix [for]="createDate1"></md-datepicker-toggle>
             <md-datepicker #createDate1></md-datepicker>
           </md-form-field>
 
-          <md-form-field>
+          <md-form-field class="inputsearch">
             <input [(ngModel)]='updatedDateData' name="updatedDate" (ngModelChange)="checkDate('updated')"  mdInput  #filterUpdatedDate  placeholder="Updated Date" [mdDatepicker]="updatedDate">            
             <md-datepicker-toggle mdSuffix [for]="updatedDate"></md-datepicker-toggle>
             <md-datepicker #updatedDate></md-datepicker>
           </md-form-field>
 
-          <md-form-field>
+          <md-form-field class="inputsearch">
             <input [(ngModel)]='startDateData' name="startDate" (ngModelChange)="checkDate('start')"  mdInput  #filterStartDate  placeholder="Start Date" [mdDatepicker]="startDate">            
             <md-datepicker-toggle mdSuffix [for]="startDate"></md-datepicker-toggle>
             <md-datepicker #startDate></md-datepicker>
           </md-form-field>
 
-          <md-form-field>
+          <md-form-field class="inputsearch">
             <input [(ngModel)]='endDateData' name="endDate" (ngModelChange)="checkDate('end')"  mdInput  placeholder="End Date" [mdDatepicker]="endDate">            
             <md-datepicker-toggle mdSuffix [for]="endDate"></md-datepicker-toggle>
             <md-datepicker #endDate></md-datepicker>
           </md-form-field>
-
+          <br>
 
 
       </div>
-      <div class="add-period inline right">
+      <div class="add-period inline right" style="clear:both">
         <button md-raised-button color="accent"  (click)="openDialog()">
           <md-icon>add</md-icon> Add Period</button>
       </div>
 
+      <br/><br/><br/><br/><br/>
       <md-table #table [dataSource]="dataSource" mdSort>
         
         <ng-container mdColumnDef="trainingPeriodID">

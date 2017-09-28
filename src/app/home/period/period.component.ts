@@ -29,6 +29,7 @@ export class PeriodComponent {
   @ViewChild('filter') filter: ElementRef;
   @ViewChild('filter1') filter1: ElementRef;
   @ViewChild('filterCreatedBy') filterCreatedBy: ElementRef;
+  @ViewChild('filterUpdatedBy') filterUpdatedBy: ElementRef;
   @ViewChild(MdSort) sort: MdSort;
   @ViewChild(MdPaginator) paginator: MdPaginator;
   ngOnInit() {
@@ -92,6 +93,18 @@ export class PeriodComponent {
       // //alert(this.filter1.nativeElement.value);
     });
 
+    Observable.fromEvent(this.filterUpdatedBy.nativeElement, 'keyup')
+    .debounceTime(150)
+    .distinctUntilChanged()
+    .subscribe(() => {
+      if (!this.dataSource) { return; }
+
+      this.dataSource.updatedBy = this.filterUpdatedBy.nativeElement.value;
+      this.dataSource.filter = this.filterUpdatedBy.nativeElement.value;
+   
+      // //alert(this.filter1.nativeElement.value);
+    });
+
 
     // Observable.fromEvent(this.filter1.nativeElement, 'keyup')
     // .debounceTime(150)
@@ -143,7 +156,6 @@ export class PeriodComponent {
           dateData = this.updatedDateData; 
           if(dateData == null)
           {
-            alert("a");
             this.dataSource.updated ="";
             this.dataSource.filter =  "";
           }
@@ -204,8 +216,8 @@ export class PeriodComponent {
       {
         //alert(this.createdDate.getFullYear() + "-" +  month + "-" + date);
         //console.log(this.createdDate.getFullYear() + "-" +  month + "-" + date);
-        this.dataSource.created = dateData.getFullYear() + "-" + month + "-" + date;
-        this.dataSource.filter =  dateData.getFullYear() + "-" +  month + "-" + date;
+        // this.dataSource.created = dateData.getFullYear() + "-" + month + "-" + date;
+        // this.dataSource.filter =  dateData.getFullYear() + "-" +  month + "-" + date;
 
         if(operation == "created")
         {
@@ -226,6 +238,8 @@ export class PeriodComponent {
 
         this.dataSource.filter =  dateData.getFullYear() + "-" +  month + "-" + date;
         
+       
+     
       }
       
   }
@@ -333,6 +347,7 @@ export class PeriodDataSource extends DataSource<any> {
   public created:string = "";
   public name:string = "";
   public createdBy:string = "";
+  public updatedBy:string = "";
   public updated:string = "";
   public start:string = "";
   public end:string = "";
@@ -374,13 +389,18 @@ export class PeriodDataSource extends DataSource<any> {
         // });
 
         this.filteredData = this._periodDatabase.data.slice().filter((item: TrainingPeriod) => {
-          
           let searchStr = (item.periodName).toLowerCase();
           let searchStr1 = (item.createdDate).toString();
           let searchStr2 = (item.employee.fullname).toLowerCase();
           let searchStr3 = (item.updatedDate).toString();
+          let searchStr4 = (item.startDate).toString();
+          let searchStr5 = (item.endDate).toString();
+          let searchStr6 = (item.updaterID.fullname).toLowerCase();
+         
           return searchStr.indexOf(this.name.toLowerCase()) != -1 && searchStr1.indexOf(this.created.toLowerCase()) != -1 && searchStr2.indexOf(this.createdBy.toLowerCase()) != -1 
-          && searchStr3.indexOf(this.updated.toLowerCase()) != -1  ;
+          && searchStr3.indexOf(this.updated.toLowerCase()) != -1 && searchStr4.indexOf(this.start.toLowerCase()) != -1 && searchStr5.indexOf(this.end.toLowerCase()) != -1 && searchStr6.indexOf(this.updatedBy.toLowerCase()) != -1 ;
+          // return searchStr.indexOf(this.name.toLowerCase()) != -1 && searchStr1.indexOf(this.created.toLowerCase()) != -1 && searchStr2.indexOf(this.createdBy.toLowerCase()) != -1 
+          // && searchStr3.indexOf(this.updated.toLowerCase()) != -1 && searchStr4.indexOf(this.start.toLowerCase()) != -1 && searchStr5.indexOf(this.end.toLowerCase()) != -1  ;
 
         });
         
@@ -390,7 +410,10 @@ export class PeriodDataSource extends DataSource<any> {
  
 
         
-    
+        console.log(this.filteredData.length);
+        console.log(this.filteredData.length);
+        this._paginator._length = this.filteredData.length;
+        this._paginator.ngOnInit();
   
        const sortedData = this.getSortedData(this.filteredData.slice());
        const startIndex = this._paginator.pageIndex * this._paginator.pageSize;
