@@ -12,6 +12,7 @@ export class TrainingPeriod{
         public periodical: boolean;
         public openenrollment: boolean;
         public employee:Employee;
+        public updaterID:Employee;
         constructor(
         ){}
 }
