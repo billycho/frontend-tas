@@ -6,6 +6,7 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 import { Employee } from '../model/employee';
 import { Role } from '../model/role';
+import { Course } from '../model/course';
 
 @Injectable()
 export class EmployeeService {
@@ -43,9 +44,25 @@ export class EmployeeService {
    //RESTRICTED TO ONLY UPDATE ROLE AND ACTIVE
    update(employee: Employee):Observable<Employee>{
       var obj = {"employeeId":employee.employeeId, "active":employee.active, "roles":employee.roles};
-      console.log(obj);
       return this.http.post("http://localhost:8080/employees/update",obj)
       .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+   }
+
+   getBCCCourses(id:number):Observable<any[]>{
+      return this.http.get("http://localhost:8080/employees/"+id+"/courses/bcc")
+      .map((res:Response)=>{
+            return res.json();
+      })
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+   }
+
+   getCoursesByCouseNameId(id:number, coursenameid:number):Observable<any[]>{
+      // console.log("http://localhost:8080/employees/"+id+"/courses/"+coursenameid);
+      return this.http.get("http://localhost:8080/employees/"+id+"/courses/"+coursenameid)
+      .map((res:Response)=>{
+            return res.json();
+      })
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
    }
 }

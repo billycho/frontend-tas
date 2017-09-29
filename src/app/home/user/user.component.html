@@ -17,37 +17,37 @@
         
         <ng-container mdColumnDef="employeeId">
           <md-header-cell *mdHeaderCellDef md-sort-header> ID </md-header-cell>
-          <md-cell *mdCellDef="let user"> {{user.employeeId}} </md-cell>
+          <md-cell *mdCellDef="let user"> {{user?.employeeId}} </md-cell>
         </ng-container>
 
         <ng-container mdColumnDef="fullname">
           <md-header-cell *mdHeaderCellDef md-sort-header> Fullname </md-header-cell>
-          <md-cell *mdCellDef="let user"> {{user.fullname}} </md-cell>
+          <md-cell *mdCellDef="let user"> {{user?.fullname}} </md-cell>
         </ng-container>
 
       <ng-container mdColumnDef="email">
         <md-header-cell *mdHeaderCellDef md-sort-header> Email </md-header-cell>
-        <md-cell style='width:100px;word-wrap: break-word; ' *mdCellDef="let user"> {{user.email}} </md-cell>
+        <md-cell style='width:100px;word-wrap: break-word; ' *mdCellDef="let user"> {{user?.email}} </md-cell>
       </ng-container>
 
       <ng-container mdColumnDef="jobfamily">
         <md-header-cell *mdHeaderCellDef md-sort-header> Job Family </md-header-cell>
-        <md-cell *mdCellDef="let user"> {{user.grade.jobfamily}} </md-cell>
+        <md-cell *mdCellDef="let user"> {{user?.grade?.jobfamily}} </md-cell>
       </ng-container>
 
       <ng-container mdColumnDef="stream">
         <md-header-cell *mdHeaderCellDef md-sort-header> Stream </md-header-cell>
-        <md-cell *mdCellDef="let user"> {{user.stream}} </md-cell>
+        <md-cell *mdCellDef="let user"> {{user?.stream}} </md-cell>
       </ng-container>
 
       <ng-container mdColumnDef="grade">
         <md-header-cell *mdHeaderCellDef md-sort-header> Grade </md-header-cell>
-        <md-cell *mdCellDef="let user"> {{user.grade.grade}} </md-cell>
+        <md-cell *mdCellDef="let user"> {{user?.grade?.grade}} </md-cell>
       </ng-container>
 
       <ng-container mdColumnDef="accountName">
         <md-header-cell *mdHeaderCellDef md-sort-header> Account Name </md-header-cell>
-        <md-cell *mdCellDef="let user"> {{user.accountName}} </md-cell>
+        <md-cell *mdCellDef="let user"> {{user?.accountName}} </md-cell>
       </ng-container>
 
       <ng-container mdColumnDef="active">

@@ -4,6 +4,7 @@ import { MaterialModule, MdDatepickerModule, MdNativeDateModule } from '@angular
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { CdkTableModule } from '@angular/cdk/table';
 
 import { routing } from "./app.routes";
 
@@ -34,6 +35,7 @@ import { EmployeeService } from './service/employee.service';
 import { EmployeeMethod } from './service/employee.method';
 import { RoleService } from './service/role.service';
 import { PeriodService } from './service/period.service';
+import { CoursenameService } from './service/coursename.service';
 
 
 import { CookieService } from 'angular2-cookie/services/cookies.service';
@@ -69,7 +71,8 @@ import { HttpClientModule } from "@angular/common/http";
     MdDatepickerModule,
     MdNativeDateModule,
     routing,
-    HttpClientModule
+    HttpClientModule,
+    CdkTableModule
   ],
   providers: [AuthGuard,
     AuthenticationService,
@@ -80,6 +83,7 @@ import { HttpClientModule } from "@angular/common/http";
     EmployeeService,
     RoleService,
     EmployeeMethod,
+    CoursenameService,
     // providers used to create fake backend
 
     GradeService,

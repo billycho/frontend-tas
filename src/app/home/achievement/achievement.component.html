@@ -1,3 +1,36 @@
-<p>
-  achievement works! 
-</p>
+<div>
+  <md-card>
+    <md-card-title>Achievement</md-card-title>
+    <md-card-subtitle>BCC Courses</md-card-subtitle>
+    <md-card-content>
+      <div>
+      <p>
+        {{participant[0]?.user?.fullname}}
+        <br>
+        {{participant[0]?.user?.grade?.jobfamily}}/{{participant[0]?.user?.grade?.grade}}
+        <br>
+        {{participant[0]?.user?.location?.locationName}}
+      </p>
+      </div>
+      
+      <div>
+      <md-table [dataSource]="dataSource" mdSort>
+          <ng-container *ngFor="let dc of displayedColumns; let i = index">
+            <ng-container [mdColumnDef]="dc">
+              <md-header-cell *mdHeaderCellDef md-sort-header>{{dc}}</md-header-cell>
+              <md-cell *mdCellDef="let row">
+                <div *ngFor = "let periodRes of row?.bccSet[i]?.periodResult">
+                   <div *ngIf="periodRes?.period==null && row?.bccSet[i+1]?.periodResult[0]?.period?.periodName.match('Placement Test')">Not Required</div>
+                  <div *ngIf="periodRes?.pass">{{periodRes?.period?.periodName}}</div>
+                  <div *ngIf="periodRes?.pass==null && periodRes?.period!=null">In Progress</div>
+                </div>                
+              </md-cell>
+            </ng-container>
+          </ng-container>
+          <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
+          <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
+        </md-table>
+        </div>        
+    </md-card-content>
+  </md-card>
+</div>
