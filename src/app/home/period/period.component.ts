@@ -18,6 +18,7 @@ import { LocationService } from '../../service/location.service';
 import { TrainingPeriod } from '../../model/trainingperiod';
 import { PeriodService } from '../../service/period.service';
 import { AddPeriodDialog } from './addperioddialog.component'
+import { AddeligibleComponent} from './addeligible.component'
 
 //Structure
 @Component({
@@ -59,8 +60,7 @@ export class PeriodComponent {
 
    this.periodService.getTrainingPeriods().subscribe(((periodDatas) => {
     this.periodDatas = periodDatas;
-    console.log(this.periodDatas); 
-
+    
     this.periodDatabase = new PeriodDatabase(this.periodDatas); 
 
     this.paginator._length = this.periodDatabase.data.length;
@@ -214,11 +214,6 @@ export class PeriodComponent {
       }
       else
       {
-        //alert(this.createdDate.getFullYear() + "-" +  month + "-" + date);
-        //console.log(this.createdDate.getFullYear() + "-" +  month + "-" + date);
-        // this.dataSource.created = dateData.getFullYear() + "-" + month + "-" + date;
-        // this.dataSource.filter =  dateData.getFullYear() + "-" +  month + "-" + date;
-
         if(operation == "created")
         {
           this.dataSource.created = dateData.getFullYear() + "-" + month + "-" + date;
@@ -266,28 +261,34 @@ export class PeriodComponent {
     //   width: '800px'
     // });
 
-    let dialogRef = this.addPeriod.open(AddPeriodDialog, {
+    let dialogRef = this.addPeriod.open(AddPeriodDialog , {
       width: '40%',
       data: { trainingPeriodId: period.trainingPeriodId, open: period.openenrollment, periodical: period.periodical, trainingName: period.periodName, startDate: period.startDate, endDate:period.endDate , createdDate: period.createdDate, operation: 'edit' }
       
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log("closed");
+      
       this.refresh();
     });
 
-    // dialogRef.afterClosed().subscribe(result=>{
-    //   this.updateUser();
-    // });
+   
+  }
+
+  openEligible(period:TrainingPeriod)
+  {
+    let dialogRef = this.addPeriod.open(AddeligibleComponent, {
+      width: '40%',
+      data: { trainingPeriodId: period.trainingPeriodId, open: period.openenrollment, periodical: period.periodical, trainingName: period.periodName, startDate: period.startDate, endDate:period.endDate , createdDate: period.createdDate, operation: 'edit' }
+      
+    });
   }
 
   refresh():void
   {
     this.periodService.getTrainingPeriods().subscribe(((periodDatas) => {
       this.periodDatas = periodDatas;
-      console.log(this.periodDatas); 
-  
+      
       this.periodDatabase = new PeriodDatabase(this.periodDatas); 
   
       this.paginator._length = this.periodDatabase.data.length;
@@ -410,8 +411,6 @@ export class PeriodDataSource extends DataSource<any> {
  
 
         
-        console.log(this.filteredData.length);
-        console.log(this.filteredData.length);
         this._paginator._length = this.filteredData.length;
         this._paginator.ngOnInit();
   

@@ -8,15 +8,24 @@ import { EnrollmentComponent } from './home/enrollment/enrollment.component'
 import { AchievementComponent } from './home/achievement/achievement.component'
 import { MaintenanceComponent } from "./home/maintenance/maintenance.component";
 import { UserDetailComponent } from './home/user/detail/userdetail.component'
+import { ScheduleComponent } from './home/period/schedule/schedule.component'
 
 import { AuthGuard } from './service/authguard.service';
 
 const routes: Routes = [
     { path: 'login',            component: LoginComponent },
     { path: 'home',        component: HomeComponent, 
-        canActivate: [AuthGuard],children: [
+        children: [
             {path: '',              component: DashboardComponent},
-            {path: 'period',        component: PeriodComponent},
+          
+            {path: 'period',        component: PeriodComponent,
+
+        children :[
+            {path:'schedule',           component: ScheduleComponent}
+        ]},
+
+
+            {path: 'period/:id', component: ScheduleComponent},
             {path: 'user',          component: UserComponent},
             {path: 'user/:id',          component: UserDetailComponent},
             {path: 'enrollment',    component: EnrollmentComponent},

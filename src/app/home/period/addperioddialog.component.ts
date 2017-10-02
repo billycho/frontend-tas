@@ -15,6 +15,7 @@ export class AddPeriodDialog {
 
   data:TrainingPeriod;
   operation:string;
+  operationName:string;
   statePeriods:any;
   constructor(
     public dialogRef: MdDialogRef<AddPeriodDialog>, @Inject(MD_DIALOG_DATA) public dialogData: any,private periodService:PeriodService) {
@@ -26,7 +27,8 @@ export class AddPeriodDialog {
       this.operation = dialogData.operation;
 
       if(dialogData.operation == 'edit')
-      {
+      { 
+        this.operationName = "Edit";
         console.log(dialogData.open);
         
         console.log(dialogData.endDate);
@@ -45,6 +47,7 @@ export class AddPeriodDialog {
       else
       {
         this.operation = "create";
+        this.operationName = "Create";
         this.data.createdDate = new Date();
         this.data.startDate = new Date();
         this.data.endDate = new Date();

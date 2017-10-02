@@ -1,5 +1,7 @@
 import { Injectable } from '@angular/core';
 import { TrainingPeriod } from '../model/trainingperiod';
+import { Employee } from '../model/employee';
+import { EligibleParticipant } from '../model/eligible'
 import { Observable } from 'rxjs/Rx';
 import { Http, Response, RequestOptions ,Headers } from '@angular/http';
 import { LoginRequest } from '../model/loginrequest';
@@ -45,6 +47,34 @@ export class PeriodService {
      return this.http.post("http://localhost:8080/periods/add",obj)
   .map((res: Response) => res.json())
   .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+  getEmployeeByPeriod(trainingId: number) : Observable<Employee[]>
+  {
+    console.log("http://localhost:8080/periods/" + trainingId + "/employee");
+    return this.http.get("http://localhost:8080/periods/" + trainingId + "/employee")
+    .map((res: Response) => res.json())
+    .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+  addEligibleParticipant(eligible: EligibleParticipant) : Observable<EligibleParticipant>
+  {
+    var obj = {"trainingPeriodId": eligible.trainingPeriodId, "employeeId": eligible.employeeId};
+    console.log(JSON.stringify(obj));
+ 
+    return this.http.post("http://localhost:8080/periods/"+eligible.trainingPeriodId+"/addemployee",obj)
+    .map((res: Response) => res.json())
+    .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+  deleteEligibleParticipant(eligible: EligibleParticipant) : Observable<number>
+  {
+    var obj = {"trainingPeriodId": eligible.trainingPeriodId, "employeeId": eligible.employeeId};
+    console.log(JSON.stringify(obj));
+ 
+    return this.http.post("http://localhost:8080/periods/"+eligible.trainingPeriodId+"/deleteemployee",obj)
+    .map((res: Response) => res.json())
+    .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
     
 

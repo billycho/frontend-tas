@@ -20,6 +20,7 @@ import { AchievementComponent } from './home/achievement/achievement.component';
 import { MaintenanceComponent } from './home/maintenance/maintenance.component';
 import { AlertComponent } from './alert/alert.component';
 import { UserDetailComponent } from './home/user/detail/userdetail.component'
+import { ScheduleComponent } from './home/period/schedule/schedule.component'
 
 import { AddUserDialog } from './home/user/adduserdialog.component';
 import { AddPeriodDialog } from './home/period/addperioddialog.component';
@@ -41,6 +42,7 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
 
 
 import { HttpClientModule } from "@angular/common/http";
+import { AddeligibleComponent } from './home/period/addeligible.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +61,8 @@ import { HttpClientModule } from "@angular/common/http";
     AddPeriodDialog,
     UserDetailComponent,
     AddUserDialog,
+    AddeligibleComponent,
+    ScheduleComponent
   ],
   imports: [
     BrowserModule,
@@ -89,7 +93,8 @@ import { HttpClientModule } from "@angular/common/http";
   bootstrap: [AppComponent],
   entryComponents: [
     AddPeriodDialog,
-    AddUserDialog
+    AddUserDialog,
+    AddeligibleComponent
   ]
 })
 export class AppModule { }

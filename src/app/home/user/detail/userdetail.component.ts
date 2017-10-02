@@ -31,6 +31,7 @@ export class UserDetailComponent {
         private location: Location
          
     ){
+        
         this.route.params.subscribe(params => {
             this.idParam= +params['id'];
             this.reload(this.idParam)
