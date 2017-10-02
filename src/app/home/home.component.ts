@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { AuthenticationService } from '../service/authentication.service';
 import {CookieService } from 'angular2-cookie/services/cookies.service';
@@ -15,12 +15,11 @@ import { LoginRequest } from '../model/loginrequest';
 })
 export class HomeComponent{
   
-  private router: Router;
   private currentUser: LoginRequest;
   private user: Employee;
   private users: Employee[];
   
-  constructor( private employeeService: EmployeeService,
+  constructor(  private route: ActivatedRoute,   private router: Router,private employeeService: EmployeeService,
     private authenticationService: AuthenticationService,
     private cookieService:CookieService
   ){

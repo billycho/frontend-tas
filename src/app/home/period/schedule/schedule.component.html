@@ -1,1 +1,83 @@
-Hello World
+<div>
+    <md-card>
+      <md-card-title>Schedule</md-card-title>
+      <md-card-content>
+        <div class="filter inline">
+          <md-form-field>
+            <input mdInput #filter placeholder="Search">
+          </md-form-field>
+        </div>
+        <!-- <div class="add-period inline right">
+          <button md-raised-button color="accent"  (click)="openDialog()">
+            <md-icon>add</md-icon> Add User</button>
+        </div> -->
+        
+     
+        <md-table style="padding:0;margin:0;" #table [dataSource]="dataSource" mdSort>
+          
+        <ng-container mdColumnDef="courseScheduleId">
+            <md-header-cell *mdHeaderCellDef md-sort-header> ID </md-header-cell>
+            <md-cell *mdCellDef="let schedule"> {{schedule.courseScheduleId}} </md-cell>
+            </ng-container>
+
+            <ng-container mdColumnDef="course_name">
+            <md-header-cell *mdHeaderCellDef md-sort-header> Course Name </md-header-cell>
+            <md-cell *mdCellDef="let schedule">{{schedule.course.coursename.coursename}}</md-cell>
+            </ng-container>
+
+            <ng-container mdColumnDef="trainer">
+            <md-header-cell *mdHeaderCellDef md-sort-header> Trainer </md-header-cell>
+            <md-cell *mdCellDef="let schedule"> {{schedule.course.mainTrainer.accountName}}</md-cell>
+            </ng-container>
+
+            <ng-container mdColumnDef="room">
+            <md-header-cell *mdHeaderCellDef md-sort-header> Room </md-header-cell>
+            <md-cell *mdCellDef="let schedule">{{schedule.room.roomName}} </md-cell>
+            </ng-container>
+
+            <ng-container mdColumnDef="participant">
+            <md-header-cell *mdHeaderCellDef md-sort-header> Participant Number </md-header-cell>
+            <md-cell *mdCellDef="let schedule" style="text-align:center">{{schedule.course.capacity}}</md-cell>
+            </ng-container>
+
+          
+            
+ 
+  
+          <ng-container mdColumnDef="date">
+            <md-header-cell *mdHeaderCellDef md-sort-header> Date </md-header-cell>
+            <md-cell *mdCellDef="let schedule"> {{schedule.date}} </md-cell>
+          </ng-container>
+
+          <ng-container mdColumnDef="action">
+            <md-header-cell *mdHeaderCellDef md-sort-header> Action </md-header-cell>
+            <md-cell *mdCellDef="let schedule"> 
+                <button md-icon-button [mdMenuTriggerFor]="menu"><md-icon>more_horiz</md-icon></button>
+                <md-menu #menu="mdMenu">
+                    <button md-icon-button class="md-small" color="accent" mdTooltip="Enroll Participant" (click)="enrollParticipant(schedule.course.courseId)"><md-icon>supervisor_account</md-icon></button>
+                    <!-- <button md-icon-button class="md-small" color="accent" mdTooltip="Schedule List" ><md-icon>date_range</md-icon></button>
+                    <button md-icon-button class="md-small" color="accent" mdTooltip="Edit"  (click)="openEditDialog('Update',period)"><md-icon>border_color</md-icon></button>
+                    <button md-icon-button class="md-small" color="warn" mdTooltip="Delete"><md-icon>delete</md-icon></button> -->
+                </md-menu>
+            </md-cell>
+          </ng-container>
+  
+  
+        
+  
+       
+      
+          <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
+          <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
+        </md-table>
+  
+              <md-paginator #paginator
+              [length]="0"
+              [pageIndex]="0"
+              [pageSize]="0"
+              [pageSizeOptions]="[10, 25, 50, 100]">
+        </md-paginator>
+      </md-card-content>
+    </md-card>
+  </div>
+  

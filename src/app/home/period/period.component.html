@@ -58,7 +58,7 @@
 
         <ng-container mdColumnDef="periodName">
           <md-header-cell *mdHeaderCellDef md-sort-header> Period Name </md-header-cell>
-          <md-cell *mdCellDef="let period"> {{period.periodName}} </md-cell>
+          <md-cell *mdCellDef="let period"> <a routerLink="/home/period/{{period.trainingPeriodId}}">{{period.periodName}} </a> </md-cell>
         </ng-container>
 
         <ng-container mdColumnDef="startDate">

@@ -76,7 +76,15 @@ export class PeriodService {
     .map((res: Response) => res.json())
     .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
-    
+
+
+  getScheduleByPeriod(trainingId: number) : Observable<any[]>
+  { //courses/46/period
+    console.log("http://localhost:8080/courses/" + trainingId + "/period");
+    return this.http.get("http://localhost:8080/courses/" + trainingId + "/period")
+    .map((res: Response) => res.json())
+    .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
 
 //  addUser(employee: Employee, role: Role): Observable<Employee>{
 //   var obj = {"employeeId":employee.employeeId, "roleId":role.roleId};
