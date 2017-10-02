@@ -86,6 +86,35 @@ export class PeriodService {
     .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
+  getParticipantByCourse(courseId: number) : Observable<Employee[]>
+  {
+    console.log("http://localhost:8080/courses/" + courseId + "/participants");
+    return this.http.get("http://localhost:8080/courses/" + courseId + "/participants")
+    .map((res: Response) => res.json())
+    .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+  
+  addEnrolledParticipant(eligible: EligibleParticipant) : Observable<EligibleParticipant>
+  {
+    var obj = {"courseId": eligible.trainingPeriodId, "employeeId": eligible.employeeId,"pass":false};
+    console.log(JSON.stringify(obj));
+
+    return this.http.post("http://localhost:8080/courses/"+eligible.trainingPeriodId+"/addparticipant",obj)
+    .map((res: Response) => res.json())
+    .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+  deleteEnrolledParticipant(eligible: EligibleParticipant) : Observable<number>
+  {
+    var obj = {"courseId": eligible.trainingPeriodId, "employeeId": eligible.employeeId};
+    console.log(JSON.stringify(obj));
+ 
+    return this.http.post("http://localhost:8080/courses/"+eligible.trainingPeriodId+"/deleteparticipant",obj)
+    .map((res: Response) => res.json())
+    .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
 //  addUser(employee: Employee, role: Role): Observable<Employee>{
 //   var obj = {"employeeId":employee.employeeId, "roleId":role.roleId};
 //   console.log(JSON.stringify({employeeId:employee.employeeId, roleId:role.roleId}));

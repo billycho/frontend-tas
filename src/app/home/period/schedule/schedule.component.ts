@@ -74,12 +74,12 @@ export class ScheduleComponent {
     
     enrollParticipant(courseid:number)
     {
-        alert(courseid);
+      //alert(courseid);
 
         
       let dialogRef = this.enrollDialog.open(EnrollParticipantComponent, {
         width: '40%',
-        data: { trainingName: "",operation: "add" }
+        data: { courseId: courseid}
       });
   
       dialogRef.afterClosed().subscribe(result=>{
@@ -87,6 +87,9 @@ export class ScheduleComponent {
       });
 
     }
+
+   
+
 
  
     
