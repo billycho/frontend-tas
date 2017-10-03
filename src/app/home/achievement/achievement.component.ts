@@ -13,95 +13,183 @@ import { TrainingPeriod } from '../../model/trainingperiod';
 import { EmployeeService } from '../../service/employee.service';
 import {CookieService } from 'angular2-cookie/services/cookies.service';
 import { CoursenameService } from '../../service/coursename.service';
+import { RoleService } from '../../service/role.service';
 
 @Component({
   templateUrl: './achievement.component.html',
   styleUrls: ['./achievement.component.css']
 })
 export class AchievementComponent implements OnInit {
-  private userCookie: LoginRequest;
-  private participant: Participant[]=[];
-
-  dataSource:AchievementDataSource;
-  private displayedColumns = [ ];
+  private currentUser: Employee;
+  private managerOrAdmin:boolean;
   private bcc : Coursename[]=[];
+  private participantId:number=4;
 
+  private achievementList: EmployeeAchievementOutput[];
+  dataSource:AchievementDataSource;
+  private dynamicDisplayedColumns:String[] =[ ];
+  private displayedColumns:String[] =[ ];
+  
   constructor(
     private cookieService:CookieService,
     private employeeService:EmployeeService,
     private coursenameService:CoursenameService,
+    private roleService:RoleService
     ) { 
-    this.userCookie=JSON.parse(this.cookieService.get('currentUserLocalHost'));
-    this.employeeService.getById(this.userCookie.employeeId)
-      .subscribe(user =>{
-        if(user!=null){
+    var cookie:LoginRequest=JSON.parse(this.cookieService.get('currentUserLocalHost'));
+    this.employeeService.getById(cookie.employeeId).subscribe(
+      user=>{
         this.coursenameService.getBCCCoursenames().subscribe(
-          coursenames =>{
-            if(coursenames!=null){
-            this.employeeService.getBCCCourses(user.employeeId)
-              .subscribe(res=>{
-                if(res!=null){
-                  this.participant[0] = new Participant(user)
-                  var i:number;
-                  for(i=0; i < coursenames.length;i++){
-                    this.participant[0].bccSet[i]=new BCC(coursenames[i]);
-                    
-                    this.displayedColumns[i] = coursenames[i].coursename;
-                    var j:number=0;
-                    for(j=0; j< res.length; j++){
-                      if(this.participant[0].bccSet[i].coursename.coursenameid==res[j].course.coursename.coursenameid){
-                        this.participant[0].bccSet[i].periodResult[this.participant[0].bccSet[i].periodResult.length] = new PeriodPass(
-                          res[j].course.trainingPeriod,
-                          res[j].pass
-                          )
-                      }
-                    }
-                }
-                this.dataSource = new AchievementDataSource(this.participant);
-              }
-            })
-          }
-        })
-      }
-  })
-  }
+          bcc =>{
+            this.currentUser = user;
+            this.managerOrAdmin = this.isManagerOrAdmin();
 
+            if(!this.managerOrAdmin){
+              this.bcc =bcc;
+              var i:number=0;
+              for(i = 0; i < this.bcc.length; i++){
+                this.dynamicDisplayedColumns.push( this.bcc[i].coursename);
+                this.displayedColumns.push( this.bcc[i].coursename);
+              }
+
+              this.getUserBCCAchievement(this.currentUser);
+
+            }else{
+              this.roleService.getEmployeesByRole(this.participantId).subscribe(
+                participants=>{
+                  this.bcc =bcc;
+
+                  this.displayedColumns=["Id","Fullname","Jobfamily","Grade","Office"];
+
+                  var i:number=0;
+                  for(i = 0; i < this.bcc.length; i++){
+                    this.dynamicDisplayedColumns.push( this.bcc[i].coursename);
+                    this.displayedColumns.push( this.bcc[i].coursename);
+                  }
+
+                  this.displayedColumns.push("Action");
+                  participants.forEach(
+                    participant=>this.getUserBCCAchievement(participant)
+                  )
+                }
+              )
+            }
+          }) 
+      }
+    )     
+    }
   ngOnInit() {
   }
+  
+  getUserBCCAchievement(user:Employee){
+    this.employeeService.getEmployeeBCC(user.employeeId)
+    .subscribe(res=>{
+      var participation: Participation= new Participation(user);
 
+      var j:number=0;
+      for(j=0; j< res.length; j++){
+         participation.courseReport.push( new CourseReport(
+            res[j].course.coursename,
+            res[j].course.trainingPeriod,
+            res[j].pass
+            ))
+      }
+      this.appendToEmployeeAchievementOutput(participation);
+    })
+  }
+
+  appendToEmployeeAchievementOutput(participation:Participation){
+    var employeeAchievement: EmployeeAchievementOutput= new EmployeeAchievementOutput();
+
+    employeeAchievement.id = participation.user.employeeId;
+    employeeAchievement.fullname = participation.user.fullname;
+    employeeAchievement.jobfamily = participation.user.grade.jobfamily;
+    employeeAchievement.grade = participation.user.grade.grade;
+    employeeAchievement.officebase = participation.user.location.locationName;
+
+    var placementTest:number=-723;
+    var i:number =0;
+    for(i =0; i < this.bcc.length; i++){
+      var j:number = 0;
+      for(j =0; j < participation.courseReport.length; j++){
+        if(this.bcc[i].coursenameid == participation.courseReport[j].coursename.coursenameid
+            && participation.courseReport[j].period !=null 
+            ){
+          if(participation.courseReport[j].pass ==true){
+            employeeAchievement.achievement[i] =participation.courseReport[j].period.periodName;
+            if(participation.courseReport[j].period.periodName.match("Placement Test")!=null){
+              placementTest = i;             
+            }
+          }else if(participation.courseReport[j].pass ==null){
+            employeeAchievement.achievement[i] =participation.courseReport[j].period.periodName + " \n(In Progress)";
+          }else{
+            if(employeeAchievement.achievement[i]==null){
+              employeeAchievement.achievement[i]=participation.courseReport[j].period.periodName +"\n (Failed)";
+            }
+          }
+        }
+      }
+    }
+
+    for(i =0; i <placementTest;i++){
+      employeeAchievement.achievement[i]="Not Required";
+    }
+
+    if (this.achievementList ==null){
+      this.achievementList =[];
+    }
+    this.achievementList.push(employeeAchievement);
+    this.dataSource = new AchievementDataSource(this.achievementList);
+  }
+
+  isManagerOrAdmin():boolean{
+    var i:number =0;
+    var result:boolean =false;
+    for(i=0; i<this.currentUser.roles.length;i++){
+      if(this.currentUser.roles[i].roleId ==1 ||this.currentUser.roles[i].roleId==3){
+        result=true;
+      }
+    }
+    return result;
+  }
 }
 
 export class AchievementDataSource extends DataSource<any> {
-  constructor( private participant:Participant[]){
+  returnParticipant:EmployeeAchievementOutput[];
+  constructor( private participant:EmployeeAchievementOutput[]){
       super();
   }
-  connect(): Observable<Participant[]> {
+  connect(): Observable<EmployeeAchievementOutput[]> {
       return Observable.of(this.participant);
   }
 
   disconnect() {}
   }
 
-class Participant{
-  public bccSet:BCC[];
+class EmployeeAchievementOutput{
+  public id:number;
+  public fullname:String;
+  public jobfamily:String;
+  public grade:String;
+  public officebase:String;
+  public achievement:String[];
+
+  constructor(){
+    this.achievement=[];
+  }
+}
+class Participation{
+  public courseReport:CourseReport[];
   constructor(
     public user:Employee
   ){
-    this.bccSet=[]
+    this.courseReport=[];
   }
 }
 
-class BCC{
-  public periodResult:PeriodPass[];
+class CourseReport{
   constructor(
-    public coursename:Coursename
-  ){
-    this.periodResult=[];
-  }
-}
-
-class PeriodPass{
-  constructor(
+    public coursename:Coursename,
     public period: TrainingPeriod,
     public pass:boolean
   ){

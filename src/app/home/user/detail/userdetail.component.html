@@ -1,78 +1,94 @@
 <div>
     <md-card>
-        <md-card-title>{{tobeUpdatedEmployee?.fullname}}</md-card-title>
+        <md-card-header>
+             <md-card-title><h2>{{tobeUpdatedEmployee?.fullname}}</h2></md-card-title>
+        </md-card-header>
+        <table>
+            <tr>
+                <td>Employee Id</td>
+                <td>:</td>
+                <td>{{tobeUpdatedEmployee?.employeeId}}</td>
+            </tr>
+            <tr>
+                <td>Fullname</td>
+                <td>:</td>
+                <td>{{tobeUpdatedEmployee?.fullname}}</td>
+            </tr>
+            <tr>
+                <td>JobFamily/Grade</td>
+                <td>:</td>
+                <td>{{tobeUpdatedEmployee?.grade?.jobfamily}}/{{tobeUpdatedEmployee?.grade?.grade}}</td>
+            </tr>
+            <tr>
+                <td>Location</td>
+                <td>:</td>
+                <td>{{tobeUpdatedEmployee?.location?.locationName}}</td>
+            </tr>
+        </table>
+        
         <md-card-content>
-            <table>
-                <tr>
-                    <td>Employee Id</td>
-                    <td>:</td>
-                    <td>{{tobeUpdatedEmployee?.employeeId}}</td>
-                </tr>
-                <tr>
-                    <td>Fullname</td>
-                    <td>:</td>
-                    <td>{{tobeUpdatedEmployee?.fullname}}</td>
-                </tr>
-                <tr>
-                    <td>JobFamily/Grade</td>
-                    <td>:</td>
-                    <td>{{tobeUpdatedEmployee?.grade?.jobfamily}}/{{tobeUpdatedEmployee?.grade?.grade}}</td>
-                </tr>
-                <tr>
-                    <td>Stream</td>
-                    <td>:</td>
-                    <td>{{tobeUpdatedEmployee?.stream}}</td>
-                </tr>
-                <tr>
-                    <td>Active</td>
-                    <td>:</td>
-                    <td>
-                        <md-checkbox color="primary" 
-                            [checked]="tobeUpdatedEmployee?.active"
-                            (change)="tobeUpdatedEmployee.active =! tobeUpdatedEmployee.active"
-                            [disabled] = "loading"
-                            >
-                            <div *ngIf="tobeUpdatedEmployee?.active then thenBlock else elseBlock"></div>
-                                <ng-template #thenBlock>Active</ng-template>
-                                <ng-template #elseBlock>Not Active</ng-template>
-                        </md-checkbox>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Location</td>
-                    <td>:</td>
-                    <td>{{tobeUpdatedEmployee?.location?.locationName}}</td>
-                </tr>
-                <tr>
-                    <td>Account</td>
-                    <td>:</td>
-                    <td>{{tobeUpdatedEmployee?.accountName}}</td>
-                </tr>
-                <tr>
-                    <td>Email</td>
-                    <td>:</td>
-                    <td><a href="tobeUpdatedEmployee.email">{{tobeUpdatedEmployee?.email}}</a></td>
-                </tr>
-                <tr>
-                    <td>Role</td>
-                    <td>:</td>
-                    <td>
-                        <div *ngFor="let role of roles">
-                            <md-checkbox color="primary" 
-                               [checked]="searchRole(tobeUpdatedEmployee, role)"
-                               (change)="toggleRole(tobeUpdatedEmployee, role)"
-                               [disabled] = "loading"
-                                >
-                                {{role?.roleName}}
-                            </md-checkbox>
-                        </div>
-                    </td>
-                </tr>
-                
-            </table>
-            <br>
+            <md-tab-group>
+                <md-tab label="User Detail">
+                    <br>
+                    <table>
+                        <tr>
+                            <td>Account</td>
+                            <td>:</td>
+                            <td>{{tobeUpdatedEmployee?.accountName}}</td>
+                        </tr>
+                        <tr>
+                            <td>Email</td>
+                            <td>:</td>
+                            <td><a href="tobeUpdatedEmployee.email">{{tobeUpdatedEmployee?.email}}</a></td>
+                        </tr>
+                        <tr>
+                            <td>Active</td>
+                            <td>:</td>
+                            <td>
+                                <md-checkbox 
+                                    color="primary" 
+                                    [checked]="tobeUpdatedEmployee?.active"
+                                    (change)="tobeUpdatedEmployee.active =! tobeUpdatedEmployee.active"
+                                    [disabled] = "loading"
+                                    >
+                                    <div *ngIf="tobeUpdatedEmployee?.active then thenBlock else elseBlock"></div>
+                                    <ng-template #thenBlock>Active</ng-template>
+                                    <ng-template #elseBlock>Not Active</ng-template>
+                                </md-checkbox>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Stream</td>
+                            <td>:</td>
+                            <td>{{tobeUpdatedEmployee?.stream}}</td>
+                        </tr>
+                        <tr>
+                            <td>Role</td>
+                            <td>:</td>
+                            <td>
+                                <div *ngFor="let role of roles">
+                                    <md-checkbox color="primary" 
+                                        [checked]="searchRole(tobeUpdatedEmployee, role)"
+                                        (change)="toggleRole(tobeUpdatedEmployee, role)"
+                                        [disabled] = "loading"
+                                        >
+                                        {{role?.roleName}}
+                                    </md-checkbox>
+                                </div>
+                            </td>
+                        </tr>
+                    </table>
+                </md-tab>
+                <md-tab label="Achievement">
+                    <achievement-detail></achievement-detail>
+                </md-tab>
+            </md-tab-group>
+        </md-card-content>
+            
+        <md-card-actions>
             <button md-button color="primary" (click)="updateUser()" [disabled] = "loading" >Save</button>
             <button md-button color="indigo" (click)="back()" [disabled] = "loading">Back</button>
-        </md-card-content>
+        </md-card-actions>
+        
     </md-card>
 </div>

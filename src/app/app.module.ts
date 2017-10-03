@@ -20,7 +20,8 @@ import { EnrollmentComponent } from './home/enrollment/enrollment.component';
 import { AchievementComponent } from './home/achievement/achievement.component';
 import { MaintenanceComponent } from './home/maintenance/maintenance.component';
 import { AlertComponent } from './alert/alert.component';
-import { UserDetailComponent } from './home/user/detail/userdetail.component'
+import { UserDetailComponent } from './home/user/detail/userdetail.component';
+import { AchievementDetailComponent } from './home/achievement/detail/achievementdetail.component';
 
 import { AddUserDialog } from './home/user/adduserdialog.component';
 import { AddPeriodDialog } from './home/period/addperioddialog.component';
@@ -61,6 +62,7 @@ import { HttpClientModule } from "@angular/common/http";
     AddPeriodDialog,
     UserDetailComponent,
     AddUserDialog,
+    AchievementDetailComponent
   ],
   imports: [
     BrowserModule,

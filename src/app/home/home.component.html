@@ -20,9 +20,9 @@
 <button md-button (click)=sidenav.close() routerLink="/home/period" color="white" >Period</button>
 <button md-button (click)=sidenav.close() routerLink="/home/user" color="white" *ngIf="currentUser.role==1">User</button>
 <button md-button (click)=sidenav.close() routerLink="/home/enrollment" color="white">Enrollment</button>
-<button md-button (click)=sidenav.close() routerLink="/home/achievement" color="white" *ngIf= "currentUser.role==1 || currentUser.role==2">Achievement</button>
-<button md-button (click)=sidenav.close() routerLink="/home/maintenance" color="white">Training Maintenance</button>
-<button md-button color="white" (click)=logout() routerLink="/login">Logout</button>
+<button md-button (click)=sidenav.close() routerLink="/home/achievement" color="white">Achievement</button>
+<button md-button (click)=sidenav.close() routerLink="/home/maintenance" color="white" *ngIf= "currentUser.role==1 || currentUser.role==2">Training Maintenance</button>
+<button md-button color="white" (click)=logout() routerLink = "/login">Logout</button>
 </md-sidenav>
 
 <div class="app-content mat-typography">

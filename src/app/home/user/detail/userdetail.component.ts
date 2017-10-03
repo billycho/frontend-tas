@@ -22,6 +22,9 @@ export class UserDetailComponent {
     private idParam:number;
     private loading:boolean = false;
 
+    private editActive:boolean=false;
+    private editRoles:boolean=false;
+
     constructor(
         private route: ActivatedRoute,
         private employeeService: EmployeeService,
@@ -35,6 +38,7 @@ export class UserDetailComponent {
             this.idParam= +params['id'];
             this.reload(this.idParam)
         });
+        
     }
     reload(id:number){
         this.employeeService.getById(id).subscribe(
@@ -68,7 +72,6 @@ export class UserDetailComponent {
         this.loading=true;
         this.employeeService.update(this.tobeUpdatedEmployee)  
         .finally(()=>{
-            console.log("finally");
             this.reload(this.idParam);
             this.loading = false;
         })
@@ -116,6 +119,7 @@ export class UserDetailComponent {
         // }) 
             
     }
+    
     back(){
         this.location.back();
     }

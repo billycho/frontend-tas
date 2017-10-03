@@ -49,7 +49,7 @@ export class EmployeeService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
    }
 
-   getBCCCourses(id:number):Observable<any[]>{
+   getEmployeeBCC(id:number):Observable<any[]>{
       return this.http.get("http://localhost:8080/employees/"+id+"/courses/bcc")
       .map((res:Response)=>{
             return res.json();
