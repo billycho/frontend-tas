@@ -3,6 +3,7 @@ import { Http, Response, RequestOptions ,Headers } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 
 import { Role } from '../model/role';
+import { Employee } from '../model/employee';
 
 @Injectable()
 export class RoleService {
@@ -17,5 +18,11 @@ export class RoleService {
       return this.http.get("http://localhost:8080/roles/"+id)
          .map((res: Response) => res.json())
          .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+   }
+
+   getEmployeesByRole(id:number): Observable<Employee[]>{
+      return this.http.get("http://localhost:8080/roles/"+id+"/employees")
+      .map((res: Response) => res.json())
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
    }
 }

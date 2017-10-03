@@ -1,3 +1,76 @@
-<p>
-  achievement works! 
-</p>
+<div>
+  <md-card>
+    <md-card-title>Achievement</md-card-title>
+    <md-card-subtitle>BCC Courses</md-card-subtitle>
+    <md-card-content>
+      <div *ngIf="!managerOrAdmin">
+      <p>
+        {{currentUser?.fullname}}
+        <br>
+        {{currentUser?.grade?.jobfamily}}/{{currentUser?.grade?.grade}}
+        <br>
+        {{currentUser?.location?.locationName}}
+      </p>
+      </div>
+      
+      <div>
+      <md-table [dataSource]="dataSource" mdSort>
+        <ng-container *ngIf = "managerOrAdmin">
+          <ng-container mdColumnDef="Id">
+            <md-header-cell *mdHeaderCellDef md-sort-header>Id</md-header-cell>
+            <md-cell *mdCellDef="let row">
+              {{row?.id}}              
+            </md-cell>
+          </ng-container>
+          <ng-container mdColumnDef="Fullname">
+            <md-header-cell *mdHeaderCellDef md-sort-header>Fullname</md-header-cell>
+            <md-cell *mdCellDef="let row">
+              {{row?.fullname}}              
+            </md-cell>
+          </ng-container>
+          <ng-container mdColumnDef="Jobfamily">
+            <md-header-cell *mdHeaderCellDef md-sort-header>Jobfamily</md-header-cell>
+            <md-cell *mdCellDef="let row">
+              {{row?.jobfamily}}              
+            </md-cell>
+          </ng-container>
+          <ng-container mdColumnDef="Grade">
+            <md-header-cell *mdHeaderCellDef md-sort-header>Grade</md-header-cell>
+            <md-cell *mdCellDef="let row">
+              {{row?.grade}}              
+            </md-cell>
+          </ng-container>
+          <ng-container mdColumnDef="Office">
+            <md-header-cell *mdHeaderCellDef md-sort-header>Office</md-header-cell>
+            <md-cell *mdCellDef="let row">
+              {{row?.officebase}}              
+            </md-cell>
+          </ng-container>
+        </ng-container>
+
+        <ng-container *ngFor="let dc of dynamicDisplayedColumns; let i = index">
+          <ng-container [mdColumnDef]="dc">
+            <md-header-cell *mdHeaderCellDef md-sort-header>{{dc}}</md-header-cell>
+            <md-cell *mdCellDef="let row">
+              {{row?.achievement[i]}}              
+            </md-cell>
+          </ng-container>
+        </ng-container>
+
+        <ng-container mdColumnDef="Action">
+            <md-header-cell *mdHeaderCellDef md-sort-header>Action</md-header-cell>
+            <md-cell *mdCellDef="let row" >
+                <md-icon 
+                  onmouseover="" style="cursor: pointer" 
+                  routerLink="/home/user/{{row?.id}}/achievement"
+                >modeedit</md-icon>  
+            </md-cell>
+        </ng-container>
+
+        <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
+        <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
+      </md-table>
+      </div>        
+    </md-card-content>
+  </md-card>
+</div>

@@ -87,9 +87,11 @@ import { AlertService } from '../../service/alert.service';
 
         this.alertService.getMessage().subscribe(
             message=>{
-                this.alertSnackBar.open(message.text,'', {
-                    duration:3000
-                });
+                if(message !=null){
+                    this.alertSnackBar.open(message.text,'', {
+                        duration:3000
+                    });
+                }
             }
         )
         this.loading = false;

@@ -4,6 +4,7 @@ import { MaterialModule, MdDatepickerModule, MdNativeDateModule } from '@angular
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule} from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { CdkTableModule } from '@angular/cdk/table';
 
 import { routing } from "./app.routes";
 
@@ -21,6 +22,7 @@ import { MaintenanceComponent } from './home/maintenance/maintenance.component';
 import { AlertComponent } from './alert/alert.component';
 import { UserDetailComponent } from './home/user/detail/userdetail.component'
 import { ScheduleComponent } from './home/period/schedule/schedule.component'
+import { AchievementDetailComponent } from './home/achievement/detail/achievementdetail.component';
 
 import { AddUserDialog } from './home/user/adduserdialog.component';
 import { AddPeriodDialog } from './home/period/addperioddialog.component';
@@ -35,6 +37,7 @@ import { EmployeeService } from './service/employee.service';
 import { EmployeeMethod } from './service/employee.method';
 import { RoleService } from './service/role.service';
 import { PeriodService } from './service/period.service';
+import { CoursenameService } from './service/coursename.service';
 
 
 import { CookieService } from 'angular2-cookie/services/cookies.service';
@@ -64,7 +67,8 @@ import { EnrollParticipantComponent } from './home/period/schedule/enroll.compon
     AddUserDialog,
     AddeligibleComponent,
     ScheduleComponent,
-    EnrollParticipantComponent
+    EnrollParticipantComponent,
+    AchievementDetailComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +79,8 @@ import { EnrollParticipantComponent } from './home/period/schedule/enroll.compon
     MdDatepickerModule,
     MdNativeDateModule,
     routing,
-    HttpClientModule
+    HttpClientModule,
+    CdkTableModule
   ],
   providers: [AuthGuard,
     AuthenticationService,
@@ -86,6 +91,7 @@ import { EnrollParticipantComponent } from './home/period/schedule/enroll.compon
     EmployeeService,
     RoleService,
     EmployeeMethod,
+    CoursenameService,
     // providers used to create fake backend
 
     GradeService,

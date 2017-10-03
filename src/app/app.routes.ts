@@ -9,6 +9,7 @@ import { AchievementComponent } from './home/achievement/achievement.component'
 import { MaintenanceComponent } from "./home/maintenance/maintenance.component";
 import { UserDetailComponent } from './home/user/detail/userdetail.component'
 import { ScheduleComponent } from './home/period/schedule/schedule.component'
+import { AchievementDetailComponent } from './home/achievement/detail/achievementdetail.component';
 
 import { AuthGuard } from './service/authguard.service';
 
@@ -27,7 +28,9 @@ const routes: Routes = [
 
             {path: 'period/:id', component: ScheduleComponent},
             {path: 'user',          component: UserComponent},
-            {path: 'user/:id',          component: UserDetailComponent},
+            {path: 'user/:id',          component: UserDetailComponent,
+                    children: [{path: 'achievement', component:AchievementDetailComponent}]
+            },
             {path: 'enrollment',    component: EnrollmentComponent},
             {path: 'achievement',   component: AchievementComponent},
             {path: 'maintenance',   component: MaintenanceComponent},

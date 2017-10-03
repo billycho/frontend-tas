@@ -37,6 +37,5 @@ export class HomeComponent{
   }
   logout(){
     this.cookieService.remove('currentUserLocalHost');
-    this.router.navigate(['/login']);
   }
 }
