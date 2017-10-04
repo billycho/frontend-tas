@@ -58,7 +58,7 @@
 
         <ng-container mdColumnDef="periodName">
           <md-header-cell *mdHeaderCellDef md-sort-header> Period Name </md-header-cell>
-          <md-cell *mdCellDef="let period"> <a routerLink="/home/period/{{period.trainingPeriodId}}">{{period.periodName}} </a> </md-cell>
+          <md-cell *mdCellDef="let period">{{period.periodName}}</md-cell>
         </ng-container>
 
         <ng-container mdColumnDef="startDate">
@@ -83,7 +83,7 @@
         <!-- | date:'M/d/yyyy' -->
         <ng-container mdColumnDef="updaterID">
           <md-header-cell *mdHeaderCellDef md-sort-header> Updater</md-header-cell>
-          <md-cell *mdCellDef="let period"> {{period.employee.fullname}} </md-cell>
+          <md-cell *mdCellDef="let period"> {{period.updaterID.fullname}} </md-cell>
         </ng-container>
 
         <ng-container mdColumnDef="updateDate">
@@ -123,8 +123,9 @@
   
                 <button md-icon-button [mdMenuTriggerFor]="menu"><md-icon>more_horiz</md-icon></button>
                 <md-menu #menu="mdMenu">
+                    <button md-icon-button class="md-small" color="accent" mdTooltip="Detail"  (click)="openDetail(period)"><md-icon>list</md-icon></button>    
                     <button md-icon-button class="md-small" color="accent" mdTooltip="Eligible Participant List" (click)="openEligible(period)"><md-icon>supervisor_account</md-icon></button>
-                    <button md-icon-button class="md-small" color="accent" mdTooltip="Schedule List" ><md-icon>date_range</md-icon></button>
+                    <button routerLink="/home/period/{{period.trainingPeriodId}}" md-icon-button class="md-small" color="accent" mdTooltip="Schedule List" ><md-icon>date_range</md-icon></button>
                     <button md-icon-button class="md-small" color="accent" mdTooltip="Edit"  (click)="openEditDialog('Update',period)"><md-icon>border_color</md-icon></button>
                     <button md-icon-button class="md-small" color="warn" mdTooltip="Delete"><md-icon>delete</md-icon></button>
                 </md-menu>

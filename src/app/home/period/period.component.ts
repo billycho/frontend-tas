@@ -19,6 +19,7 @@ import { TrainingPeriod } from '../../model/trainingperiod';
 import { PeriodService } from '../../service/period.service';
 import { AddPeriodDialog } from './addperioddialog.component'
 import { AddeligibleComponent} from './addeligible.component'
+import { DetailPeriodDialog } from './perioddetail.component'
 
 //Structure
 @Component({
@@ -60,7 +61,7 @@ export class PeriodComponent {
 
    this.periodService.getTrainingPeriods().subscribe(((periodDatas) => {
     this.periodDatas = periodDatas;
-    
+    console.log(this.periodDatas);
     this.periodDatabase = new PeriodDatabase(this.periodDatas); 
 
     this.paginator._length = this.periodDatabase.data.length;
@@ -284,6 +285,16 @@ export class PeriodComponent {
     });
   }
 
+
+  openDetail(period:TrainingPeriod)
+  {
+    let dialogRef = this.addPeriod.open(DetailPeriodDialog, {
+      width: '40%',
+      data: { updatedDate: period.updatedDate, creator: period.employee.fullname, updater: period.updaterID.fullname,trainingPeriodId: period.trainingPeriodId, open: period.openenrollment, periodical: period.periodical, trainingName: period.periodName, startDate: period.startDate, endDate:period.endDate , createdDate: period.createdDate, operation: 'edit' }
+      
+    });
+  }
+
   refresh():void
   {
     this.periodService.getTrainingPeriods().subscribe(((periodDatas) => {
@@ -436,6 +447,7 @@ export class PeriodDataSource extends DataSource<any> {
 
       switch (this._sort.active) {
         case 'trainingPeriodID': [propertyA, propertyB] = [a.trainingPeriodId, b.trainingPeriodId]; break;
+        
       }
 
       let valueA = isNaN(+propertyA) ? propertyA : +propertyA;

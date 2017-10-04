@@ -2,7 +2,7 @@
 <md-sidenav-container>
 <md-toolbar color="primary" >
 <span>
-    <button class="menu" type="button" md-button (click)="sidenav.toggle()">
+    <button class="menu" type="button" md-button (mouseover)="sidenav.toggle()">
         <md-icon>menu</md-icon>
     </button>
 </span>
@@ -12,8 +12,8 @@
 <span><br>
     <div style='font-size: 18px;font-family:Roboto;'>{{currentUser.name}}</div>
     <div style='font-size: 13px;font-family:Roboto;' *ngIf="currentUser.role==1">Administrator</div>
-    <div style='font-size: 13px;font-family:Roboto;' *ngIf="currentUser.role==2">Trainer</div>
-    <div style='font-size: 13px;font-family:Roboto;' *ngIf="currentUser.role==3">Manager</div>
+    <div style='font-size: 13px;font-family:Roboto;' *ngIf="currentUser.role==2">Manager</div>
+    <div style='font-size: 13px;font-family:Roboto;' *ngIf="currentUser.role==3">Trainer</div>
     <div style='font-size: 13px;font-family:Roboto;' *ngIf="currentUser.role==4">Participant</div>
     <br>
 </span>

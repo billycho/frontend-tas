@@ -20,8 +20,11 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import  {DataSource} from '@angular/cdk/collections';
 import {EnrollParticipantComponent} from './enroll.component'
 
+import { AddScheduleDialog } from './addschedule.component'
+
 @Component({
     templateUrl: './schedule.component.html',
+    styleUrls: ['./schedule.component.css']
   })
 
 export class ScheduleComponent {
@@ -79,13 +82,25 @@ export class ScheduleComponent {
         
       let dialogRef = this.enrollDialog.open(EnrollParticipantComponent, {
         width: '40%',
-        data: { courseId: courseid}
+        data: { courseId: courseid, "trainingId": this.periodId}
       });
   
       dialogRef.afterClosed().subscribe(result=>{
            //this.refresh();
       });
 
+    }
+
+    openDialog()
+    {
+      let dialogRef = this.enrollDialog.open(AddScheduleDialog, {
+        width: '40%',
+        data: { "trainingId": this.periodId }
+      });
+  
+      dialogRef.afterClosed().subscribe(result=>{
+           //this.refresh();
+      });
     }
 
    
@@ -154,10 +169,10 @@ export class ScheduleDatabase {
         return searchStr.indexOf(this.filter.toLowerCase()) != -1;
       });
        const sortedData = this.getSortedData(this.filteredData.slice());
-    //    const startIndex = this._paginator.pageIndex * this._paginator.pageSize;
-    //    this.renderedData = sortedData.splice(startIndex, this._paginator.pageSize);
+        const startIndex = this._paginator.pageIndex * this._paginator.pageSize;
+       this.renderedData = sortedData.splice(startIndex, this._paginator.pageSize);
   
-        return sortedData;
+        return this.renderedData;
        
         
   

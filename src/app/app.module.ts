@@ -47,6 +47,8 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { HttpClientModule } from "@angular/common/http";
 import { AddeligibleComponent } from './home/period/addeligible.component';
 import { EnrollParticipantComponent } from './home/period/schedule/enroll.component'
+import { DetailPeriodDialog } from './home/period/perioddetail.component' 
+import { AddScheduleDialog } from './home/period/schedule/addschedule.component'
 
 @NgModule({
   declarations: [
@@ -68,7 +70,9 @@ import { EnrollParticipantComponent } from './home/period/schedule/enroll.compon
     AddeligibleComponent,
     ScheduleComponent,
     EnrollParticipantComponent,
-    AchievementDetailComponent
+    AchievementDetailComponent,
+    DetailPeriodDialog,
+    AddScheduleDialog
   ],
   imports: [
     BrowserModule,
@@ -103,7 +107,9 @@ import { EnrollParticipantComponent } from './home/period/schedule/enroll.compon
     AddPeriodDialog,
     AddUserDialog,
     AddeligibleComponent,
-    EnrollParticipantComponent
+    EnrollParticipantComponent,
+    DetailPeriodDialog,
+    AddScheduleDialog
   ]
 })
 export class AppModule { }

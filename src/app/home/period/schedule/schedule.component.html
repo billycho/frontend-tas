@@ -2,11 +2,20 @@
     <md-card>
       <md-card-title>Schedule</md-card-title>
       <md-card-content>
-        <div class="filter inline">
-          <md-form-field>
-            <input mdInput #filter placeholder="Search">
-          </md-form-field>
-        </div>
+          <div class="inline">
+              <md-form-field class="inputsearch">
+                <input mdInput #filter placeholder="Name">
+              </md-form-field>
+
+            </div>
+            <div class="add-period inline right" style="clear:both">
+              <button md-raised-button color="accent"  (click)="openDialog()">
+                <md-icon>add</md-icon> Add Schedule</button>
+            </div>
+      
+            <br/><br/><br/><br/><br/>
+
+      
         <!-- <div class="add-period inline right">
           <button md-raised-button color="accent"  (click)="openDialog()">
             <md-icon>add</md-icon> Add User</button>

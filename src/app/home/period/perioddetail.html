@@ -1,0 +1,22 @@
+<h2 md-dialog-title>Training Class Detail</h2>
+<md-dialog-content >
+   <span style='width:500px'>Training ID</span>: {{dialogData.trainingPeriodId}}<br>
+   Period Name: {{dialogData.periodName}}<br>
+   Start Date: {{dialogData.startDate}}<br>
+   End Date: {{dialogData.endDate}}<br>
+   Creator: {{dialogData.trainingPeriodId}}<br>
+   Created Date: {{dialogData.createdDate}}<br>
+   Updater: {{dialogData.updater}}<br>
+   Updated Date: {{dialogData.updatedDate}}<br>
+   
+   <div *ngIf="dialogData.periodical == true">Periodical: Fixed</div>
+   <div *ngIf="dialogData.periodical == false">Periodical: Periodical</div>
+   <div *ngIf="dialogData.open == true">Open Enrollment: Open</div>
+   <div *ngIf="dialogData.open == false">Open Enrollment: Close</div>
+
+
+
+</md-dialog-content>
+<!-- <md-dialog-actions style="float: right;">
+    <button type="submit" md-button color="accent"  (click)="addUser()"[disabled]=loading>Add User</button>
+    <button md-button color="indigo"  (click)="closeDialog()" [disabled]=loading>Cancel</button> -->

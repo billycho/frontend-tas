@@ -65,4 +65,44 @@ export class EmployeeService {
       })
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
    }
+
+   getEnrolledCourse(id:number):Observable<Course[]>
+   {
+       console.log("http://localhost:8080/employees/"+id+"/enrolled");
+       return this.http.get("http://localhost:8080/employees/"+id+"/enrolled")
+       .map((res:Response)=>{
+             return res.json();
+       })
+       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+   }
+
+   getEnrolledStatusCourse(id:number):Observable<any[]>
+   {
+       console.log("http://localhost:8080/employees/"+id+"/enrolledstatus");
+       return this.http.get("http://localhost:8080/employees/"+id+"/enrolledstatus")
+       .map((res:Response)=>{
+             return res.json();
+       })
+       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+   }
+
+   getTrainer():Observable<Employee[]>
+   {
+      console.log("http://localhost:8080/roles/3/employees");
+      return this.http.get("http://localhost:8080/roles/3/employees")
+      .map((res:Response)=>{
+            return res.json();
+      })
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+   }
+
+   getRooms():Observable<any[]>
+   {
+      console.log("http://localhost:8080/rooms");
+      return this.http.get("http://localhost:8080/rooms")
+      .map((res:Response)=>{
+            return res.json();
+      })
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+   }
 }

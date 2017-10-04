@@ -1,0 +1,72 @@
+<h1 md-dialog-title>Add Schedule</h1>
+
+<form #scheduleForm="ngForm">
+    <div md-dialog-content>
+        <md-select style="width:100%" required name='courseName' mdInput  [(ngModel)]= 'coursename' placeholder="Course Name">
+            <md-option *ngFor = "let t of coursenames" [value]="t.coursenameid">
+           {{ t.coursename }}
+            </md-option>
+    </md-select>
+    </div>
+    <br>
+    
+
+    <div md-dialog-content>
+        <md-form-field color="accent">
+            <input required mdInput type="number" placeholder="Capacity" [(ngModel)]='capacity' name="capacity">
+            <md-error *ngIf="addScheduleFormControl.hasError('required')">
+              Capacity is <strong>required</strong>
+        </md-error>
+        </md-form-field>
+    </div>
+
+    <div *ngIf="periodical == false" md-dialog-content>
+        <md-form-field color="accent">
+            <input required mdInput type="number" placeholder="Training Time (day)" [(ngModel)]='day' name="days">
+            <md-error *ngIf="addScheduleFormControl.hasError('required')">
+              Day is <strong>required</strong>
+        </md-error>
+        </md-form-field>
+    </div>
+
+    <div  md-dialog-content>
+        <md-form-field color="accent">
+            <input mdInput required placeholder="Schedule Date" [(ngModel)]='date' name="scheduleDate" [mdDatepicker]="scheduleDate">
+            <md-datepicker-toggle mdSuffix [for]="scheduleDate"></md-datepicker-toggle>
+            <md-datepicker #scheduleDate></md-datepicker>
+            <md-error *ngIf="addScheduleFormControl.hasError('required')">
+                    Schedule Date is <strong>required</strong>
+            </md-error>
+        </md-form-field>
+    </div>
+    
+
+    <!-- <div *ngFor = "let t of trainer">
+        {{t.fullname}}
+    </div> -->
+    <md-card-content>
+         <md-select required name='mainTrainer' mdInput  [(ngModel)]= 'mainTrainer' placeholder="Main Trainer">
+             <md-option *ngFor = "let t of trainer" [value]="t.employeeId">
+            {{ t.fullname }}
+             </md-option>
+     </md-select>
+    
+        <md-select required name='backupTrainer' mdInput  [(ngModel)]= 'backupTrainer' placeholder="Backup Trainer">
+            <md-option *ngFor = "let t of trainer" [value]="t.employeeId">
+           {{ t.fullname }}
+            </md-option>
+    </md-select>
+    &nbsp;	&nbsp;
+    <md-select required name='room' mdInput  [(ngModel)]= 'room' placeholder="Room">
+        <md-option *ngFor = "let t of rooms" [value]="t.roomId">
+       {{ t.roomName }}
+        </md-option>
+</md-select>
+    
+
+    </md-card-content>
+    <button [disabled]="!scheduleForm.form.valid" md-raised-button type='submit' color="accent"(click)="submit()">
+        Create Schedule
+    </button>
+    <button md-raised-button color="warn" (click)="onNoClick()">Cancel</button>
+</form>

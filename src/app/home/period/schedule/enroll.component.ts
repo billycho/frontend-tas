@@ -33,7 +33,7 @@ export class EnrollParticipantComponent implements OnInit {
         
         
               //get all user
-              this.employeeService.getUsers().subscribe(((response) => {
+              this.periodService.getEmployeeByPeriod(dialogData.trainingId).subscribe(((response) => {
                 
                 this.employees = response;
                 console.log(this.employees.length);
