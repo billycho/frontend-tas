@@ -9,6 +9,9 @@ constructor(
 ){
 
 }
+public getEmployee():Employee{
+    return this.employee;
+}
 //IF EXIST RETURN THE INDEX IF NOT RETURN MINUS
 public searchRole(role:Role):number{
     var i:number=0;
@@ -36,4 +39,49 @@ public insertRole(role:Role){
             this.employee.roles[this.employee.roles.length] = role;
             }
     }
+
+public isAdministrator():boolean{
+    var i:number=0;
+    var result:boolean=false;
+    for(i=0;i<this.employee.roles.length; i++){
+        if(this.employee.roles[i].roleId==1){
+            result=true;
+        }
+    }
+    return result;
+    }
+
+public isManager():boolean{
+    var i:number=0;
+    var result:boolean=false;
+    for(i=0;i<this.employee.roles.length; i++){
+        if(this.employee.roles[i].roleId==2){
+            result=true;
+        }
+    }
+    return result;
+    }
+
+public isTrainer():boolean{
+    var i:number=0;
+    var result:boolean=false;
+    for(i=0;i<this.employee.roles.length; i++){
+        if(this.employee.roles[i].roleId==3){
+            result=true;
+        }
+    }
+    return result;
+    }
+
+public isParticipant():boolean{
+    var i:number=0;
+    var result:boolean=false;
+    for(i=0;i<this.employee.roles.length; i++){
+        if(this.employee.roles[i].roleId==4){
+            result=true;
+        }
+    }
+    return result;
+    }
 }
+

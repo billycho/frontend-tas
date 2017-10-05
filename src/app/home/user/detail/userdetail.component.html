@@ -27,68 +27,98 @@
         </table>
         
         <md-card-content>
-            <md-tab-group>
+            <md-tab-group [selectedIndex]="selectedIndex">
                 <md-tab label="User Detail">
-                    <br>
-                    <table>
-                        <tr>
-                            <td>Account</td>
-                            <td>:</td>
-                            <td>{{tobeUpdatedEmployee?.accountName}}</td>
-                        </tr>
-                        <tr>
-                            <td>Email</td>
-                            <td>:</td>
-                            <td><a href="tobeUpdatedEmployee.email">{{tobeUpdatedEmployee?.email}}</a></td>
-                        </tr>
-                        <tr>
-                            <td>Active</td>
-                            <td>:</td>
-                            <td>
-                                <md-checkbox 
-                                    color="primary" 
-                                    [checked]="tobeUpdatedEmployee?.active"
-                                    (change)="tobeUpdatedEmployee.active =! tobeUpdatedEmployee.active"
-                                    [disabled] = "loading"
-                                    >
-                                    <div *ngIf="tobeUpdatedEmployee?.active then thenBlock else elseBlock"></div>
-                                    <ng-template #thenBlock>Active</ng-template>
-                                    <ng-template #elseBlock>Not Active</ng-template>
-                                </md-checkbox>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>Stream</td>
-                            <td>:</td>
-                            <td>{{tobeUpdatedEmployee?.stream}}</td>
-                        </tr>
-                        <tr>
-                            <td>Role</td>
-                            <td>:</td>
-                            <td>
-                                <div *ngFor="let role of roles">
-                                    <md-checkbox color="primary" 
-                                        [checked]="searchRole(tobeUpdatedEmployee, role)"
-                                        (change)="toggleRole(tobeUpdatedEmployee, role)"
-                                        [disabled] = "loading"
-                                        >
-                                        {{role?.roleName}}
-                                    </md-checkbox>
+                    <md-card>
+                    <md-card-content>
+                        <table>
+                                <tr>
+                                    <td>Account</td>
+                                    <td>:</td>
+                                    <td>{{tobeUpdatedEmployee?.accountName}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Email</td>
+                                    <td>:</td>
+                                    <td><a href="tobeUpdatedEmployee.email">{{tobeUpdatedEmployee?.email}}</a></td>
+                                </tr>
+                                <tr>
+                                    <td>Active</td>
+                                    <td>:</td>
+                                    <td>
+                                        <div *ngIf="currentUser.role==1 then adminBlock else managerBlock"></div>
+                                            <ng-template #adminBlock>
+                                                <md-checkbox 
+                                                    color="primary" 
+                                                    [checked]="tobeUpdatedEmployee?.active"
+                                                    (change)="tobeUpdatedEmployee.active =! tobeUpdatedEmployee.active"
+                                                    [disabled] = "loading"
+                                                    >
+                                                    <div *ngIf="tobeUpdatedEmployee?.active then thenBlock else elseBlock"></div>
+                                                    <ng-template #thenBlock>Active</ng-template>
+                                                    <ng-template #elseBlock>Not Active</ng-template>
+                                                </md-checkbox>
+                                            </ng-template>
+                                            <ng-template #managerBlock>
+                                                <div *ngIf="tobeUpdatedEmployee?.active then thenBlock else elseBlock"></div>
+                                                    <ng-template #thenBlock>Active</ng-template>
+                                                    <ng-template #elseBlock>Not Active</ng-template>
+                                            </ng-template>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>Stream</td>
+                                    <td>:</td>
+                                    <td>{{tobeUpdatedEmployee?.stream}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Role</td>
+                                    <td>:</td>
+                                    <td>
+                                        <div *ngIf="currentUser.role==1 then adminRolesBlock else managerRolesBlock"></div>
+                                            <ng-template #adminRolesBlock>
+                                                <div *ngFor="let role of roles">
+                                                    <md-checkbox color="primary" 
+                                                        [checked]="searchRole(tobeUpdatedEmployee, role)"
+                                                        (change)="toggleRole(tobeUpdatedEmployee, role)"
+                                                        [disabled] = "loading"
+                                                        >
+                                                        {{role?.roleName}}
+                                                    </md-checkbox>
+                                                </div>
+                                            </ng-template>
+                                            <ng-template #managerRolesBlock>
+                                                <div *ngFor="let role of tobeUpdatedEmployee?.roles">
+                                                    {{role?.roleName}}
+                                                </div>
+                                            </ng-template>
+                                    </td>
+                                </tr>
+                            </table>
+                        </md-card-content>
+                        <md-card-actions>
+                            <div *ngIf="currentUser.role==1">
+                                    <md-card-actions>
+                                        <button md-button color="primary" (click)="updateUser()" [disabled] = "loading" >Save</button>
+                                        <button md-button color="indigo" (click)="back()" [disabled] = "loading">Back</button>
+                                    </md-card-actions>
+                        
                                 </div>
-                            </td>
-                        </tr>
-                    </table>
+                        </md-card-actions>
+                    </md-card>
+                    
                 </md-tab>
-                <md-tab label="Achievement">
-                    <achievement-detail></achievement-detail>
+            
+                <md-tab label="Achievement Detail">
+                    <achievement-detail
+                        [idParam]="idParam"
+                        [currentUser]="currentUser">
+                    </achievement-detail>
                 </md-tab>
             </md-tab-group>
         </md-card-content>
-            
-        <md-card-actions>
-            <button md-button color="primary" (click)="updateUser()" [disabled] = "loading" >Save</button>
-            <button md-button color="indigo" (click)="back()" [disabled] = "loading">Back</button>
-        </md-card-actions>
+        
+        
         
     </md-card>
 </div>

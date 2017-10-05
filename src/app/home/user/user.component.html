@@ -16,8 +16,8 @@
       <md-table style="padding:0;margin:0;" #table [dataSource]="dataSource" mdSort>
         
         <ng-container mdColumnDef="employeeId">
-          <md-header-cell *mdHeaderCellDef md-sort-header> ID </md-header-cell>
-          <md-cell *mdCellDef="let user"> {{user?.employeeId}} </md-cell>
+          <md-header-cell *mdHeaderCellDef md-sort-header fxFlex="120px"> ID </md-header-cell>
+          <md-cell *mdCellDef="let user"fxFlex="120px"> {{user?.employeeId}} </md-cell>
         </ng-container>
 
         <ng-container mdColumnDef="fullname">

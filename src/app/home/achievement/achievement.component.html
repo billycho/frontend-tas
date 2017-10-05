@@ -28,16 +28,10 @@
               {{row?.fullname}}              
             </md-cell>
           </ng-container>
-          <ng-container mdColumnDef="Jobfamily">
-            <md-header-cell *mdHeaderCellDef md-sort-header>Jobfamily</md-header-cell>
+          <ng-container mdColumnDef="Jobfamily-Grade">
+            <md-header-cell *mdHeaderCellDef md-sort-header>Jobfamily/Grade</md-header-cell>
             <md-cell *mdCellDef="let row">
-              {{row?.jobfamily}}              
-            </md-cell>
-          </ng-container>
-          <ng-container mdColumnDef="Grade">
-            <md-header-cell *mdHeaderCellDef md-sort-header>Grade</md-header-cell>
-            <md-cell *mdCellDef="let row">
-              {{row?.grade}}              
+              {{row?.jobfamily}}/{{row?.grade}}                
             </md-cell>
           </ng-container>
           <ng-container mdColumnDef="Office">
@@ -58,19 +52,32 @@
         </ng-container>
 
         <ng-container mdColumnDef="Action">
-            <md-header-cell *mdHeaderCellDef md-sort-header>Action</md-header-cell>
+            <md-header-cell *mdHeaderCellDef md-sort-header></md-header-cell>
             <md-cell *mdCellDef="let row" >
                 <md-icon 
                   onmouseover="" style="cursor: pointer" 
                   routerLink="/home/user/{{row?.id}}/achievement"
-                >modeedit</md-icon>  
+                >open_in_new</md-icon>
             </md-cell>
         </ng-container>
+
+        <!-- <ng-container mdColumnDef="Action2">
+            <md-header-cell *mdHeaderCellDef md-sort-header></md-header-cell>
+            <md-cell *mdCellDef="let row" (click)="openEditDialog(row?.id)">
+                <md-icon 
+                  onmouseover="" style="cursor: pointer" 
+                  
+                >modeedit</md-icon>
+            </md-cell>
+        </ng-container> -->
 
         <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
         <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
       </md-table>
       </div>        
     </md-card-content>
+    <md-card-actions>
+        <button md-button color="primary" (click)="import()">Import Excel</button>
+    </md-card-actions>
   </md-card>
 </div>

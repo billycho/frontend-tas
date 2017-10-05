@@ -1,1 +1,96 @@
-<p>{{test}}</p>
+<md-card>
+<md-card-content>
+<md-table [dataSource]="dataSource" mdSort>
+    <ng-container mdColumnDef="coursename">
+        <md-header-cell *mdHeaderCellDef md-sort-header>Course</md-header-cell>
+        <md-cell *mdCellDef="let row">
+            {{row?.courseParticipant?.course?.coursename?.coursename}}           
+        </md-cell>
+    </ng-container>
+
+    <ng-container mdColumnDef="coursetype">
+            <md-header-cell *mdHeaderCellDef md-sort-header>Type</md-header-cell>
+            <md-cell *mdCellDef="let row">
+                {{row?.courseParticipant?.course?.coursename?.coursetype}}           
+            </md-cell>
+        </ng-container>
+
+    <ng-container mdColumnDef="periodname">
+        <md-header-cell *mdHeaderCellDef md-sort-header>Period</md-header-cell>
+        <md-cell *mdCellDef="let row">      
+            {{row?.courseParticipant?.course?.trainingPeriod?.periodName}}       
+        </md-cell>
+    </ng-container>
+
+    <ng-container mdColumnDef="startdate">
+        <md-header-cell *mdHeaderCellDef md-sort-header>Start Date</md-header-cell>
+        <md-cell *mdCellDef="let row">    
+            {{row?.courseParticipant?.course?.trainingPeriod?.startDate}}          
+        </md-cell>
+    </ng-container>
+
+    <ng-container mdColumnDef="enddate">
+            <md-header-cell *mdHeaderCellDef md-sort-header>End Date</md-header-cell>
+            <md-cell *mdCellDef="let row">    
+                {{row?.courseParticipant?.course?.trainingPeriod?.endDate}}           
+            </md-cell>
+        </ng-container>
+
+    <ng-container mdColumnDef="maintrainer">
+        <md-header-cell *mdHeaderCellDef md-sort-header>Main Trainer</md-header-cell>
+        <md-cell *mdCellDef="let row">
+                {{row?.courseParticipant?.course?.mainTrainer?.fullname}}          
+        </md-cell>
+    </ng-container>
+
+    <ng-container mdColumnDef="backuptrainer">
+        <md-header-cell *mdHeaderCellDef md-sort-header>Back Up Trainer</md-header-cell>
+        <md-cell *mdCellDef="let row">  
+                {{row?.courseParticipant?.course?.backUpTrainer.fullname}}         
+        </md-cell>
+    </ng-container>
+
+    <ng-container mdColumnDef="result">
+        <md-header-cell *mdHeaderCellDef md-sort-header>Status</md-header-cell>
+        <md-cell *mdCellDef="let row">
+            <div *ngIf="row.isEdit">
+                <select [(ngModel)]="row.courseParticipant.pass" >
+                    <option [value]="true">Passed</option>
+                    <option [value]=null>In Progress</option>
+                    <option [value]="false">Failed</option>
+                </select>  
+                
+            </div>
+            <div *ngIf="!row.isEdit">
+                <div *ngIf="row?.courseParticipant?.pass==true">Passed</div>
+                <div *ngIf="row?.courseParticipant?.pass==null">In Progress</div>
+                <div *ngIf="row?.courseParticipant?.pass==false">Failed</div>
+            </div>
+       
+        </md-cell>
+    </ng-container>
+
+    <ng-container mdColumnDef="action">
+            <md-header-cell *mdHeaderCellDef md-sort-header>Action</md-header-cell>
+            <md-cell *mdCellDef="let row">   
+                    <md-icon onmouseover="" 
+                    style="cursor: pointer"
+                    (click)="row.isEdit=true"
+                    >modeedit</md-icon>       
+            </md-cell>
+        </ng-container>
+
+    <md-header-row *mdHeaderRowDef="displayedColumns"></md-header-row>
+    <md-row *mdRowDef="let row; columns: displayedColumns;"></md-row>
+</md-table>
+</md-card-content>
+<md-card-actions>
+        <div *ngIf="currentUser.role==1">
+                <md-card-actions>
+                    <button md-button color="primary" (click)="save()"  >Save</button>
+                    <button md-button color="indigo" (click)="back()" >Back</button>
+                </md-card-actions>
+    
+            </div>
+</md-card-actions>
+</md-card>

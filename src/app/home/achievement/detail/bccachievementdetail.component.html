@@ -1,0 +1,28 @@
+<md-card>
+    <md-card-header>
+        <md-card-title>
+            <h2>BCC</h2>
+        </md-card-title>
+    </md-card-header>
+    
+    <md-card-content>
+        <form>
+        <table>
+            <tr *ngFor="let bcc of bccs">
+                <th>
+                    {{bcc?.coursename?.coursename}}
+                </th>
+                <td>
+                        
+                    <md-select placeholder="Favorite food" [(ngModel)]="selectedValue" name="food">
+                        <md-option *ngFor="let food of foods" [value]="food.value">
+                        {{food.viewValue}}
+                        </md-option>
+                    </md-select>
+                              
+                </td>
+            </tr>
+        </table>
+        </form>
+    </md-card-content>
+</md-card>

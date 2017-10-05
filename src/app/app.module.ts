@@ -23,8 +23,10 @@ import { AlertComponent } from './alert/alert.component';
 import { UserDetailComponent } from './home/user/detail/userdetail.component'
 import { ScheduleComponent } from './home/period/schedule/schedule.component'
 import { AchievementDetailComponent } from './home/achievement/detail/achievementdetail.component';
+import { BccAchievementDetailComponent }from './home/achievement/detail/bccachievementdetail.component';
 
 import { AddUserDialog } from './home/user/adduserdialog.component';
+import { EditAchievementDialog } from './home/achievement/editachievementdialog.component';
 import { AddPeriodDialog } from './home/period/addperioddialog.component';
 
 import { AuthGuard } from './service/authguard.service';
@@ -38,8 +40,7 @@ import { EmployeeMethod } from './service/employee.method';
 import { RoleService } from './service/role.service';
 import { PeriodService } from './service/period.service';
 import { CoursenameService } from './service/coursename.service';
-
-
+import { DownloadService } from './service/download.service';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
 // used to create fake backend
 
@@ -63,7 +64,6 @@ import { AddScheduleDialog } from './home/period/schedule/addschedule.component'
     AchievementComponent,
     MaintenanceComponent,
     AlertComponent,
-    AddUserDialog,
     AddPeriodDialog,
     UserDetailComponent,
     AddUserDialog,
@@ -72,7 +72,9 @@ import { AddScheduleDialog } from './home/period/schedule/addschedule.component'
     EnrollParticipantComponent,
     AchievementDetailComponent,
     DetailPeriodDialog,
-    AddScheduleDialog
+    AddScheduleDialog,
+    BccAchievementDetailComponent,
+    EditAchievementDialog
   ],
   imports: [
     BrowserModule,
@@ -96,16 +98,15 @@ import { AddScheduleDialog } from './home/period/schedule/addschedule.component'
     RoleService,
     EmployeeMethod,
     CoursenameService,
-    // providers used to create fake backend
-
-    GradeService,
-    PeriodService
-   
+     GradeService,
+    PeriodService,
+    DownloadService
   ],
   bootstrap: [AppComponent],
   entryComponents: [
     AddPeriodDialog,
     AddUserDialog,
+    EditAchievementDialog,
     AddeligibleComponent,
     EnrollParticipantComponent,
     DetailPeriodDialog,
