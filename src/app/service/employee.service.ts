@@ -7,6 +7,7 @@ import { CookieService } from 'angular2-cookie/services/cookies.service';
 import { Employee } from '../model/employee';
 import { Role } from '../model/role';
 import { Course } from '../model/course';
+import {CourseParticipant} from '../model/courseparticipant';
 
 @Injectable()
 export class EmployeeService {
@@ -29,7 +30,7 @@ export class EmployeeService {
 
    addUser(employee: Employee, role: Role): Observable<Employee>{
          var obj = {"employeeId":employee.employeeId, "roleId":role.roleId};
-         console.log(JSON.stringify({employeeId:employee.employeeId, roleId:role.roleId}));
+      //    console.log(JSON.stringify({employeeId:employee.employeeId, roleId:role.roleId}));
          return this.http.post("http://localhost:8080/employees/addrole",obj)
          .map((res: Response) => res.json())
          .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
@@ -48,8 +49,14 @@ export class EmployeeService {
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
    }
-
-   getEmployeeBCC(id:number):Observable<any[]>{
+   getAllCoursesOfAnEmployee(id:number):Observable<CourseParticipant[]>{
+      return this.http.get("http://localhost:8080/employees/"+id+"/courses")
+      .map((res:Response)=>{
+            return res.json();
+      })
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+   }
+   getEmployeeBCC(id:number):Observable<CourseParticipant[]>{
       return this.http.get("http://localhost:8080/employees/"+id+"/courses/bcc")
       .map((res:Response)=>{
             return res.json();
@@ -57,9 +64,17 @@ export class EmployeeService {
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
    }
 
-   getCoursesByCouseNameId(id:number, coursenameid:number):Observable<any[]>{
+   getCoursesByCouseNameId(id:number, coursenameid:number):Observable<CourseParticipant[]>{
       // console.log("http://localhost:8080/employees/"+id+"/courses/"+coursenameid);
       return this.http.get("http://localhost:8080/employees/"+id+"/courses/"+coursenameid)
+      .map((res:Response)=>{
+            return res.json();
+      })
+      .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+   }
+
+   updateAchievement(courseParticipant:CourseParticipant[]):Observable<CourseParticipant[]>{
+      return this.http.post("http://localhost:8080/employees/update/achievement", courseParticipant)
       .map((res:Response)=>{
             return res.json();
       })

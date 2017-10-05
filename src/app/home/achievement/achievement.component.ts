@@ -2,7 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import  {DataSource} from '@angular/cdk/collections';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
-import { MdSort} from '@angular/material';
+import { MdDialog, MdDialogRef, MD_DIALOG_DATA, MdPaginator,MdSort} from '@angular/material';
+
+import { EditAchievementDialog } from './editachievementdialog.component'
 
 import { Employee } from '../../model/employee';
 import { Course } from '../../model/course';
@@ -14,6 +16,7 @@ import { EmployeeService } from '../../service/employee.service';
 import {CookieService } from 'angular2-cookie/services/cookies.service';
 import { CoursenameService } from '../../service/coursename.service';
 import { RoleService } from '../../service/role.service';
+import { DownloadService } from '../../service/download.service';
 
 @Component({
   templateUrl: './achievement.component.html',
@@ -22,20 +25,27 @@ import { RoleService } from '../../service/role.service';
 export class AchievementComponent implements OnInit {
   private currentUser: Employee;
   private managerOrAdmin:boolean;
+  private isAdmin:boolean=false;
   private bcc : Coursename[]=[];
   private participantId:number=4;
 
   private achievementList: EmployeeAchievementOutput[];
   dataSource:AchievementDataSource;
-  private dynamicDisplayedColumns:String[] =[ ];
+  private dynamicDisplayedColumns:String[]=[];
   private displayedColumns:String[] =[ ];
   
   constructor(
     private cookieService:CookieService,
     private employeeService:EmployeeService,
     private coursenameService:CoursenameService,
-    private roleService:RoleService
+    private roleService:RoleService,
+    // public editAchievementDialog: MdDialog,
+    private downloadService:DownloadService
     ) { 
+    
+    }
+  load(){
+    
     var cookie:LoginRequest=JSON.parse(this.cookieService.get('currentUserLocalHost'));
     this.employeeService.getById(cookie.employeeId).subscribe(
       user=>{
@@ -43,7 +53,9 @@ export class AchievementComponent implements OnInit {
           bcc =>{
             this.currentUser = user;
             this.managerOrAdmin = this.isManagerOrAdmin();
-
+            this.isAdmin = this.isAdminF();
+            this.displayedColumns=[];
+            this.dynamicDisplayedColumns=[];
             if(!this.managerOrAdmin){
               this.bcc =bcc;
               var i:number=0;
@@ -58,8 +70,8 @@ export class AchievementComponent implements OnInit {
               this.roleService.getEmployeesByRole(this.participantId).subscribe(
                 participants=>{
                   this.bcc =bcc;
-
-                  this.displayedColumns=["Id","Fullname","Jobfamily","Grade","Office"];
+                  this.displayedColumns=[];
+                  this.displayedColumns=["Id","Fullname","Jobfamily-Grade","Office"];
 
                   var i:number=0;
                   for(i = 0; i < this.bcc.length; i++){
@@ -68,6 +80,7 @@ export class AchievementComponent implements OnInit {
                   }
 
                   this.displayedColumns.push("Action");
+                  this.achievementList=[];
                   participants.forEach(
                     participant=>this.getUserBCCAchievement(participant)
                   )
@@ -77,9 +90,23 @@ export class AchievementComponent implements OnInit {
           }) 
       }
     )     
-    }
-  ngOnInit() {
   }
+  ngOnInit() {
+    // this.displayedColumns=[];
+    // this.dynamicDisplayedColumns=[];
+    this.load()
+  }
+
+  // openEditDialog(id:number){
+  //   let dialogRef = this.editAchievementDialog.open(EditAchievementDialog, {
+  //     height: '600px',
+  //     width: '800px',
+  //     data:{id:id}
+  //   });
+  //   dialogRef.afterClosed().subscribe(result=>{
+  //     this.load();
+  //   });
+  // }
   
   getUserBCCAchievement(user:Employee){
     this.employeeService.getEmployeeBCC(user.employeeId)
@@ -151,6 +178,21 @@ export class AchievementComponent implements OnInit {
       }
     }
     return result;
+  }
+
+  isAdminF():boolean{
+    var i:number =0;
+    var result:boolean =false;
+    for(i=0; i<this.currentUser.roles.length;i++){
+      if(this.currentUser.roles[i].roleId ==1){
+        result=true;
+      }
+    }
+    return result;
+  }
+
+  import(){
+    window.open("http://localhost:8080/downloads/achievement");
   }
 }
 

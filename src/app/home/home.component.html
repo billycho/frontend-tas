@@ -8,22 +8,22 @@
 </span>
 <span><a class="title" routerLink="/home" (click)=sidenav.close()>Training Admin System</a></span>
 </md-toolbar>
-<md-sidenav #sidenav>
+<md-sidenav #sidenav color="primary">
 <span><br>
-    <div style='font-size: 18px;font-family:Roboto;'>{{currentUser.name}}</div>
-    <div style='font-size: 13px;font-family:Roboto;' *ngIf="currentUser.role==1">Administrator</div>
-    <div style='font-size: 13px;font-family:Roboto;' *ngIf="currentUser.role==2">Trainer</div>
-    <div style='font-size: 13px;font-family:Roboto;' *ngIf="currentUser.role==3">Manager</div>
-    <div style='font-size: 13px;font-family:Roboto;' *ngIf="currentUser.role==4">Participant</div>
+    <div style='font-size: 18px;font-family:Roboto;' color="primary">{{currentUser.name}}</div>
+    <div style='font-size: 13px;font-family:Roboto;' *ngIf="currentUser.role==1"color="primary">Administrator</div>
+    <div style='font-size: 13px;font-family:Roboto;' *ngIf="currentUser.role==2"color="primary">Trainer</div>
+    <div style='font-size: 13px;font-family:Roboto;' *ngIf="currentUser.role==3"color="primary">Manager</div>
+    <div style='font-size: 13px;font-family:Roboto;' *ngIf="currentUser.role==4"color="primary">Participant</div>
     <br>
 </span>
-<button md-button (click)=sidenav.close() routerLink="/home/dashboard" color="white" >Dashboard</button>
-<button md-button (click)=sidenav.close() routerLink="/home/period" color="white" >Period</button>
-<button md-button (click)=sidenav.close() routerLink="/home/user" color="white" *ngIf="currentUser.role==1">User</button>
-<button md-button (click)=sidenav.close() routerLink="/home/enrollment" color="white">Enrollment</button>
-<button md-button (click)=sidenav.close() routerLink="/home/achievement" color="white">Achievement</button>
-<button md-button (click)=sidenav.close() routerLink="/home/maintenance" color="white" *ngIf= "currentUser.role==1 || currentUser.role==2">Training Maintenance</button>
-<button md-button color="white" (click)=logout() routerLink = "/login">Logout</button>
+<!-- <button md-button (click)=sidenav.close() routerLink="/home/dashboard" routerLinkActive="active-link" #rladashboard=routerLinkActive [disabled]="rladashboard.isActive" color="white" >Dashboard</button> -->
+<button md-button (click)=sidenav.close() routerLink="/home/period"  routerLinkActive="active-link" #rlaperiod=routerLinkActive [disabled]="rlaperiod.isActive" color="primary" >Period</button>
+<button md-button (click)=sidenav.close() routerLink="/home/user" routerLinkActive="active-link" #rlauser=routerLinkActive [disabled]="rlauser.isActive" color="primary" *ngIf="currentUser.role==1">User</button>
+<button md-button (click)=sidenav.close() routerLink="/home/enrollment" routerLinkActive="active-link" #rlaenrollment=routerLinkActive [disabled]="rlaenrollment.isActive" color="primary">Enrollment</button>
+<button md-button (click)=sidenav.close() routerLink="/home/achievement" routerLinkActive="active-link" #rlaachievement=routerLinkActive [disabled]="rlaachievement.isActive" color="primary">Achievement</button>
+<button md-button (click)=sidenav.close() routerLink="/home/maintenance" routerLinkActive="active-link" #rlamaintenance=routerLinkActive [disabled]="rlamaintenance.isActive" color="primary" *ngIf= "currentUser.role==1 || currentUser.role==2">Training Maintenance</button>
+<button md-button color="primary" (click)=logout() routerLink = "/login">Logout</button>
 </md-sidenav>
 
 <div class="app-content mat-typography">

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute, RouterLinkActive } from '@angular/router';
 
 import { AuthenticationService } from '../service/authentication.service';
 import {CookieService } from 'angular2-cookie/services/cookies.service';

@@ -10,6 +10,7 @@ import { MaintenanceComponent } from "./home/maintenance/maintenance.component";
 import { UserDetailComponent } from './home/user/detail/userdetail.component'
 import { ScheduleComponent } from './home/period/schedule/schedule.component'
 import { AchievementDetailComponent } from './home/achievement/detail/achievementdetail.component';
+import { BccAchievementDetailComponent } from './home/achievement/detail/bccachievementdetail.component';
 
 import { AuthGuard } from './service/authguard.service';
 
@@ -29,7 +30,10 @@ const routes: Routes = [
             {path: 'period/:id', component: ScheduleComponent},
             {path: 'user',          component: UserComponent},
             {path: 'user/:id',          component: UserDetailComponent,
-                    children: [{path: 'achievement', component:AchievementDetailComponent}]
+                    children: [
+                    {path: 'achievement', component:AchievementDetailComponent},
+                    {path: 'bcc', component:BccAchievementDetailComponent}
+                ]
             },
             {path: 'enrollment',    component: EnrollmentComponent},
             {path: 'achievement',   component: AchievementComponent},

@@ -1,0 +1,21 @@
+<h2 md-dialog-title>Edit Achievement</h2>
+<md-dialog-content>
+    <table>
+        <tr *ngFor="let participation of participations">
+            <td>
+                {{participation?.coursename?.coursename}}
+            </td>
+            <td style="width:500px">
+                <md-select [(ngModel)]="participation.picked" placeholder="Choose Period" style="width:100%">
+                    <md-option *ngFor="let cp of participation.courseParticipants; let i=index;" [value]="i">
+                       {{cp?.course?.trainingPeriod?.periodName}}
+                    </md-option>
+                </md-select>
+            </td>
+        </tr>
+    </table>
+</md-dialog-content>
+<md-dialog-actions style="float: right;">
+    <button type="submit" md-button color="accent"  (click)="editAchievement()"[disabled]=loading>Save</button>
+    <button md-button color="indigo"  (click)="closeDialog()"[disabled]=loading>Cancel</button>
+</md-dialog-actions>

@@ -2,11 +2,16 @@ import { Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import {Location} from '@angular/common';
 import {MdSnackBar} from '@angular/material';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
 import { FormsModule, ReactiveFormsModule} from '@angular/forms';
+
+import {CookieService } from 'angular2-cookie/services/cookies.service';
 
 import { Employee} from '../../../model/employee';
 import { EmployeeMethod } from '../../../service/employee.method';
 import { Role } from '../../../model/role';
+import { LoginRequest} from '../../../model/loginrequest';
 
 import { EmployeeService } from '../../../service/employee.service';
 import { RoleService } from '../../../service/role.service';
@@ -20,7 +25,9 @@ export class UserDetailComponent {
     private tobeUpdatedEmployee:Employee;
     private roles:Role[];
     private idParam:number;
+    private currentUser: LoginRequest;
     private loading:boolean = false;
+    private selectedIndex=2;
 
     private editActive:boolean=false;
     private editRoles:boolean=false;
@@ -31,15 +38,20 @@ export class UserDetailComponent {
         private roleService: RoleService,
         private alertService: AlertService,
         private alertSnackBar:MdSnackBar,
-        private location: Location
+        private location: Location,
+        private cookieService:CookieService,
          
     ){
-        
+        this.currentUser=JSON.parse(this.cookieService.get('currentUserLocalHost'));
         this.route.params.subscribe(params => {
             this.idParam= +params['id'];
             this.reload(this.idParam)
         });
-        
+        if(this.location.path() =="/home/user/"+this.idParam+"/achievement"){
+            this.selectedIndex = 1;
+        }else if(this.location.path() =="/home/user/"+this.idParam){
+            this.selectedIndex = 0;
+        }
     }
     reload(id:number){
         this.employeeService.getById(id).subscribe(
