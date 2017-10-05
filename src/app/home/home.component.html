@@ -22,7 +22,7 @@
 <button md-button (click)=sidenav.close() routerLink="/home/user" routerLinkActive="active-link" #rlauser=routerLinkActive [disabled]="rlauser.isActive" color="primary" *ngIf="currentUser.role==1">User</button>
 <button md-button (click)=sidenav.close() routerLink="/home/enrollment" routerLinkActive="active-link" #rlaenrollment=routerLinkActive [disabled]="rlaenrollment.isActive" color="primary">Enrollment</button>
 <button md-button (click)=sidenav.close() routerLink="/home/achievement" routerLinkActive="active-link" #rlaachievement=routerLinkActive [disabled]="rlaachievement.isActive" color="primary">Achievement</button>
-<button md-button (click)=sidenav.close() routerLink="/home/maintenance" routerLinkActive="active-link" #rlamaintenance=routerLinkActive [disabled]="rlamaintenance.isActive" color="primary" *ngIf= "currentUser.role==1 || currentUser.role==2">Training Maintenance</button>
+<!-- <button md-button (click)=sidenav.close() routerLink="/home/maintenance" routerLinkActive="active-link" #rlamaintenance=routerLinkActive [disabled]="rlamaintenance.isActive" color="primary" *ngIf= "currentUser.role==1 || currentUser.role==2">Training Maintenance</button> -->
 <button md-button color="primary" (click)=logout() routerLink = "/login">Logout</button>
 </md-sidenav>
 
