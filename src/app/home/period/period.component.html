@@ -127,7 +127,7 @@
                     <button md-icon-button class="md-small" color="accent" mdTooltip="Eligible Participant List" (click)="openEligible(period)"><md-icon>supervisor_account</md-icon></button>
                     <button routerLink="/home/period/{{period.trainingPeriodId}}" md-icon-button class="md-small" color="accent" mdTooltip="Schedule List" ><md-icon>date_range</md-icon></button>
                     <button md-icon-button class="md-small" color="accent" mdTooltip="Edit"  (click)="openEditDialog('Update',period)"><md-icon>border_color</md-icon></button>
-                    <button md-icon-button class="md-small" color="warn" mdTooltip="Delete"><md-icon>delete</md-icon></button>
+                    <button md-icon-button class="md-small" color="warn" mdTooltip="Delete" (click)="openDeleteDialog(period)"><md-icon>delete</md-icon></button>
                 </md-menu>
   
               </md-cell>

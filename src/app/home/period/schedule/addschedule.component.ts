@@ -39,8 +39,11 @@ export class AddScheduleDialog {
   constructor(
     public dialogRef: MdDialogRef<AddScheduleDialog>, @Inject(MD_DIALOG_DATA) public dialogData: any, private employeeService:EmployeeService, private periodService:PeriodService,private alertSnackBar:MdSnackBar) {
       this.trainingId = dialogData.trainingId;
+
       this.employeeService.getTrainer().subscribe(((response) => {
       this.day = 0;
+
+      //this.mainTrainer = 6;
         console.log(response);
         this.trainer = response;
         this.courseId = -1;

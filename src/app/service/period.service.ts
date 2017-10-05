@@ -144,6 +144,38 @@ export class PeriodService {
     .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
+  deletePeriodById(obj:number) :any
+  {
+    console.log("http://localhost:8080/periods/" + obj + "/delete");
+    return this.http.get("http://localhost:8080/periods/" + obj + "/delete")
+    .map((res:Response)=>{
+          return res.json();
+    })
+    .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+  getActiveCourse() : any
+  {
+    console.log("http://localhost:8080/periods/active");
+    return this.http.get("http://localhost:8080/periods/active")
+    .map((res:Response)=>{
+          return res.json();
+    })
+    .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+  getActiveCoursebcc() : any
+  {
+    console.log("http://localhost:8080/periods/active");
+    return this.http.get("http://localhost:8080/periods/active")
+    .map((res:Response)=>{
+          return res.json();
+    })
+    .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
+  }
+
+
+  
 //  addUser(employee: Employee, role: Role): Observable<Employee>{
 //   var obj = {"employeeId":employee.employeeId, "roleId":role.roleId};
 //   console.log(JSON.stringify({employeeId:employee.employeeId, roleId:role.roleId}));

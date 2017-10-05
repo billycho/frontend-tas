@@ -3,6 +3,7 @@ import { FormControl, Validators } from '@angular/forms';
 import { MdDialog, MdDialogRef, MD_DIALOG_DATA, MdPaginator,MdSort } from '@angular/material';
 import { TrainingPeriod } from '../../model/trainingperiod';
 import { PeriodService } from '../../service/period.service';
+import {MdSnackBar} from '@angular/material';
 
 @Component({
   templateUrl: 'add-period-dialog.html',
@@ -17,7 +18,7 @@ export class AddPeriodDialog {
   operation:string;
   operationName:string;
   statePeriods:any;
-  constructor(
+  constructor(private alertSnackBar:MdSnackBar ,
     public dialogRef: MdDialogRef<AddPeriodDialog>, @Inject(MD_DIALOG_DATA) public dialogData: any,private periodService:PeriodService) {
       this.data = new TrainingPeriod();
       this.statePeriods = [
@@ -76,6 +77,10 @@ export class AddPeriodDialog {
     {
        console.log("edit");
        this.periodService.editTrainingPeriod(this.data).subscribe(((periodDatas) => {
+        this.alertSnackBar.open("Period modified",'', {
+          duration:3000
+        });
+
         this.dialogRef.close();
 
        })); 
@@ -83,6 +88,10 @@ export class AddPeriodDialog {
     else
     {
       this.periodService.addTrainingPeriod(this.data).subscribe(((periodDatas) => {
+              
+      this.alertSnackBar.open("Period added",'', {
+        duration:3000
+      });
        this.dialogRef.close();
       })); 
     }

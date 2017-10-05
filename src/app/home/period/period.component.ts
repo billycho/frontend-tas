@@ -20,6 +20,7 @@ import { PeriodService } from '../../service/period.service';
 import { AddPeriodDialog } from './addperioddialog.component'
 import { AddeligibleComponent} from './addeligible.component'
 import { DetailPeriodDialog } from './perioddetail.component'
+import {MdSnackBar} from '@angular/material';
 
 //Structure
 @Component({
@@ -56,11 +57,15 @@ export class PeriodComponent {
   dataSource: PeriodDataSource | null;
 
   periodDatas:TrainingPeriod[];
-  constructor(public addPeriod: MdDialog,private locationService:LocationService, private periodService:PeriodService) {
+  constructor(private alertSnackBar:MdSnackBar ,public addPeriod: MdDialog,private locationService:LocationService, private periodService:PeriodService) {
    // this.periodDatabase = new PeriodDatabase();
 
    this.periodService.getTrainingPeriods().subscribe(((periodDatas) => {
     this.periodDatas = periodDatas;
+
+    this.periodDatas = this.periodDatas.filter(item => item['active'] != false);  
+
+    
     console.log(this.periodDatas);
     this.periodDatabase = new PeriodDatabase(this.periodDatas); 
 
@@ -131,6 +136,29 @@ export class PeriodComponent {
   }
   
   //
+
+  openDeleteDialog(period:TrainingPeriod)
+  {
+    var r = confirm("Are you sure want to delete this period? (all of the course data will be deleted too");
+
+    if(r == true)
+    {
+        this.periodService.deletePeriodById(period.trainingPeriodId).subscribe(((response) => {
+          console.log(response);
+
+          this.alertSnackBar.open("Period with id " + period.trainingPeriodId + " deleted",'', {
+            duration:3000
+          });
+
+          this.refresh();
+        }));          
+    }
+    else
+    {
+      
+    }
+  }
+  
   checkDate(operation: string): void {
     if (!this.dataSource) { return; }
     //alert(this.trainingName.toString().toLocaleLowerCase());
@@ -252,6 +280,7 @@ export class PeriodComponent {
     });
 
     dialogRef.afterClosed().subscribe(result=>{
+
          this.refresh();
     });
   }
@@ -299,6 +328,7 @@ export class PeriodComponent {
   {
     this.periodService.getTrainingPeriods().subscribe(((periodDatas) => {
       this.periodDatas = periodDatas;
+      this.periodDatas = this.periodDatas.filter(item => item['active'] != false);  
       
       this.periodDatabase = new PeriodDatabase(this.periodDatas); 
   
