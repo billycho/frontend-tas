@@ -24,6 +24,8 @@ import { UserDetailComponent } from './home/user/detail/userdetail.component'
 import { ScheduleComponent } from './home/period/schedule/schedule.component'
 import { AchievementDetailComponent } from './home/achievement/detail/achievementdetail.component';
 import { BccAchievementDetailComponent }from './home/achievement/detail/bccachievementdetail.component';
+import {MaintenanceCourseParticipantComponent } from './home/maintenance/maintenancecourseparticipant.component';
+
 
 import { AddUserDialog } from './home/user/adduserdialog.component';
 import { EditAchievementDialog } from './home/achievement/editachievementdialog.component';
@@ -42,6 +44,7 @@ import { PeriodService } from './service/period.service';
 import { CoursenameService } from './service/coursename.service';
 import { DownloadService } from './service/download.service';
 import { CookieService } from 'angular2-cookie/services/cookies.service';
+import { CourseService } from './service/course.service';
 // used to create fake backend
 
 
@@ -74,7 +77,8 @@ import { AddScheduleDialog } from './home/period/schedule/addschedule.component'
     DetailPeriodDialog,
     AddScheduleDialog,
     BccAchievementDetailComponent,
-    EditAchievementDialog
+    EditAchievementDialog,
+    MaintenanceCourseParticipantComponent 
   ],
   imports: [
     BrowserModule,
@@ -100,7 +104,8 @@ import { AddScheduleDialog } from './home/period/schedule/addschedule.component'
     CoursenameService,
      GradeService,
     PeriodService,
-    DownloadService
+    DownloadService,
+    CourseService
   ],
   bootstrap: [AppComponent],
   entryComponents: [

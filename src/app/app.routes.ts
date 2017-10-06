@@ -11,7 +11,7 @@ import { UserDetailComponent } from './home/user/detail/userdetail.component'
 import { ScheduleComponent } from './home/period/schedule/schedule.component'
 import { AchievementDetailComponent } from './home/achievement/detail/achievementdetail.component';
 import { BccAchievementDetailComponent } from './home/achievement/detail/bccachievementdetail.component';
-
+import {MaintenanceCourseParticipantComponent } from './home/maintenance/maintenancecourseparticipant.component';
 import { AuthGuard } from './service/authguard.service';
 
 const routes: Routes = [
@@ -38,6 +38,7 @@ const routes: Routes = [
             {path: 'enrollment',    component: EnrollmentComponent},
             {path: 'achievement',   component: AchievementComponent},
             {path: 'maintenance',   component: MaintenanceComponent},
+            {path: 'maintenance/:courseid',   component: MaintenanceCourseParticipantComponent}
     ]},
 
     //if any path then redirect to home
