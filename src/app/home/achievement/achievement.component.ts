@@ -53,6 +53,7 @@ export class AchievementComponent implements OnInit {
           bcc =>{
             this.currentUser = user;
             this.managerOrAdmin = this.isManagerOrAdmin();
+            console.log(this.managerOrAdmin);
             this.isAdmin = this.isAdminF();
             this.displayedColumns=[];
             this.dynamicDisplayedColumns=[];
@@ -173,7 +174,7 @@ export class AchievementComponent implements OnInit {
     var i:number =0;
     var result:boolean =false;
     for(i=0; i<this.currentUser.roles.length;i++){
-      if(this.currentUser.roles[i].roleId ==1 ||this.currentUser.roles[i].roleId==3){
+      if(this.currentUser.roles[i].roleId ==1 ||this.currentUser.roles[i].roleId==2){
         result=true;
       }
     }
