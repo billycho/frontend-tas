@@ -17,7 +17,7 @@ export class PeriodService {
 
   getTrainingPeriods(): Observable<TrainingPeriod []> {
     
-    return this.http.get("http://localhost:8080/periods")
+    return this.http.get("http://localhost:8085/periods")
        .map((res: Response) => res.json())
        .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
  }
@@ -31,7 +31,7 @@ export class PeriodService {
   var obj = {"trainingPeriodId": period.trainingPeriodId, "periodName": period.periodName, "startDate":period.startDate.toLocaleDateString(), "endDate":period.endDate.toLocaleDateString(),"creatorId": this.currentUser.employeeId,"createdDate":period.createdDate.toLocaleDateString(), "updaterId":this.currentUser.employeeId, 
    "updateDate":period.updatedDate.toLocaleDateString(), "periodical":period.periodical, "openenrollment":period.openenrollment};
    console.log(JSON.stringify(obj));
-     return this.http.post("http://localhost:8080/periods/edit",obj)
+     return this.http.post("http://localhost:8085/periods/edit",obj)
   .map((res: Response) => res.json())
   .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
  }
@@ -44,15 +44,15 @@ export class PeriodService {
   var obj = {"periodName": period.periodName, "startDate":period.startDate.toLocaleDateString(), "endDate":period.endDate.toLocaleDateString(),"creatorId": this.currentUser.employeeId,"createdDate":period.createdDate.toLocaleDateString(), "updaterId":this.currentUser.employeeId, 
    "updateDate":period.updatedDate, "periodical":period.periodical, "openenrollment":period.openenrollment};
    console.log(JSON.stringify(obj));
-     return this.http.post("http://localhost:8080/periods/add",obj)
+     return this.http.post("http://localhost:8085/periods/add",obj)
   .map((res: Response) => res.json())
   .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
   getEmployeeByPeriod(trainingId: number) : Observable<Employee[]>
   {
-    console.log("http://localhost:8080/periods/" + trainingId + "/employee");
-    return this.http.get("http://localhost:8080/periods/" + trainingId + "/employee")
+    console.log("http://localhost:8085/periods/" + trainingId + "/employee");
+    return this.http.get("http://localhost:8085/periods/" + trainingId + "/employee")
     .map((res: Response) => res.json())
     .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
@@ -62,7 +62,7 @@ export class PeriodService {
     var obj = {"trainingPeriodId": eligible.trainingPeriodId, "employeeId": eligible.employeeId};
     console.log(JSON.stringify(obj));
  
-    return this.http.post("http://localhost:8080/periods/"+eligible.trainingPeriodId+"/addemployee",obj)
+    return this.http.post("http://localhost:8085/periods/"+eligible.trainingPeriodId+"/addemployee",obj)
     .map((res: Response) => res.json())
     .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
@@ -72,7 +72,7 @@ export class PeriodService {
     var obj = {"trainingPeriodId": eligible.trainingPeriodId, "employeeId": eligible.employeeId};
     console.log(JSON.stringify(obj));
  
-    return this.http.post("http://localhost:8080/periods/"+eligible.trainingPeriodId+"/deleteemployee",obj)
+    return this.http.post("http://localhost:8085/periods/"+eligible.trainingPeriodId+"/deleteemployee",obj)
     .map((res: Response) => res.json())
     .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
@@ -80,16 +80,16 @@ export class PeriodService {
 
   getScheduleByPeriod(trainingId: number) : Observable<any[]>
   { //courses/46/period
-    console.log("http://localhost:8080/courses/" + trainingId + "/period");
-    return this.http.get("http://localhost:8080/courses/" + trainingId + "/period")
+    console.log("http://localhost:8085/courses/" + trainingId + "/period");
+    return this.http.get("http://localhost:8085/courses/" + trainingId + "/period")
     .map((res: Response) => res.json())
     .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
   getParticipantByCourse(courseId: number) : Observable<Employee[]>
   {
-    console.log("http://localhost:8080/courses/" + courseId + "/participants");
-    return this.http.get("http://localhost:8080/courses/" + courseId + "/participants")
+    console.log("http://localhost:8085/courses/" + courseId + "/participants");
+    return this.http.get("http://localhost:8085/courses/" + courseId + "/participants")
     .map((res: Response) => res.json())
     .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
@@ -100,7 +100,7 @@ export class PeriodService {
     var obj = {"courseId": eligible.trainingPeriodId, "employeeId": eligible.employeeId,"pass":false};
     console.log(JSON.stringify(obj));
 
-    return this.http.post("http://localhost:8080/courses/"+eligible.trainingPeriodId+"/addparticipant",obj)
+    return this.http.post("http://localhost:8085/courses/"+eligible.trainingPeriodId+"/addparticipant",obj)
     .map((res: Response) => res.json())
     .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
@@ -110,15 +110,15 @@ export class PeriodService {
     var obj = {"courseId": eligible.trainingPeriodId, "employeeId": eligible.employeeId};
     console.log(JSON.stringify(obj));
  
-    return this.http.post("http://localhost:8080/courses/"+eligible.trainingPeriodId+"/deleteparticipant",obj)
+    return this.http.post("http://localhost:8085/courses/"+eligible.trainingPeriodId+"/deleteparticipant",obj)
     .map((res: Response) => res.json())
     .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
   }
 
   getCourseName():Observable<any[]>
   {
-     console.log("http://localhost:8080/coursenames");
-     return this.http.get("http://localhost:8080/coursenames")
+     console.log("http://localhost:8085/coursenames");
+     return this.http.get("http://localhost:8085/coursenames")
      .map((res:Response)=>{
            return res.json();
      })
@@ -127,8 +127,8 @@ export class PeriodService {
 
   addCourseSchedule(obj:any,trainingId:number) : Observable<any> {
     console.log(JSON.stringify(obj));
-    console.log("http://localhost:8080/courses/" + trainingId + "/addschedule");
-    return this.http.post("http://localhost:8080/courses/" + trainingId + "/addschedule", obj)
+    console.log("http://localhost:8085/courses/" + trainingId + "/addschedule");
+    return this.http.post("http://localhost:8085/courses/" + trainingId + "/addschedule", obj)
     .map((res:Response)=>{
           return res.json();
     })
@@ -136,8 +136,8 @@ export class PeriodService {
 
   getPeriodById(obj:number) : any
   {
-    console.log("http://localhost:8080/coursenames");
-    return this.http.get("http://localhost:8080/periods/" + obj)
+    console.log("http://localhost:8085/coursenames");
+    return this.http.get("http://localhost:8085/periods/" + obj)
     .map((res:Response)=>{
           return res.json();
     })
@@ -146,8 +146,8 @@ export class PeriodService {
 
   deletePeriodById(obj:number) :any
   {
-    console.log("http://localhost:8080/periods/" + obj + "/delete");
-    return this.http.get("http://localhost:8080/periods/" + obj + "/delete")
+    console.log("http://localhost:8085/periods/" + obj + "/delete");
+    return this.http.get("http://localhost:8085/periods/" + obj + "/delete")
     .map((res:Response)=>{
           return res.json();
     })
@@ -156,8 +156,8 @@ export class PeriodService {
 
   getActiveCourse() : any
   {
-    console.log("http://localhost:8080/periods/active");
-    return this.http.get("http://localhost:8080/periods/active")
+    console.log("http://localhost:8085/periods/active");
+    return this.http.get("http://localhost:8085/periods/active")
     .map((res:Response)=>{
           return res.json();
     })
@@ -166,8 +166,8 @@ export class PeriodService {
 
   getActiveCoursebcc() : any
   {
-    console.log("http://localhost:8080/periods/active");
-    return this.http.get("http://localhost:8080/periods/active")
+    console.log("http://localhost:8085/periods/active");
+    return this.http.get("http://localhost:8085/periods/active")
     .map((res:Response)=>{
           return res.json();
     })
@@ -179,7 +179,7 @@ export class PeriodService {
 //  addUser(employee: Employee, role: Role): Observable<Employee>{
 //   var obj = {"employeeId":employee.employeeId, "roleId":role.roleId};
 //   console.log(JSON.stringify({employeeId:employee.employeeId, roleId:role.roleId}));
-//   return this.http.post("http://localhost:8080/employees/addrole",obj)
+//   return this.http.post("http://localhost:8085/employees/addrole",obj)
 //   .map((res: Response) => res.json())
 //   .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
 // }

@@ -9,19 +9,19 @@ export class CoursenameService{
     }
 
     getCoursenameById(id:number):Observable<Coursename>{
-        return this.http.get("http://localhost:8080/coursenames/"+id)
+        return this.http.get("http://localhost:8085/coursenames/"+id)
            .map((res:Response)=>res.json())
            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
     getCoursenames():Observable<Coursename[]>{
-        return this.http.get("http://localhost:8080/coursenames")
+        return this.http.get("http://localhost:8085/coursenames")
            .map((res:Response)=>res.json())
            .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }
 
     getBCCCoursenames():Observable<Coursename[]>{
-        return this.http.get("http://localhost:8080/coursenames/bcc")
+        return this.http.get("http://localhost:8085/coursenames/bcc")
         .map((res:Response)=>res.json())
         .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
     }

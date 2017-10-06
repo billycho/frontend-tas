@@ -16,14 +16,14 @@ export class EmployeeService {
    
    getEmployees(): Observable<Employee []> {
       
-      return this.http.get("http://localhost:8080/employees")
+      return this.http.get("http://localhost:8085/employees")
          .map((res: Response) => res.json())
          .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
    }
 
    getUsers(): Observable<Employee []> {
       
-      return this.http.get("http://localhost:8080/employees/users")
+      return this.http.get("http://localhost:8085/employees/users")
          .map((res: Response) => res.json())
          .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
    }
@@ -31,13 +31,13 @@ export class EmployeeService {
    addUser(employee: Employee, role: Role): Observable<Employee>{
          var obj = {"employeeId":employee.employeeId, "roleId":role.roleId};
       //    console.log(JSON.stringify({employeeId:employee.employeeId, roleId:role.roleId}));
-         return this.http.post("http://localhost:8080/employees/addrole",obj)
+         return this.http.post("http://localhost:8085/employees/addrole",obj)
          .map((res: Response) => res.json())
          .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
    }
 
    getById(id:number):Observable<Employee>{
-         return this.http.get("http://localhost:8080/employees/"+id)
+         return this.http.get("http://localhost:8085/employees/"+id)
             .map((res:Response)=>res.json())
             .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
    }
@@ -45,19 +45,19 @@ export class EmployeeService {
    //RESTRICTED TO ONLY UPDATE ROLE AND ACTIVE
    update(employee: Employee):Observable<Employee>{
       var obj = {"employeeId":employee.employeeId, "active":employee.active, "roles":employee.roles};
-      return this.http.post("http://localhost:8080/employees/update",obj)
+      return this.http.post("http://localhost:8085/employees/update",obj)
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
    }
    getAllCoursesOfAnEmployee(id:number):Observable<CourseParticipant[]>{
-      return this.http.get("http://localhost:8080/employees/"+id+"/courses")
+      return this.http.get("http://localhost:8085/employees/"+id+"/courses")
       .map((res:Response)=>{
             return res.json();
       })
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
    }
    getEmployeeBCC(id:number):Observable<CourseParticipant[]>{
-      return this.http.get("http://localhost:8080/employees/"+id+"/courses/bcc")
+      return this.http.get("http://localhost:8085/employees/"+id+"/courses/bcc")
       .map((res:Response)=>{
             return res.json();
       })
@@ -65,8 +65,8 @@ export class EmployeeService {
    }
 
    getCoursesByCouseNameId(id:number, coursenameid:number):Observable<CourseParticipant[]>{
-      // console.log("http://localhost:8080/employees/"+id+"/courses/"+coursenameid);
-      return this.http.get("http://localhost:8080/employees/"+id+"/courses/"+coursenameid)
+      // console.log("http://localhost:8085/employees/"+id+"/courses/"+coursenameid);
+      return this.http.get("http://localhost:8085/employees/"+id+"/courses/"+coursenameid)
       .map((res:Response)=>{
             return res.json();
       })
@@ -75,8 +75,8 @@ export class EmployeeService {
 
    getEnrolledCourse(id:number):Observable<Course[]>
    {
-       console.log("http://localhost:8080/employees/"+id+"/enrolled");
-       return this.http.get("http://localhost:8080/employees/"+id+"/enrolled")
+       console.log("http://localhost:8085/employees/"+id+"/enrolled");
+       return this.http.get("http://localhost:8085/employees/"+id+"/enrolled")
        .map((res:Response)=>{
              return res.json();
        })
@@ -85,8 +85,8 @@ export class EmployeeService {
 
    getEnrolledStatusCourse(id:number):Observable<any[]>
    {
-       console.log("http://localhost:8080/employees/"+id+"/enrolledstatus");
-       return this.http.get("http://localhost:8080/employees/"+id+"/enrolledstatus")
+       console.log("http://localhost:8085/employees/"+id+"/enrolledstatus");
+       return this.http.get("http://localhost:8085/employees/"+id+"/enrolledstatus")
        .map((res:Response)=>{
              return res.json();
        })
@@ -95,8 +95,8 @@ export class EmployeeService {
 
    getTrainer():Observable<Employee[]>
    {
-      console.log("http://localhost:8080/roles/3/employees");
-      return this.http.get("http://localhost:8080/roles/3/employees")
+      console.log("http://localhost:8085/roles/3/employees");
+      return this.http.get("http://localhost:8085/roles/3/employees")
       .map((res:Response)=>{
             return res.json();
       })
@@ -105,15 +105,15 @@ export class EmployeeService {
 
    getRooms():Observable<any[]>
    {
-      console.log("http://localhost:8080/rooms");
-      return this.http.get("http://localhost:8080/rooms")
+      console.log("http://localhost:8085/rooms");
+      return this.http.get("http://localhost:8085/rooms")
       .map((res:Response)=>{
             return res.json();
       })
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
    }
    updateAchievement(courseParticipant:CourseParticipant[]):Observable<CourseParticipant[]>{
-      return this.http.post("http://localhost:8080/employees/update/achievement", courseParticipant)
+      return this.http.post("http://localhost:8085/employees/update/achievement", courseParticipant)
       .map((res:Response)=>{
             return res.json();
       })

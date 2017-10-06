@@ -10,18 +10,18 @@ export class RoleService {
    constructor(private http: Http) {
    }
    getAll():Observable<Role[]>{
-      return this.http.get("http://localhost:8080/roles/")
+      return this.http.get("http://localhost:8085/roles/")
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
    }
    getRoleById(id:number): Observable<Role> {
-      return this.http.get("http://localhost:8080/roles/"+id)
+      return this.http.get("http://localhost:8085/roles/"+id)
          .map((res: Response) => res.json())
          .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
    }
 
    getEmployeesByRole(id:number): Observable<Employee[]>{
-      return this.http.get("http://localhost:8080/roles/"+id+"/employees")
+      return this.http.get("http://localhost:8085/roles/"+id+"/employees")
       .map((res: Response) => res.json())
       .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
    }

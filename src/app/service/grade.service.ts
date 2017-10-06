@@ -12,7 +12,7 @@ export class GradeService {
  
    getUsers(): Observable<Grade[]> {
       
-      return this.http.get("http://localhost:8080/grades")
+      return this.http.get("http://localhost:8085/grades")
          .map((res: Response) => res.json())
          .catch((error: any) => Observable.throw(error.json().error || 'Server error'));
    }
